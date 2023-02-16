@@ -16,3 +16,11 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+
+Creating resources:
+
+```
+mix phx.gen.html Recipes Recipe recipes title:string descrition:text cover:string directions:text mins:integer ingredients:array:string likes:integer tags:array:string
+mix ecto.migrate
+``

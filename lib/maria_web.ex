@@ -86,6 +86,7 @@ defmodule MariaWeb do
       # Core UI components and translation
       import MariaWeb.CoreComponents
       import MariaWeb.Gettext
+      import MariaWeb.InputHelpers
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

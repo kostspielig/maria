@@ -1,0 +1,34 @@
+<.header>
+  Edit Recipe <%= @recipe.id %>
+  <:subtitle>Use this form to manage recipe records in your database.</:subtitle>
+</.header>
+
+<.simple_form :let={f} for={@changeset} method="put" action={~p"/recipes/#{@recipe}"}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={{f, :title}} type="text" label="Title" />
+  <.input field={{f, :descrition}} type="text" label="Descrition" />
+  <.input field={{f, :directions}} type="text" label="Directions" />
+  <.input field={{f, :mins}} type="number" label="Mins" />
+  <.input
+    field={{f, :ingredients}}
+    type="select"
+    multiple
+    label="Ingredients"
+    options={[{"Option 1", "option1"}, {"Option 2", "option2"}]}
+  />
+  <.input field={{f, :likes}} type="number" label="Likes" />
+  <.input
+    field={{f, :tags}}
+    type="select"
+    multiple
+    label="Tags"
+    options={[{"Option 1", "option1"}, {"Option 2", "option2"}]}
+  />
+  <:actions>
+    <.button>Save Recipe</.button>
+  </:actions>
+</.simple_form>
+
+<.back navigate={~p"/recipes"}>Back to recipes</.back>

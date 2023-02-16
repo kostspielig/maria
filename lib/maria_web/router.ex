@@ -18,6 +18,9 @@ defmodule MariaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    resources "/recipes", RecipeController
+    # Created an alias for nicer path, might rename
+    resources "/cooking", RecipeController, as: "cooking"
   end
 
   # Other scopes may use custom stacks.

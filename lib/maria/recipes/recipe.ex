@@ -4,7 +4,7 @@ defmodule Maria.Recipes.Recipe do
 
   schema "recipes" do
     field :cover, :string
-    field :descrition, :string
+    field :description, :string
     field :directions, :string
     field :ingredients, {:array, :string}
     field :likes, :integer
@@ -19,7 +19,7 @@ defmodule Maria.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :descrition, :directions, :mins, :ingredients, :likes, :tags])
-    |> validate_required([:title, :descrition, :directions, :mins, :ingredients, :tags])
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :tags])
+    |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
   end
 end

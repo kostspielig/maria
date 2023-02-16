@@ -3,9 +3,9 @@ defmodule MariaWeb.RecipeControllerTest do
 
   import Maria.RecipesFixtures
 
-  @create_attrs %{descrition: "some descrition", directions: "some directions", ingredients: ["option1", "option2"], likes: 42, mins: 42, tags: ["option1", "option2"], title: "some title"}
-  @update_attrs %{descrition: "some updated descrition", directions: "some updated directions", ingredients: ["option1"], likes: 43, mins: 43, tags: ["option1"], title: "some updated title"}
-  @invalid_attrs %{descrition: nil, directions: nil, ingredients: nil, likes: nil, mins: nil, tags: nil, title: nil}
+  @create_attrs %{description: "some description", directions: "some directions", ingredients: ["option1", "option2"], likes: 42, mins: 42, tags: ["option1", "option2"], title: "some title"}
+  @update_attrs %{description: "some updated description", directions: "some updated directions", ingredients: ["option1"], likes: 43, mins: 43, tags: ["option1"], title: "some updated title"}
+  @invalid_attrs %{description: nil, directions: nil, ingredients: nil, likes: nil, mins: nil, tags: nil, title: nil}
 
   describe "index" do
     test "lists all recipes", %{conn: conn} do
@@ -55,7 +55,7 @@ defmodule MariaWeb.RecipeControllerTest do
       assert redirected_to(conn) == ~p"/recipes/#{recipe}"
 
       conn = get(conn, ~p"/recipes/#{recipe}")
-      assert html_response(conn, 200) =~ "some updated descrition"
+      assert html_response(conn, 200) =~ "some updated description"
     end
 
     test "renders errors when data is invalid", %{conn: conn, recipe: recipe} do

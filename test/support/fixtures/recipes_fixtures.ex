@@ -11,7 +11,7 @@ defmodule Maria.RecipesFixtures do
     {:ok, recipe} =
       attrs
       |> Enum.into(%{
-        descrition: "some descrition",
+        description: "some description",
         directions: "some directions",
         ingredients: ["option1", "option2"],
         likes: 42,

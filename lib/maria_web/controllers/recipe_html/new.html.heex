@@ -11,21 +11,9 @@
   <.input field={{f, :description}} type="textarea" label="Description" />
   <.input field={{f, :directions}} type="textarea" label="Directions" />
   <.input field={{f, :mins}} type="number" label="Mins" />
-  <.input
-    field={{f, :ingredients}}
-    type="select"
-    multiple
-    label="Ingredients"
-    options={[{"Option 1", "option1"}, {"Option 2", "option2"}]}
-  />
+  <.input field={{f, :ingredients}} type="text" label="Ingredients"  />
   <.input field={{f, :link}} type="text" label="Link" />
-  <.input
-    field={{f, :tags}}
-    type="select"
-    multiple
-    label="Tags"
-    options={[{"Option 1", "option1"}, {"Option 2", "option2"}]}
-  />
+  <.input field={{f, :tags}} type="text" label="Tags" />
   <:actions>
     <.button>Save Recipe</.button>
   </:actions>

@@ -1,6 +1,7 @@
 defmodule MariaWeb.RecipeController do
   use MariaWeb, :controller
 
+  require String
   alias Maria.Recipes
   alias Maria.Recipes.Recipe
 
@@ -9,13 +10,21 @@ defmodule MariaWeb.RecipeController do
     render(conn, :index, recipes: recipes)
   end
 
+  def cooking(conn, _params) do
+    recipes = Recipes.list_recipes()
+    render(conn, :cooking, recipes: recipes)
+  end
+
   def new(conn, _params) do
     changeset = Recipes.change_recipe(%Recipe{})
     render(conn, :new, changeset: changeset)
   end
 
   def create(conn, %{"recipe" => recipe_params}) do
-    case Recipes.create_recipe(recipe_params) do
+    params = %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "") |> String.split(",", trim: true),
+          "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true) }
+
+    case Recipes.create_recipe(params) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, "Recipe created successfully.")
@@ -28,19 +37,25 @@ defmodule MariaWeb.RecipeController do
 
   def show(conn, %{"id" => id}) do
     recipe = Recipes.get_recipe!(id)
+
     render(conn, :show, recipe: recipe)
   end
 
   def edit(conn, %{"id" => id}) do
     recipe = Recipes.get_recipe!(id)
-    changeset = Recipes.change_recipe(recipe)
-    render(conn, :edit, recipe: recipe, changeset: changeset)
+    p = %{recipe | ingredients: Enum.join(recipe.ingredients, ", "),
+         tags: Enum.join(recipe.tags, ", ")}
+
+    changeset = Recipes.change_recipe(p)
+    render(conn, :edit, recipe: p, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "recipe" => recipe_params}) do
     recipe = Recipes.get_recipe!(id)
 
-    case Recipes.update_recipe(recipe, recipe_params) do
+    params = %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "") |> String.split(",", trim: true),
+          "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true) }
+    case Recipes.update_recipe(recipe, params) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, "Recipe updated successfully.")

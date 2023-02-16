@@ -20,7 +20,7 @@ defmodule MariaWeb.Router do
     get "/", PageController, :home
     resources "/recipes", RecipeController
     # Created an alias for nicer path, might rename
-    resources "/cooking", RecipeController, as: "cooking"
+    get "/cooking", RecipeController, :cooking
   end
 
   # Other scopes may use custom stacks.

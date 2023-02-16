@@ -1,6 +1,5 @@
 <.header>
-  Recipe <%= @recipe.id %>
-  <:subtitle>This is a recipe record from your database.</:subtitle>
+  Recipe <%= @recipe.title %>
   <:actions>
     <.link href={~p"/recipes/#{@recipe}/edit"}>
       <.button>Edit recipe</.button>

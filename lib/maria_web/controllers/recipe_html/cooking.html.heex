@@ -1,0 +1,10 @@
+<.header>
+  Listing Recipes
+</.header>
+
+<%= for recipe <- @recipes do %>
+<.list>
+    <:item title="Title"><%= recipe.title %></:item>
+    <:item title="Description"><%= recipe.description %></:item>
+</.list>
+<% end %>

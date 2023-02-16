@@ -1,4 +1,4 @@
-<div class="h-screen bg-brand">
+<div class="h-screen bg-brand selection:bg-blood selection:text-white">
 <header class="px-4 py-6 sm:px-6 lg:px-8 xl:px-28 bg-white sticky top-0 border-brand border-b">
   <div class="mx-auto max-w-xl lg:mx-auto">
     <h1 class="flex justify-center text-2xl font-semibold text-brand uppercase">
@@ -11,12 +11,12 @@
 </header>
 <div class="px-6 py-44 sm:py-44 sm:px-8 lg:px-8 xl:py-52 xl:px-28 bg-brand">
   <div class="mx-auto lg:mx-0 text-white">
-    <p class="leading-none mt-4 text-[4rem] max-w-[30rem] sm:max-w-xl lg:max-w-2xl font-semibold tracking-tighter uppercase">
-      Welcome to the week of <%=Calendar.strftime(Date.utc_today(), "%B")%> <%=Date.utc_today().day %> !
+    <p class="leading-none mt-4 text-[4rem] max-w-[30rem] sm:max-w-xl lg:max-w-2xl xl:max-w-3xl font-semibold tracking-tighter uppercase">
+      Welcome to the week of <%=Calendar.strftime(Date.utc_today(), "%B")%> <%=Date.utc_today().day %> 👏
     </p>
-    <div class="mt-40 flex justify-end ">
+    <div class="mt-40 xl:mt-60 flex justify-end ">
       <p class="font-serif font-medium w-2/3 text-3xl">
-        Here is everything you should be <i>reading</i>, <i>cooking</i> or <i>watching</i> before <%=Calendar.strftime(Date.utc_today(), "%b")%> <%=Date.end_of_week(Date.utc_today()).day%>.
+        Here is everything you should be <i>reading</i>, <i>cooking</i> or <i>watching</i> before 📅 <%=Calendar.strftime(Date.utc_today(), "%b")%> <%=Date.end_of_week(Date.utc_today()).day%>.
       </p>
     </div>
   </div>
@@ -24,13 +24,13 @@
 </div>
 <div class="px-6 py-6 sm:px-8 lg:px-8 xl:px-28">
   <div class="flex justify-center">
-        <div class="grid grid-cols-1 gap-y-4 text-ml leading-6 text-brand sm:grid-cols-2 uppercase font-semibold">
+        <div class="grid grid-cols-1 gap-y-4 gap-x-4 text-ml leading-6 text-brand sm:grid-cols-2 xl:grid-cols-4 uppercase font-semibold">
           <div>
             <a
               href="https://twitter.com/kostspielig"
               class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood"
             >
-            Read on Twitter
+            🐦 Scroll on Twitter
             </a>
           </div>
           <div>
@@ -38,7 +38,7 @@
               href="https://instagram.com/kostspielig"
               class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood"
             >
-            View on Instagram
+            📸 View on Instagram
             </a>
           </div>
           <div>
@@ -46,7 +46,7 @@
               href="https://discord.gg/elixir"
               class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood"
             >
-              Read the Blog
+             📝 Read the Blog
             </a>
           </div>
           <div>
@@ -54,7 +54,7 @@
               href="https://www.tiktok.com/@kstsplg"
               class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood"
             >
-              Watch on TikTok
+            🎥 Watch on TikTok
             </a>
           </div>
     </div>

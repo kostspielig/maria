@@ -1,10 +1,7 @@
-<.header>
-  Listing Recipes
-</.header>
 
-<%= for recipe <- @recipes do %>
-<.list>
-    <:item title="Title"><%= recipe.title %></:item>
-    <:item title="Description"><%= recipe.description %></:item>
-</.list>
-<% end %>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 items-center justify-center">
+  <%= for recipe <- @recipes do %>
+    <.card info={recipe} row_click={&JS.navigate(~p"/recipes/#{&1}")}/>
+  <% end %>
+</div>

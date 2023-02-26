@@ -2,4 +2,30 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+
 /* This file is for your main application CSS */
+
+body::-webkit-scrollbar {
+  width: 0.4em;
+}
+
+/* Vertical Scrollbar */
+
+body::-webkit-scrollbar-track {
+  background-color: #fdc690;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ef7801;
+
+}
+
+/* Horizontal Scrollbar */
+
+::-webkit-scrollbar {
+  height: 0.18em;
+  background-color: #cdd5cd;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #181A18;
+}

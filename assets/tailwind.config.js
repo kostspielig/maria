@@ -11,9 +11,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Helvetica', 'Arial', 'sans-serif'],
+        'serif': ['Georgia', 'Times', 'Times New Roman', 'serif' ]
+      },
       colors: {
         brand: "#3aadec",
-        blood: "#ef7801"
+        blood: "#ef7801",
+        blk: "#181A18",
+        grey: "#181A18"
       }
     },
   },

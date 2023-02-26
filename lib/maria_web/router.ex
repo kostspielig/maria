@@ -18,6 +18,8 @@ defmodule MariaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/reading", ReadingLive
     resources "/recipes", RecipeController
     # Created an alias for nicer path, might rename
     get "/cooking", RecipeController, :cooking

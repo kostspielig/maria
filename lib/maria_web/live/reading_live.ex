@@ -1,10 +1,11 @@
 defmodule MariaWeb.ReadingLive do
-  use MariaWeb, :live_view
+  use MariaWeb, :live_view_basic
 
 
   def mount(_params, _session, socket) do
 
     socket = assign(socket,
+      page_title: "Reading",
       newsletter: get_newsletters(),
       goodreads: get_books(),
       podcast: get_podcasts(),
@@ -15,15 +16,16 @@ defmodule MariaWeb.ReadingLive do
 
   def render(assigns) do
     ~H"""
-    <section id="goodreads" class="border-brand border-b pb-8">
-      <h1 class="uppercase font-bold font-sans text-xl text-blk"> Books </h1>
-      <div class="overflow-x-auto flex">
+    <section id="goodreads" class="px-6 py-10 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
+      <h1 class="uppercase underline underline-offset-4 font-bold font-sans text-xl text-blk"> Books </h1>
+      <h2 class="mt-8 text-base font-normal">Lost in Translation: My Latest Book Obsessions</h2>
+    <div class="overflow-x-auto flex">
       <%= for book <- @goodreads do %>
         <div class="flex-none px-3 py-6 first:pl-0 last:pr-6">
           <a href={"#{book["link"]}"} target="_blank">
           <img class="max-h-80" src={"#{Regex.replace(~r/_\w+_/u, book["src"], "")|> String.replace("..jpg", ".jpg")}"}>
           <div class="block w-40 mt-4">
-          <!--<div class="inline leading-6 font-serif font-bold text-blk text-xl"><%= book["title"] %></div>-->
+          <!--<div class="inline leading-6 font-serif font-bold text-blk text-lg"><%= book["title"] %></div>-->
           </div>
           </a>
         </div>
@@ -31,17 +33,19 @@ defmodule MariaWeb.ReadingLive do
       </div>
     </section>
 
-    <section id="podcast" class="mt-10 border-brand border-b pb-8">
-      <h1 class="uppercase font-bold font-sans text-xl text-blk"> Podcasts </h1>
-      <div class="font-sans mt-10">
+    <section id="podcast" class="bg-brand px-6 py-10 text-white">
+      <h1 class="uppercase underline underline-offset-4 font-bold font-sans text-xl mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Podcasts </h1>
+      <div class="font-sans mt-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-3xl font-bold"><%= @podcast.title %> </h1>
         <h2 class="mt-2 text-base font-normal"><%= @podcast.subtitle %> </h2>
         <div class="overflow-x-auto flex">
           <%= for e <- @podcast.entries do %>
             <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
               <a href={"#{e.enclosure.url}"} target="_blank">
-                <img class="max-h-80" src={"#{e.image}"}>
-                <div class="w-80 block mt-4 font-serif font-bold text-blk text-xl hover:text-blood"><%= e.title %></div>
+                <img class="max-h-72 mx-auto" src={"#{e.image}"}>
+                <div class="block w-72 mt-4">
+                  <div class="inline leading-6 font-serif font-semibold text-lg hover:bg-blood"><%= e.title %></div>
+                </div>
               </a>
             </div>
           <% end %>
@@ -49,42 +53,50 @@ defmodule MariaWeb.ReadingLive do
       </div>
     </section>
 
-    <section id="newsletter" class="mt-10 border-brand border-b pb-8">
-      <h1 class="uppercase font-bold font-sans text-xl text-blk"> Newsletters </h1>
+    <section id="newsletter" class=" text-blood">
+      <h1 class="px-6 pt-10 underline underline-offset-4  uppercase font-bold font-sans text-xl mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Newsletters </h1>
       <%= for newsletter <- @newsletter do %>
-      <div class="font-sans mt-10">
+      <div class="font-sans mt-10 border-blood border-b-[15px] border-opacity-25 last:border-0  ">
+      <div class="px-6 pb-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-3xl font-bold"><%= newsletter.title %> </h1>
         <h2 class="mt-2 text-base font-normal"><%= newsletter.summary %> </h2>
         <div class="overflow-x-auto flex">
           <%= for e <- newsletter.entries do %>
             <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
               <a href={"#{e.link}"} target="_blank">
-                <img class="max-h-80" src={"#{e.enclosure.url}"}>
-                <div class="w-80 block mt-4 font-serif font-bold text-blood text-xl hover:text-blood"><%= e.title %></div>
+              <img class="max-h-60 mx-auto" src={"#{e.enclosure.url}"}>
+              <div class="block w-72 mt-4">
+                <div class="inline leading-6 font-serif font-semibold text-lg hover:bg-blood hover:text-white"><%= e.title %></div>
+               </div>
               </a>
             </div>
           <% end %>
         </div>
       </div>
+      </div>
       <% end %>
     </section>
 
-    <section id="youtube" class="mt-10">
-      <h1 class="uppercase font-sans font-bold text-xl text-blk"> Youtube </h1>
+    <section id="youtube" class="bg-neutral text-blk">
+      <h1 class="px-6 pt-10 uppercase underline underline-offset-4 font-sans font-bold text-xl  mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Youtube </h1>
       <%= for yc <- @youtube do %>
-      <div class="font-sans mt-10">
+      <div class="font-sans mt-10 border-blk border-b-[15px] border-opacity-10 last:border-0">
+      <div class="px-6 pb-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-3xl font-bold"><%= yc.title %> </h1>
         <div class="overflow-x-auto flex">
           <%= for e <- yc.entries do %>
           <div class="flex-none py-6 px-3 first:pl-6 last:pr-6">
             <!--  <iframe width="320" height="255" allow="fullscreen" frameBorder="0" src={"#{String.replace(e.link, "https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")}"}></iframe> -->
-            <a href={"#{e.link}"} target="_blank">
-              <img class="max-h-80" src={"#{String.replace(e.link, "https://www.youtube.com/watch?v=", "https://img.youtube.com/vi/") <> "/0.jpg"}"}>
-              <div class="w-80 block mt-4 font-serif font-bold text-brand text-xl hover:text-blood"><%= e.title %></div>
+            <a class="" href={"#{e.link}"} target="_blank">
+              <img class="max-h-52 mx-auto" src={"#{String.replace(e.link, "https://www.youtube.com/watch?v=", "https://img.youtube.com/vi/") <> "/0.jpg"}"}>
+                <div class="block w-48 mt-4">
+                  <div class="inline leading-6 font-serif font-semibold text-lg hover:bg-brand hover:text-white"><%= e.title %></div>
+                </div>
             </a>
           </div>
           <% end %>
         </div>
+      </div>
       </div>
       <% end %>
     </section>

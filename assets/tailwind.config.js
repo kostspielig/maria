@@ -17,9 +17,11 @@ module.exports = {
       },
       colors: {
         brand: "#3aadec",
+        lbrand: "#e4eef3",
         blood: "#ef7801",
         blk: "#181A18",
-        grey: "#181A18"
+        grey: "#181A18",
+        neutral: "#f2f2f2"
       }
     },
   },

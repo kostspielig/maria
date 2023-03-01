@@ -9,13 +9,13 @@
     </h1>
   </div>
 </header>
-<div class="px-6 py-44 sm:py-44 sm:px-8 lg:px-8 xl:py-52 xl:px-28 bg-brand">
+<div class="px-6 py-36 sm:py-40 sm:px-8 md:py-44 lg:px-8 xl:py-52 xl:px-28 bg-brand">
   <div class="mx-auto lg:mx-0 text-white">
-    <p class="leading-none mt-4 text-[4rem] max-w-[30rem] sm:max-w-xl lg:max-w-2xl xl:max-w-3xl font-semibold tracking-tighter uppercase">
+    <p class="leading-none mt-4 text-[3.5rem] max-w-[28rem] sm:text-[4rem] sm:max-w-xl lg:max-w-2xl xl:max-w-3xl font-semibold tracking-tighter uppercase">
       Welcome to the week of <%=Calendar.strftime(Date.utc_today(), "%B")%> <%=Date.utc_today().day %> 👏
     </p>
     <div class="mt-40 xl:mt-60 flex justify-end ">
-      <p class="font-serif font-medium w-2/3 text-3xl">
+      <p class="font-serif font-medium w-2/3 text-2xl sm:text-3xl">
         Here is everything you should be <a href="/reading" class="italic hover:bg-blood">reading</a>, <a href="/cooking" class="italic hover:bg-blood">cooking</a> or <i>watching</i> before 📅 <%=Calendar.strftime(Date.utc_today(), "%b")%> <%=Date.end_of_week(Date.utc_today()).day%>.
       </p>
     </div>

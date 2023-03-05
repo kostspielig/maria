@@ -19,7 +19,7 @@ defmodule Maria.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :tags])
-    |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :tags, :cover])
+    |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags, :cover])
   end
 end

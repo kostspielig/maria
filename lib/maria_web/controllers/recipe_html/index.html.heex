@@ -15,6 +15,7 @@
   <:col :let={recipe} label="Ingredients"><%= recipe.ingredients %></:col>
   <:col :let={recipe} label="Likes"><%= recipe.likes %></:col>
   <:col :let={recipe} label="Tags"><%= recipe.tags %></:col>
+  <:col :let={recipe} label="Cover"><img src={"#{recipe.cover}"} class="w-24"></:col>
   <:action :let={recipe}>
     <div class="sr-only">
       <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>

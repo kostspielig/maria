@@ -62,6 +62,11 @@ config :maria, MariaWeb.Endpoint,
     ]
   ]
 
+config :maria, MariaWeb.RecipeController,
+  s3: [
+    bucket: "local-maria"
+  ]
+
 # Enable dev routes for dashboard and mailbox
 config :maria, dev_routes: true
 

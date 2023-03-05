@@ -7,6 +7,10 @@
   </:actions>
 </.header>
 
+<div class="mt-14  max-w-screen-lg mx-auto">
+  <img src={"#{@recipe.cover}"}>
+</div>
+
 <.list>
   <:item title="Title"><%= @recipe.title %></:item>
   <:item title="Description"><%= @recipe.description %></:item>
@@ -16,5 +20,6 @@
   <:item title="Likes"><%= @recipe.likes %></:item>
   <:item title="Tags"><%= @recipe.tags %></:item>
 </.list>
+
 
 <.back navigate={~p"/recipes"}>Back to recipes</.back>

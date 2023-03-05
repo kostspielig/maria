@@ -3,7 +3,7 @@
   <:subtitle>Use this form to manage recipe records in your database.</:subtitle>
 </.header>
 
-<.simple_form :let={f} for={@changeset} action={~p"/recipes"}>
+<.simple_form :let={f} for={@changeset} method="post" enctype="multipart/form-data" action={~p"/recipes"}>
   <.error :if={@changeset.action}>
     Oops, something went wrong! Please check the errors below.
   </.error>
@@ -11,8 +11,9 @@
   <.input field={{f, :description}} type="textarea" label="Description" />
   <.input field={{f, :directions}} type="textarea" label="Directions" />
   <.input field={{f, :mins}} type="number" label="Mins" />
-  <.input field={{f, :ingredients}} type="text" label="Ingredients"  />
+  <.input field={{f, :ingredients}} type="text" label="Ingredients" />
   <.input field={{f, :link}} type="text" label="Link" />
+  <.input field={{f, :cover}} type="file" label="Cover Image" />
   <.input field={{f, :tags}} type="text" label="Tags" />
   <:actions>
     <.button>Save Recipe</.button>

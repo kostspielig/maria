@@ -11,8 +11,13 @@ import Config
 # before starting your production server.
 config :maria, MariaWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
-  url: [host: "maria.gigalixirapp.com"],
-  check_origin: ["https://maria.gigalixirapp.com", "//*.maria.gigalixir.com"]
+  url: [
+    host: System.get_env("PHX_HOST")
+  ],
+  check_origin: [
+    "https://#{System.get_env("PHX_HOST")}",
+    "//*.#{System.get_env("PHX_HOST")}"
+  ]
 
 config :maria, MariaWeb.RecipeController,
   s3: [

@@ -150,9 +150,9 @@ defmodule MariaWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "fixed hidden top-2 right-2 w-80 sm:w-96 z-50 rounded-lg p-3 shadow-md shadow-zinc-900/5 ring-1",
-        @kind == :info && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
-        @kind == :error && "bg-rose-50 p-3 text-rose-900 shadow-md ring-rose-500 fill-rose-900"
+        "fixed hidden top-2 right-4 w-80 sm:w-96 z-50 p-3 text-white shadow-md shadow-zinc-900/5 ring-1",
+        @kind == :info && "bg-brand  ring-brand fill-cyan-900",
+        @kind == :error && "bg-blood p-3  shadow-md ring-blood fill-blood"
       ]}
       {@rest}
     >
@@ -499,7 +499,7 @@ defmodule MariaWeb.CoreComponents do
                 <span class="absolute h-full w-4 top-0 -right-4 group-hover:bg-zinc-50 sm:rounded-r-xl" />
               </div>
               <div class="block py-4 pr-6">
-                <span class={["relative", i == 0 && "font-semibold text-zinc-900"]}>
+                <span class={["relative block max-h-72 overflow-clip", i == 0 && "font-semibold text-zinc-900"]}>
                   <%= render_slot(col, row) %>
                 </span>
               </div>

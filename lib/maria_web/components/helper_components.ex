@@ -16,4 +16,22 @@ defmodule MariaWeb.HelperComponents do
     </div>
     """
   end
+
+  def ingredients(assigns) do
+    ~H"""
+    <%= for ingredient <- @info do %>
+      <div class=""><%= ingredient %></div>
+    <% end %>
+    """
+  end
+
+  def tags(assigns) do
+    ~H"""
+    <%= for tag <- @info do %>
+      <span class="rounded-full bg-brand text-white text-semibold px-3 py-1 m-2">
+        <%= tag %>
+      </span>
+    <% end %>
+    """
+  end
 end

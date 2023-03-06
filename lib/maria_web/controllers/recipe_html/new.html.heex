@@ -9,12 +9,12 @@
   </.error>
   <.input field={{f, :title}} type="text" label="Title" />
   <.input field={{f, :description}} type="textarea" label="Description" />
+  <.input field={{f, :ingredients}} type="text" label="Ingredients" placeholder="1 egg, 2 tsp sugar" />
   <.input field={{f, :directions}} type="textarea" label="Directions" />
   <.input field={{f, :mins}} type="number" label="Mins" />
-  <.input field={{f, :ingredients}} type="text" label="Ingredients" />
   <.input field={{f, :link}} type="text" label="Link" />
   <.input field={{f, :cover}} type="file" label="Cover Image" />
-  <.input field={{f, :tags}} type="text" label="Tags" />
+  <.input field={{f, :tags}} type="text" label="Tags" placeholder="chinese, korean, spanish, russian" />
   <:actions>
     <.button>Save Recipe</.button>
   </:actions>

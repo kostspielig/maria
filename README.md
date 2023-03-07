@@ -34,3 +34,10 @@ Also 👀 [phoenix deployment guides](https://hexdocs.pm/phoenix/deployment.html
 Run tests in the project with:
 
 `mix test`
+
+# Mail
+
+We are using [Swoosh](https://hexdocs.pm/swoosh/Swoosh.html) [not yet configured live]
+
+To see mailbox in dev go to: `http://localhost:4000/dev/mailbox/`
+or curl: `curl http://localhost:4000/dev/mailbox/json`

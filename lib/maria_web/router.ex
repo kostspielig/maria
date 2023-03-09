@@ -24,19 +24,15 @@ defmodule MariaWeb.Router do
 
     live "/reading", ReadingLive
     # Created an alias for nicer path, might rename
-    get "/cooking", RecipeController, :cooking
+    get "/cook", RecipeController, :cook
   end
 
  scope "/", MariaWeb do
     pipe_through [:browser, :require_authenticated_user]
 
     resources "/recipes", RecipeController
-
   end
-  # Other scopes may use custom stacks.
-  # scope "/api", MariaWeb do
-  #   pipe_through :api
-  # end
+
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:maria, :dev_routes) do

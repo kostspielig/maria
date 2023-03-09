@@ -10,9 +10,9 @@ defmodule MariaWeb.RecipeController do
     render(conn, :index, recipes: recipes)
   end
 
-  def cooking(conn, _params) do
+  def cook(conn, _params) do
     recipes = Recipes.list_recipes()
-    render(conn, :cooking, recipes: recipes)
+    render(conn, :cook, recipes: recipes)
   end
 
   def new(conn, _params) do

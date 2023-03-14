@@ -12,6 +12,7 @@ defmodule MariaWeb.UserSettingsLiveTest do
         |> log_in_user(user_fixture())
         |> live(~p"/users/settings")
 
+      assert html =~ "Recipes"
       assert html =~ "Change Email"
       assert html =~ "Change Password"
     end

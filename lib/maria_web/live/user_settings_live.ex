@@ -5,7 +5,19 @@ defmodule MariaWeb.UserSettingsLive do
 
   def render(assigns) do
     ~H"""
-    <.header>Change Email</.header>
+
+    <.header>Recipes
+      <:actions>
+        <.link href={~p"/recipes"}>
+          <.button>See All</.button>
+        </.link>
+        <.link href={~p"/recipes/new"}>
+          <.button>New Recipe</.button>
+          </.link>
+      </:actions>
+    </.header>
+
+    <.header class="mt-12">Change Email</.header>
 
     <.simple_form
       for={@email_form}
@@ -28,7 +40,7 @@ defmodule MariaWeb.UserSettingsLive do
       </:actions>
     </.simple_form>
 
-    <.header>Change Password</.header>
+    <.header class="mt-12">Change Password</.header>
 
     <.simple_form
       for={@password_form}

@@ -24,7 +24,7 @@ defmodule MariaWeb.Router do
 
     live "/reading", ReadingLive
     # Created an alias for nicer path, might rename
-    get "/cook", RecipeController, :cook
+    get "/cooking", RecipeController, :cook
   end
 
  scope "/", MariaWeb do

@@ -8,6 +8,8 @@ defmodule Maria.RecipesFixtures do
   Generate a recipe.
   """
   def recipe_fixture(attrs \\ %{}) do
+    user = Maria.AccountsFixtures.user_fixture()
+
     {:ok, recipe} =
       attrs
       |> Enum.into(%{
@@ -18,10 +20,12 @@ defmodule Maria.RecipesFixtures do
         likes: 42,
         mins: 42,
         tags: ["option1", "option2"],
-        title: "some title"
+        title: "some title",
+        user_id: user.id,
+        editor_id: user.id
       })
       |> Maria.Recipes.create_recipe()
 
-    recipe
+    recipe |> Maria.Repo.preload(:user) |> Maria.Repo.preload(:editor)
   end
 end

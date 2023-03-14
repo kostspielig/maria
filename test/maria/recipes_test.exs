@@ -8,7 +8,7 @@ defmodule Maria.RecipesTest do
 
     import Maria.RecipesFixtures
 
-    @invalid_attrs %{cover: nil, description: nil, directions: nil, ingredients: nil, likes: nil, mins: nil, tags: nil, title: nil}
+    @invalid_attrs %{cover: nil, description: nil, directions: nil, ingredients: nil, likes: nil, mins: nil, tags: nil, title: nil, user_id: nil}
 
     test "list_recipes/0 returns all recipes" do
       recipe = recipe_fixture()

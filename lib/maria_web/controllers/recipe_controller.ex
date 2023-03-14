@@ -43,7 +43,7 @@ defmodule MariaWeb.RecipeController do
       |> Map.update("cover", "", fn _value -> "https://#{bucket_name}.s3.#{region}.amazonaws.com/#{unique_filename}" end)
 
 
-    case Recipes.create_recipe(updated_params) do
+    case Recipes.create_recipe(updated_params |> Map.put("user_id", conn.assigns.current_user.id)) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, "Recipe created successfully.")
@@ -73,8 +73,9 @@ defmodule MariaWeb.RecipeController do
     recipe = Recipes.get_recipe!(id)
 
     params = %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "") |> String.split(",", trim: true),
-          "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true) }
-    case Recipes.update_recipe(recipe, params) do
+               "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true)}
+
+    case Recipes.update_recipe(recipe, params |> Map.put("editor_id", conn.assigns.current_user.id)) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, "Recipe updated successfully.")

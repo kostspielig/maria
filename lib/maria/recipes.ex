@@ -18,7 +18,7 @@ defmodule Maria.Recipes do
 
   """
   def list_recipes do
-    Repo.all(Recipe)
+    Repo.all(Recipe) |> Repo.preload(:user) |> Repo.preload(:editor)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule Maria.Recipes do
       ** (Ecto.NoResultsError)
 
   """
-  def get_recipe!(id), do: Repo.get!(Recipe, id)
+  def get_recipe!(id), do: Repo.get!(Recipe, id) |> Repo.preload(:user) |> Repo.preload(:editor)
 
   @doc """
   Creates a recipe.
@@ -69,7 +69,7 @@ defmodule Maria.Recipes do
   """
   def update_recipe(%Recipe{} = recipe, attrs) do
     recipe
-    |> Recipe.changeset(attrs)
+    |> Recipe.changeset_update(attrs)
     |> Repo.update()
   end
 

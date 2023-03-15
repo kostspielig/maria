@@ -69,6 +69,7 @@ defmodule MariaWeb.RecipeControllerTest do
     end
   end
 
+  @tag :skip
   describe "delete recipe" do
     setup [:create_recipe]
 

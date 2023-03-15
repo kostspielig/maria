@@ -79,6 +79,8 @@ defmodule MariaWeb.RecipeController do
     recipe = Recipes.get_recipe!(id)
     {:ok, _recipe} = Recipes.delete_recipe(recipe)
 
+    MariaWeb.File.delete(recipe.cover)
+
     conn
     |> put_flash(:info, "Recipe deleted successfully.")
     |> redirect(to: ~p"/recipes")

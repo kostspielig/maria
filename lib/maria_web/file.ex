@@ -24,6 +24,11 @@ defmodule MariaWeb.File do
     "https://#{bucket()}.s3.#{region()}.amazonaws.com/#{unique_filename}"
   end
 
+  def delete(url) do
+    unique_filename = url |> String.split("/") |> List.last()
+    ExAws.S3.delete_object(bucket(), unique_filename) |> ExAws.request()
+  end
+
   defp validate(file) do
     file_extension = file |> Path.extname |> String.downcase
     { Enum.member?(@extension_whitelist, file_extension), file}

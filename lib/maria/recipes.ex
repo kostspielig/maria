@@ -52,6 +52,7 @@ defmodule Maria.Recipes do
   def create_recipe(attrs \\ %{}) do
     %Recipe{}
     |> Recipe.changeset(attrs)
+    |> Recipe.upload_cover()
     |> Repo.insert()
   end
 
@@ -70,6 +71,7 @@ defmodule Maria.Recipes do
   def update_recipe(%Recipe{} = recipe, attrs) do
     recipe
     |> Recipe.changeset_update(attrs)
+    |> Recipe.upload_cover()
     |> Repo.update()
   end
 

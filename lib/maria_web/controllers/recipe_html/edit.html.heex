@@ -1,8 +1,8 @@
 <.header>
   Edit <%= @recipe.title %>
 </.header>
-
-<.simple_form :let={f} for={@changeset} method="put" action={~p"/recipes/#{@recipe}"}>
+<img src={"#{@recipe.cover}"}>
+<.simple_form :let={f} for={@changeset} method="put" enctype="multipart/form-data" action={~p"/recipes/#{@recipe}"}>
   <.error :if={@changeset.action}>
     Oops, something went wrong! Please check the errors below.
   </.error>
@@ -12,6 +12,7 @@
   <.input field={{f, :directions}} type="text" label="Directions" />
   <.input field={{f, :mins}} type="number" label="Mins" />
   <.input field={{f, :link}} type="text" label="Link" />
+  <.input field={{f, :cover}} type="file" label="Cover Image" />
   <.input field={{f, :tags}} type="text" label="Tags" />
   <:actions>
     <.button>Save Recipe</.button>

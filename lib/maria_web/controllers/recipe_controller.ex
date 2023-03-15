@@ -21,20 +21,16 @@ defmodule MariaWeb.RecipeController do
   end
 
   def create(conn, %{"recipe" => %{"cover" => cover_params } = recipe_params}) do
-    params = %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "")
-               |> String.split(",", trim: true),
-          "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true) }
-
     {_, image_binary} = File.read(cover_params.path)
     link = MariaWeb.File.upload(cover_params.filename, recipe_params["title"], image_binary)
 
-    # build the image url and add to the params to be stored
     updated_params =
-      params
+      recipe_params
       |> Map.update("cover", "", fn _value -> link end)
+      |> format_list_params()
+      |> Map.put("user_id", conn.assigns.current_user.id)
 
-
-    case Recipes.create_recipe(updated_params |> Map.put("user_id", conn.assigns.current_user.id)) do
+    case Recipes.create_recipe(updated_params) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, "Recipe created successfully.")
@@ -53,8 +49,8 @@ defmodule MariaWeb.RecipeController do
 
   def edit(conn, %{"id" => id}) do
     recipe = Recipes.get_recipe!(id)
-    p = %{recipe | ingredients: Enum.join(recipe.ingredients, ", "),
-         tags: Enum.join(recipe.tags, ", ")}
+    p = %{recipe | ingredients: Enum.join(recipe.ingredients, ","),
+         tags: Enum.join(recipe.tags, ",")}
 
     changeset = Recipes.change_recipe(p)
     render(conn, :edit, recipe: p, changeset: changeset)
@@ -63,10 +59,12 @@ defmodule MariaWeb.RecipeController do
   def update(conn, %{"id" => id, "recipe" => recipe_params}) do
     recipe = Recipes.get_recipe!(id)
 
-    params = %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "") |> String.split(",", trim: true),
-               "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true)}
+    params =
+      recipe_params
+      |> format_list_params()
+      |> Map.put("editor_id", conn.assigns.current_user.id)
 
-    case Recipes.update_recipe(recipe, params |> Map.put("editor_id", conn.assigns.current_user.id)) do
+    case Recipes.update_recipe(recipe, params) do
       {:ok, recipe} ->
         conn
         |> put_flash(:info, "Recipe updated successfully.")
@@ -84,5 +82,10 @@ defmodule MariaWeb.RecipeController do
     conn
     |> put_flash(:info, "Recipe deleted successfully.")
     |> redirect(to: ~p"/recipes")
+  end
+
+  defp format_list_params(recipe_params) do
+    %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "") |> String.split(",", trim: true),
+      "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true)}
   end
 end

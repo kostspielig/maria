@@ -3,8 +3,8 @@ defmodule MariaWeb.RecipeControllerTest do
 
   import Maria.RecipesFixtures
   import Maria.AccountsFixtures
-  @create_attrs %{cover: %Plug.Upload {filename: "cover", path: "/some"}, description: "some description", directions: "some directions", ingredients: "option1, option 2", likes: 42, mins: 42, tags: "option1, option2", title: "some title"}
-  @update_attrs %{cover: %Plug.Upload {filename: "updated cover", path: "/some"},  description: "some updated description", directions: "some updated directions", ingredients: "option1", likes: 43, mins: 43, tags: "option1", title: "some updated title"}
+  @create_attrs %{cover: %Plug.Upload {filename: "cover.png", path: "/some"}, description: "some description", directions: "some directions", ingredients: "option1, option 2", likes: 42, mins: 42, tags: "option1, option2", title: "some title"}
+  @update_attrs %{cover: %Plug.Upload {filename: "updated cover.png", path: "/some"},  description: "some updated description", directions: "some updated directions", ingredients: "option1", likes: 43, mins: 43, tags: "option1", title: "some updated title"}
   @invalid_attrs %{cover: %Plug.Upload {filename: "", path: "/some"}, description: nil, directions: nil, ingredients: "", likes: nil, mins: nil, tags: "", title: nil}
 
   describe "index" do

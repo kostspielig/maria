@@ -13,7 +13,7 @@ defmodule Maria.RecipesFixtures do
     {:ok, recipe} =
       attrs
       |> Enum.into(%{
-        cover: "cover",
+        cover: "cover.png",
         description: "some description",
         directions: "some directions",
         ingredients: ["option1", "option2"],

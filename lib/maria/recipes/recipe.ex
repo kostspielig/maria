@@ -25,6 +25,7 @@ defmodule Maria.Recipes.Recipe do
     recipe
     |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :tags, :cover, :user_id])
     |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags, :cover])
+    |> validate_format(:cover, ~r/(?i)\.(jpg|jpeg|png|gif)$/)
     |> foreign_key_constraint(:user_id)
   end
 

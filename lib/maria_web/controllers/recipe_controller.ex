@@ -21,26 +21,17 @@ defmodule MariaWeb.RecipeController do
   end
 
   def create(conn, %{"recipe" => %{"cover" => cover_params } = recipe_params}) do
-
     params = %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "")
                |> String.split(",", trim: true),
           "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true) }
 
-    file_uuid = UUID.uuid4(:hex)
-    image_filename = String.replace(recipe_params["title"], " ", "-") |> String.downcase()
-    unique_filename = "#{image_filename}-#{file_uuid}" <> Path.extname(cover_params.filename)
     {_, image_binary} = File.read(cover_params.path)
-    bucket_name = Application.get_env(:maria, MariaWeb.RecipeController)[:s3][:bucket]
-    region = Application.get_env(:ex_aws, :region)
-
-    # Upload picture to AWS
-    ExAws.S3.put_object(bucket_name, unique_filename, image_binary)
-    |> ExAws.request!
+    link = MariaWeb.File.upload(cover_params.filename, recipe_params["title"], image_binary)
 
     # build the image url and add to the params to be stored
     updated_params =
       params
-      |> Map.update("cover", "", fn _value -> "https://#{bucket_name}.s3.#{region}.amazonaws.com/#{unique_filename}" end)
+      |> Map.update("cover", "", fn _value -> link end)
 
 
     case Recipes.create_recipe(updated_params |> Map.put("user_id", conn.assigns.current_user.id)) do

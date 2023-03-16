@@ -35,6 +35,14 @@ Run tests in the project with:
 
 `mix test`
 
+To only run specific tests add this tag `@tag runnable: true` before each test and run:
+
+`mix test --only runnable:true`
+
+To get into a console with test environment:
+
+`MIX_ENV=test iex -S mix`
+
 # Mail
 
 We are using [Swoosh](https://hexdocs.pm/swoosh/Swoosh.html) [not yet configured live]

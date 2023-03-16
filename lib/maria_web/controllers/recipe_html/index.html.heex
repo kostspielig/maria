@@ -20,10 +20,10 @@
     <div class="sr-only">
       <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>
     </div>
-    <.link navigate={~p"/recipes/#{recipe}/edit"}>Edit</.link>
+    <.link navigate={~p"/recipes/#{recipe}/edit"} class="hover:text-brand">Edit</.link>
   </:action>
   <:action :let={recipe}>
-    <.link href={~p"/recipes/#{recipe}"} method="delete" data-confirm="Are you sure?">
+    <.link href={~p"/recipes/#{recipe}"} method="delete" data-confirm="Are you sure?" class="hover:text-blood">
       Delete
     </.link>
   </:action>

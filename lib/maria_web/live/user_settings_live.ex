@@ -2,11 +2,12 @@ defmodule MariaWeb.UserSettingsLive do
   use MariaWeb, :live_view
 
   alias Maria.Accounts
+  alias Maria.Recipes
 
   def render(assigns) do
     ~H"""
 
-    <.header>Recipes
+    <.header>My Recipes
       <:actions>
         <.link href={~p"/recipes"}>
           <.button>See All</.button>
@@ -16,6 +17,25 @@ defmodule MariaWeb.UserSettingsLive do
           </.link>
       </:actions>
     </.header>
+
+    <.table id="recipes" rows={@recipes} row_click={&JS.navigate(~p"/recipes/#{&1}")}>
+      <:col :let={recipe} label="Title"><%= recipe.title %></:col>
+      <:col :let={recipe} label="Description"><%= recipe.description %></:col>
+      <:col :let={recipe} label="Tags"><.tags info={recipe.tags}/></:col>
+      <:col :let={recipe} label="Cover"><img src={"#{recipe.cover}"} class="w-28"></:col>
+      <:action :let={recipe}>
+        <div class="sr-only">
+          <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>
+        </div>
+        <.link navigate={~p"/recipes/#{recipe}/edit"} class="hover:text-brand">Edit</.link>
+      </:action>
+      <:action :let={recipe}>
+        <.link href={~p"/recipes/#{recipe}"} method="delete" data-confirm="Are you sure?" class="hover:text-blood">
+          Delete
+        </.link>
+      </:action>
+    </.table>
+
 
     <.header class="mt-12">Change Email</.header>
 
@@ -91,6 +111,7 @@ defmodule MariaWeb.UserSettingsLive do
     user = socket.assigns.current_user
     email_changeset = Accounts.change_user_email(user)
     password_changeset = Accounts.change_user_password(user)
+    recipes = Recipes.list_recipes(user)
 
     socket =
       socket
@@ -100,6 +121,7 @@ defmodule MariaWeb.UserSettingsLive do
       |> assign(:email_form, to_form(email_changeset))
       |> assign(:password_form, to_form(password_changeset))
       |> assign(:trigger_submit, false)
+      |> assign(:recipes, recipes)
 
     {:ok, socket}
   end

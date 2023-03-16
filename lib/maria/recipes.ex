@@ -21,6 +21,10 @@ defmodule Maria.Recipes do
     Repo.all(Recipe) |> Repo.preload(:user) |> Repo.preload(:editor)
   end
 
+  def list_recipes(user) do
+    Recipe |> where(user_id: ^user.id) |> Repo.all() |> Repo.preload(:user) |> Repo.preload(:editor)
+  end
+
   @doc """
   Gets a single recipe.
 

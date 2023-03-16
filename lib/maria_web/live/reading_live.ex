@@ -17,8 +17,8 @@ defmodule MariaWeb.ReadingLive do
   def render(assigns) do
     ~H"""
     <section id="goodreads" class="px-6 py-10 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
-      <h1 class="uppercase underline underline-offset-4 font-bold font-sans text-xl text-blk"> Books </h1>
-      <h2 class="mt-8 text-base font-normal">Lost in Translation: My Latest Book Obsessions</h2>
+      <h1 class="font-head text-2xl font-bold text-blk"> Books </h1>
+      <h2 class="mt-8 text-base font-normal">Lost in Translation: The Latest Book Obsessions</h2>
     <div class="overflow-x-auto flex">
       <%= for book <- @goodreads do %>
         <div class="flex-none px-3 py-6 first:pl-0 last:pr-6">
@@ -34,9 +34,9 @@ defmodule MariaWeb.ReadingLive do
     </section>
 
     <section id="podcast" class="bg-brand px-6 py-10 text-white">
-      <h1 class="uppercase underline underline-offset-4 font-bold font-sans text-xl mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Podcasts </h1>
+      <h1 class="font-head text-2xl font-bold mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Podcasts </h1>
       <div class="font-sans mt-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
-        <h1 class="text-3xl font-bold"><%= @podcast.title %> </h1>
+        <h1 class="text-2xl font-bold"><%= @podcast.title %> </h1>
         <h2 class="mt-2 text-base font-normal"><%= @podcast.subtitle %> </h2>
         <div class="overflow-x-auto flex">
           <%= for e <- @podcast.entries do %>
@@ -54,11 +54,11 @@ defmodule MariaWeb.ReadingLive do
     </section>
 
     <section id="newsletter" class=" text-blood">
-      <h1 class="px-6 pt-10 underline underline-offset-4  uppercase font-bold font-sans text-xl mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Newsletters </h1>
+      <h1 class="px-6 pt-10 font-head text-2xl font-bold mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Newsletters </h1>
       <%= for newsletter <- @newsletter do %>
       <div class="font-sans mt-10 border-blood border-b-[15px] border-opacity-25 last:border-0  ">
       <div class="px-6 pb-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
-        <h1 class="text-3xl font-bold"><%= newsletter.title %> </h1>
+        <h1 class="text-2xl font-bold"><%= newsletter.title %> </h1>
         <h2 class="mt-2 text-base font-normal"><%= newsletter.summary %> </h2>
         <div class="overflow-x-auto flex">
           <%= for e <- newsletter.entries do %>
@@ -78,11 +78,11 @@ defmodule MariaWeb.ReadingLive do
     </section>
 
     <section id="youtube" class="bg-neutral text-blk">
-      <h1 class="px-6 pt-10 uppercase underline underline-offset-4 font-sans font-bold text-xl  mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Youtube </h1>
+      <h1 class="px-6 pt-10 font-head font-bold text-2xl  mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Youtube </h1>
       <%= for yc <- @youtube do %>
       <div class="font-sans mt-10 border-blk border-b-[15px] border-opacity-10 last:border-0">
       <div class="px-6 pb-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
-        <h1 class="text-3xl font-bold"><%= yc.title %> </h1>
+        <h1 class="text-2xl font-bold"><%= yc.title %> </h1>
         <div class="overflow-x-auto flex">
           <%= for e <- yc.entries do %>
           <div class="flex-none py-6 px-3 first:pl-6 last:pr-6">

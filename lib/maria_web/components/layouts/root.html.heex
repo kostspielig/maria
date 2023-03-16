@@ -8,16 +8,16 @@
       <%= assigns[:page_title] || "Maria" %>
     </.live_title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦪</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Racing+Sans+One&display=swap" rel="stylesheet">
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
   <body class="bg-white antialiased">
-    <ul class="mt-2 relative float-right z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+    <ul class="mt-[33px] relative float-right z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
       <%= if @current_user do %>
-        <li class="text-[0.8125rem] leading-6 text-zinc-900">
-          <%= @current_user.email %>
-        </li>
         <li>
           <.link
             title="Settings"
@@ -50,5 +50,40 @@
       <% end %>
     </ul>
     <%= @inner_content %>
+    <div class="px-6 py-6 sm:px-8 lg:px-8 xl:px-28 flex justify-between">
+      <div class="">
+        <div class="grid grid-cols-4 gap-y-4 gap-x-4 text-ml leading-6 text-brand  capitalize font-semibold">
+          <div>
+            <a
+              href="https://twitter.com/kostspielig"
+              target="_blank"
+              class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
+            >🐦</a>
+          </div>
+          <div>
+            <a
+              href="https://instagram.com/kostspielig"
+              target="_blank"
+              class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
+            >📸</a>
+          </div>
+          <div>
+            <a
+              href="https://github.com/kostspielig"
+              target="_blank"
+              class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
+            >🐈</a>
+          </div>
+          <div>
+            <a
+              href="https://www.tiktok.com/@kstsplg"
+              target="_blank"
+              class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
+            >🎥</a>
+          </div>
+        </div>
+      </div>
+      <div class="font-head">© Maria Carrasco</div>
+    </div>
   </body>
 </html>

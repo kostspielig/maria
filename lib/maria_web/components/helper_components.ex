@@ -10,8 +10,8 @@ defmodule MariaWeb.HelperComponents do
     <div phx-click={@row_click && @row_click.(@info)} class="w-ful border overflow-hidden">
       <div class="pb-8 cursor-pointer">
         <div class="w-full h-56 bg-brand overflow-hidden"><img class="object-cover w-full h-full" src={"#{@info.cover}"}></div>
-        <div class="text-2xl font-semibold font-sans mt-4 ml-4 uppercase"><%= @info.title %></div>
-        <div class="text-sm font-medium mt-4 ml-4 font-sans capitalize"><%= @info.description %></div>
+        <div class="text-2xl font-semibold font-head mt-4 ml-4"><%= @info.title %></div>
+        <div class="text-sm font-medium mt-2 ml-4 font-sans capitalize"><%= @info.description %></div>
       </div>
     </div>
     """

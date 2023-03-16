@@ -1,11 +1,8 @@
 <div class="sm:h-screen bg-brand selection:bg-blood selection:text-white">
-<header class="px-4 py-6 sm:px-6 lg:px-8 xl:px-28 bg-white sticky top-0 border-lbrand border-b">
+<header class="px-4 py-6 sm:px-6 lg:px-8 xl:px-28 bg-white sticky top-0">
   <div class="mx-auto max-w-xl lg:mx-auto">
-    <h1 class="flex justify-center text-2xl font-semibold text-brand uppercase">
-      Maria Carrasco
-      <small class="ml-3 rounded-full bg-brand/5 px-2 text-[0.8125rem] font-medium leading-6 lowercase hidden">
-        kostspielig
-      </small>
+    <h1 class="flex justify-center text-4xl font-racing font-semibold text-brand bg-white uppercase">
+      carras.co
     </h1>
   </div>
 </header>
@@ -15,45 +12,10 @@
       Welcome to the week of <%=Calendar.strftime(Date.utc_today(), "%B")%> <%=Date.utc_today().day %> 👏
     </p>
     <div class="mt-40 xl:mt-60 flex justify-end ">
-      <p class="font-serif font-medium w-2/3 text-2xl sm:text-3xl">
+      <p class="font-head font-medium w-2/3 text-2xl sm:text-3xl">
         Here is everything to <a href="/reading" class="italic hover:bg-blood">read</a>, <a href="/cooking" class="italic hover:bg-blood">cook</a> or <a href="https://www.imdb.com/user/ur65531471/watchlist?sort=date_added%2Cdesc&view=detail" class="italic hover:bg-blood" target="_blank">watch</a> before 📅 <%=Calendar.strftime(Date.utc_today(), "%b")%> <%=Date.end_of_week(Date.utc_today()).day%>.
       </p>
     </div>
   </div>
 </div>
-</div>
-<div class="px-6 py-6 sm:px-8 lg:px-8 xl:px-28 flex justify-between">
-  <div class="">
-    <div class="grid grid-cols-4 gap-y-4 gap-x-4 text-ml leading-6 text-brand  capitalize font-semibold">
-      <div>
-        <a
-          href="https://twitter.com/kostspielig"
-          target="_blank"
-          class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
-        >🐦</a>
-      </div>
-      <div>
-        <a
-          href="https://instagram.com/kostspielig"
-          target="_blank"
-          class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
-        >📸</a>
-      </div>
-      <div>
-        <a
-          href="https://github.com/kostspielig"
-          target="_blank"
-          class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
-        >🐈</a>
-      </div>
-      <div>
-        <a
-          href="https://www.tiktok.com/@kstsplg"
-          target="_blank"
-          class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
-        >🎥</a>
-      </div>
-    </div>
-  </div>
-  <div class="">© Maria Carrasco</div>
 </div>

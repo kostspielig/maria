@@ -13,7 +13,9 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['Helvetica', 'Arial', 'sans-serif'],
-        'serif': ['Georgia', 'Times', 'Times New Roman', 'serif' ]
+        'serif': ['Georgia', 'Times', 'Times New Roman', 'serif' ],
+        'head': [ 'Gloock', 'serif'],
+        'racing': ['Racing Sans One', 'cursive']
       },
       colors: {
         brand: "#3aadec",

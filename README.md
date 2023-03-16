@@ -14,7 +14,7 @@ Now you can visit maria's page at [`localhost:4000`](http://localhost:4000).
 
 # Run in production ☁️
 
-We are hosting the [app](https://maria.gigalixirapp.com/) at Gigalixir- a PaaS built for Elixir.
+We are hosting the [app](https://carras.co/) at Gigalixir- a PaaS built for Elixir.
 We use here the free tier that provides  instance with 0.2GB of memory and 1 postgresql database limited to 10,000 rows.
 See [console here](https://console.gigalixir.com/).
 

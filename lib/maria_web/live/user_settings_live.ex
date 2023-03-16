@@ -7,7 +7,8 @@ defmodule MariaWeb.UserSettingsLive do
   def render(assigns) do
     ~H"""
 
-    <.header>My Recipes
+    <div class="text-lg leading-8 text-zinc-800">👏 <%= @current_email %></div>
+    <.header class="mt-12">My Recipes
       <:actions>
         <.link href={~p"/recipes"}>
           <.button>See All</.button>

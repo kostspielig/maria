@@ -21,10 +21,11 @@ defmodule Maria.RecipesTest do
     end
 
     test "create_recipe/1 with valid data creates a recipe" do
-      valid_attrs = %{cover: "cover.png", description: "some description", directions: "some directions", ingredients: ["option1", "option2"], likes: 42, mins: 42, tags: ["option1", "option2"], title: "some title"}
+      cover = %Plug.Upload{content_type: "image/png", filename: "cover.png", path: "/tmp/plug"}
+      valid_attrs = %{cover: cover, description: "some description", directions: "some directions", ingredients: ["option1", "option2"], likes: 42, mins: 42, tags: ["option1", "option2"], title: "some title"}
 
       assert {:ok, %Recipe{} = recipe} = Recipes.create_recipe(valid_attrs)
-      assert recipe.cover == "cover.png"
+      assert recipe.cover =~ "some-title"
       assert recipe.description == "some description"
       assert recipe.directions == "some directions"
       assert recipe.ingredients == ["option1", "option2"]
@@ -40,10 +41,11 @@ defmodule Maria.RecipesTest do
 
     test "update_recipe/2 with valid data updates the recipe" do
       recipe = recipe_fixture()
-      update_attrs = %{cover: "updated cover.png", description: "some updated description", directions: "some updated directions", ingredients: ["option1"], likes: 43, mins: 43, tags: ["option1"], title: "some updated title"}
+      cover = %Plug.Upload{content_type: "image/png", filename: "cover.png", path: "/tmp/plug"}
+      update_attrs = %{cover: cover, description: "some updated description", directions: "some updated directions", ingredients: ["option1"], likes: 43, mins: 43, tags: ["option1"], title: "some updated title"}
 
       assert {:ok, %Recipe{} = recipe} = Recipes.update_recipe(recipe, update_attrs)
-      assert recipe.cover == "updated cover.png"
+      assert recipe.cover =~ "some-updated-title"
       assert recipe.description == "some updated description"
       assert recipe.directions == "some updated directions"
       assert recipe.ingredients == ["option1"]

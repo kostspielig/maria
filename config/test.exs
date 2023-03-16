@@ -23,6 +23,8 @@ config :maria, MariaWeb.Endpoint,
   secret_key_base: "e5vxL1yFMfeSY3ONqDNxTJp6vcntzrVQVFM9++RglImO5xdMVzh7GO4XDellAL7+",
   server: false
 
+config :maria, :storage_dependency, Maria.Test.Stub.Storage
+
 # In test we don't send emails.
 config :maria, Maria.Mailer, adapter: Swoosh.Adapters.Test
 

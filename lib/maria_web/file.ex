@@ -1,5 +1,8 @@
 defmodule MariaWeb.File do
-    require Logger
+  @storage_dependency Application.compile_env(
+    :maria, :storage_dependency, ExAws
+  )
+  require Logger
 
   def bucket, do: Application.get_env(:maria, MariaWeb.RecipeController)[:s3][:bucket]
   def region, do: Application.get_env(:ex_aws, :region)
@@ -9,9 +12,8 @@ defmodule MariaWeb.File do
   """
   def upload(file, filename) do
     {_, image_binary} = File.read(file.path)
-
     # Upload picture to AWS
-    case ExAws.S3.put_object(bucket(), filename, image_binary) |> ExAws.request do
+    case @storage_dependency.S3.put_object(bucket(), filename, image_binary) |> @storage_dependency.request do
       {:ok, _} ->
         "https://#{bucket()}.s3.#{region()}.amazonaws.com/#{filename}"
       {:error, exception} ->
@@ -22,7 +24,7 @@ defmodule MariaWeb.File do
 
   def delete(url) do
     unique_filename = url |> String.split("/") |> List.last()
-    ExAws.S3.delete_object(bucket(), unique_filename) |> ExAws.request()
+    @storage_dependency.S3.delete_object(bucket(), unique_filename) |> @storage_dependency.request()
   end
 
   def generate_name(filename, title) do

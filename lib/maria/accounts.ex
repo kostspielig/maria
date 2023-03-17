@@ -90,7 +90,7 @@ defmodule Maria.Accounts do
 
   """
   def change_user_registration(%User{} = user, attrs \\ %{}) do
-    User.registration_changeset(user, attrs, hash_password: false, validate_email: false)
+    User.registration_changeset(user, attrs, hash_password: false, validate_email: false, validate_username: false)
   end
 
   ## Settings
@@ -106,6 +106,39 @@ defmodule Maria.Accounts do
   """
   def change_user_email(user, attrs \\ %{}) do
     User.email_changeset(user, attrs, validate_email: false)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for changing the user username.
+
+  ## Examples
+
+      iex> change_username(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_username(user, attrs \\ %{}) do
+    User.username_changeset(user, attrs, validate_username: false)
+  end
+
+  @doc """
+  Emulates that the username will change without actually changing
+  it in the database.
+
+  ## Examples
+
+      iex> apply_username(user, "free username", %{email: ...})
+      {:ok, %User{}}
+
+      iex> apply_username(user, "taken username", %{email: ...})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def apply_username(user, password, attrs) do
+    user
+    |> User.username_changeset(attrs)
+    |> User.validate_current_password(password)
+    |> Ecto.Changeset.apply_action(:update)
   end
 
   @doc """
@@ -126,6 +159,24 @@ defmodule Maria.Accounts do
     |> User.email_changeset(attrs)
     |> User.validate_current_password(password)
     |> Ecto.Changeset.apply_action(:update)
+  end
+
+  @doc """
+  Updates the username if the given password is correct.
+  """
+  def update_username(user, password, attrs) do
+    changeset =
+      user
+      |> User.username_changeset(attrs)
+      |> User.validate_current_password(password)
+
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(:user, changeset)
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{user: user}} -> {:ok, user}
+      {:error, :user, changeset, _} -> {:error, changeset}
+    end
   end
 
   @doc """

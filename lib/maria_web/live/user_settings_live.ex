@@ -7,7 +7,7 @@ defmodule MariaWeb.UserSettingsLive do
   def render(assigns) do
     ~H"""
 
-    <div class="text-base font-head leading-8 text-zinc-800">👏 <%= @current_email %>
+    <div class="text-base font-head leading-8 text-zinc-800">👏 <%= @current_username %>
 
     </div>
     <.header class="mt-12">My Recipes
@@ -21,6 +21,7 @@ defmodule MariaWeb.UserSettingsLive do
       </:actions>
     </.header>
 
+    <%= if length(@recipes) != 0 do %>
     <.table id="recipes" rows={@recipes} row_click={&JS.navigate(~p"/recipes/#{&1}")}>
       <:col :let={recipe} label="Title"><%= recipe.title %></:col>
       <:col :let={recipe} label="Description"><%= recipe.description %></:col>
@@ -38,7 +39,32 @@ defmodule MariaWeb.UserSettingsLive do
         </.link>
       </:action>
     </.table>
+    <% else%>
+    <div class="mt-10 block text-sm font-semibold leading-6 text-zinc-500">No recipes yet 🤦‍♀️</div>
+    <% end%>
+    <.header class="mt-12">Change Username</.header>
 
+    <.simple_form
+      for={@username_form}
+      id="username_form"
+      phx-submit="update_username"
+      phx-change="validate_username"
+    >
+      <.input field={{@username_form, :email}} type="hidden" value={@current_email} />
+      <.input field={{@username_form, :username}} type="text" label="Username" required />
+      <.input
+        field={{@username_form, :current_password}}
+        name="current_password"
+        id="current_password_for_username"
+        type="password"
+        label="Current password"
+        value={@username_form_current_password}
+        required
+      />
+      <:actions>
+        <.button phx-disable-with="Changing...">Change Username</.button>
+      </:actions>
+    </.simple_form>
 
     <.header class="mt-12">Change Email</.header>
 
@@ -113,6 +139,7 @@ defmodule MariaWeb.UserSettingsLive do
   def mount(_params, _session, socket) do
     user = socket.assigns.current_user
     email_changeset = Accounts.change_user_email(user)
+    username_changeset = Accounts.change_username(user)
     password_changeset = Accounts.change_user_password(user)
     recipes = Recipes.list_recipes(user)
 
@@ -121,12 +148,46 @@ defmodule MariaWeb.UserSettingsLive do
       |> assign(:current_password, nil)
       |> assign(:email_form_current_password, nil)
       |> assign(:current_email, user.email)
+      |> assign(:current_username, user.username)
+      |> assign(:username_form_current_password, nil)
+      |> assign(:username_form, to_form(username_changeset))
       |> assign(:email_form, to_form(email_changeset))
       |> assign(:password_form, to_form(password_changeset))
       |> assign(:trigger_submit, false)
       |> assign(:recipes, recipes)
 
     {:ok, socket}
+  end
+
+  def handle_event("validate_username", params, socket) do
+    %{"current_password" => password, "user" => user_params} = params
+
+    username_form =
+      socket.assigns.current_user
+      |> Accounts.change_username(user_params)
+      |> Map.put(:action, :validate)
+      |> to_form()
+
+    {:noreply, assign(socket, username_form: username_form, username_form_current_password: password)}
+  end
+
+  def handle_event("update_username", params, socket) do
+    %{"current_password" => password, "user" => user_params} = params
+    user = socket.assigns.current_user
+
+    case Accounts.update_username(user, password, user_params) do
+      {:ok, user} ->
+        username_form =
+          user
+          |> Accounts.change_username(user_params)
+          |> to_form()
+
+        info = "Username updated 🎉"
+        {:noreply, socket |> put_flash(:info, info) |> assign(username_form: username_form, username_form_current_password: nil, current_username: user.username)}
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, :username_form, to_form(Map.put(changeset, :action, :insert)))}
+    end
   end
 
   def handle_event("validate_email", params, socket) do

@@ -56,8 +56,8 @@ defmodule MariaWeb.ReadingLive do
     <section id="newsletter" class=" text-blood">
       <h1 class="px-6 pt-10 font-head text-2xl font-bold mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Newsletters </h1>
       <%= for newsletter <- @newsletter do %>
-      <div class="font-sans mt-10 border-blood border-b-[15px] border-opacity-25 last:border-0  ">
-      <div class="px-6 pb-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
+      <div class="font-sans odd:bg-blood odd:bg-opacity-10">
+      <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-2xl font-bold"><%= newsletter.title %> </h1>
         <h2 class="mt-2 text-base font-normal"><%= newsletter.summary %> </h2>
         <div class="overflow-x-auto flex">
@@ -80,8 +80,8 @@ defmodule MariaWeb.ReadingLive do
     <section id="youtube" class="bg-neutral text-blk">
       <h1 class="px-6 pt-10 font-head font-bold text-2xl  mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Youtube </h1>
       <%= for yc <- @youtube do %>
-      <div class="font-sans mt-10 border-blk border-b-[15px] border-opacity-10 last:border-0">
-      <div class="px-6 pb-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
+      <div class="font-sans odd:bg-blk odd:bg-opacity-10">
+      <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-2xl font-bold"><%= yc.title %> </h1>
         <div class="overflow-x-auto flex">
           <%= for e <- yc.entries do %>

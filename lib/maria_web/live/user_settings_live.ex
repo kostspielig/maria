@@ -7,7 +7,7 @@ defmodule MariaWeb.UserSettingsLive do
   def render(assigns) do
     ~H"""
 
-    <div class="text-base font-head leading-8 text-zinc-800">👏 <%= @current_email %>
+    <div class="text-base font-head leading-8 text-zinc-800">👏 <%= @current_username %>
 
     </div>
     <.header class="mt-12">My Recipes
@@ -121,6 +121,7 @@ defmodule MariaWeb.UserSettingsLive do
       |> assign(:current_password, nil)
       |> assign(:email_form_current_password, nil)
       |> assign(:current_email, user.email)
+      |> assign(:current_username, user.username)
       |> assign(:email_form, to_form(email_changeset))
       |> assign(:password_form, to_form(password_changeset))
       |> assign(:trigger_submit, false)

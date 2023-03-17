@@ -13,6 +13,7 @@ defmodule MariaWeb.UserSettingsLiveTest do
         |> live(~p"/users/settings")
 
       assert html =~ "Recipes"
+      assert html =~ "Change Username"
       assert html =~ "Change Email"
       assert html =~ "Change Password"
     end
@@ -23,6 +24,73 @@ defmodule MariaWeb.UserSettingsLiveTest do
       assert {:redirect, %{to: path, flash: flash}} = redirect
       assert path == ~p"/users/log_in"
       assert %{"error" => "You must log in to access this page."} = flash
+    end
+  end
+
+  describe "update username form" do
+    setup %{conn: conn} do
+      password = valid_user_password()
+      user = user_fixture(%{password: password, username: "username"})
+      %{conn: log_in_user(conn, user), user: user, password: password}
+    end
+
+    test "updates the username", %{conn: conn, user: user, password: password} do
+      new_username = "new-username"
+
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      form =
+        form(lv, "#username_form", %{
+          "current_password" => password,
+          "user" => %{
+            "username" => new_username,
+            "email" => user.email
+          }
+        })
+
+      result = render_submit(form)
+
+      assert result =~ "Username updated"
+
+      assert Accounts.get_user_by_email_and_password(user.email, password)
+    end
+
+    test "renders errors with invalid data (phx-change)", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> element("#username_form")
+        |> render_change(%{
+          "current_password" => "invalid",
+          "user" => %{
+            "username" => "",
+            "password" => "not"
+          }
+        })
+
+      assert result =~ "Change Username"
+      assert result =~ "did not change\n"
+      assert result =~ "t be blank\n"
+    end
+
+    test "renders errors with invalid data (phx-submit)", %{conn: conn, user: user} do
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> form("#username_form", %{
+          "current_password" => "invalid",
+          "user" => %{
+            "username" => user.username,
+            "email" => user.email
+          }
+        })
+        |> render_submit()
+
+      assert result =~ "Change Username"
+      assert result =~ "did not change"
+      assert result =~ "is not valid"
     end
   end
 

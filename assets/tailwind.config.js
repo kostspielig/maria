@@ -15,7 +15,7 @@ module.exports = {
         'sans': ['Helvetica', 'Arial', 'sans-serif'],
         'serif': ['Georgia', 'Times', 'Times New Roman', 'serif' ],
         'head': [ 'Gloock', 'serif'],
-        'racing': ['Racing Sans One', 'cursive']
+        'racing': ['Racing Sans One', 'Helvetica', 'sans']
       },
       colors: {
         brand: "#3aadec",

@@ -15,7 +15,7 @@
   <:item title="by"><%= if user = Map.get(@recipe, :user, nil) do user.username end %></:item>
   <:item title="Description"><%= @recipe.description %></:item>
   <:item title="Ingredients"><.ingredients info={@recipe.ingredients} /></:item>
-  <:item title="Directions"><%= @recipe.directions %></:item>
+  <:item title="Directions"><%= raw(@recipe.directions) %></:item>
   <:item title="Mins"><%= @recipe.mins %></:item>
   <:item title="Likes"><%= @recipe.likes %></:item>
   <:item title="Tags"><.tags info={@recipe.tags}/></:item>

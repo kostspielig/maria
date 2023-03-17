@@ -1,3 +1,5 @@
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
 <.header>
   Edit <%= @recipe.title %>
 </.header>
@@ -8,8 +10,9 @@
   </.error>
   <.input field={{f, :title}} type="text" label="Title" />
   <.input field={{f, :description}} type="textarea" label="Description" />
+  <.input field={{f, :directions}} type="textarea" label="Directions" id="product_directions" />
+  <.input field={{f, :mins}} type="number" label="Mins" />
   <.input field={{f, :ingredients}} type="text" label="Ingredients" />
-  <.input field={{f, :directions}} type="textarea" label="Directions" />
   <.input field={{f, :mins}} type="number" label="Mins" />
   <.input field={{f, :link}} type="text" label="Link" />
   <.input field={{f, :cover}} type="file" label="Cover Image" />
@@ -19,4 +22,14 @@
   </:actions>
 </.simple_form>
 
-<.back navigate={~p"/recipes"}>Back to recipes</.back>
+<script>
+  ClassicEditor
+    .create( document.querySelector( '#product_directions' ) , {
+        toolbar: [ 'bold', 'italic', 'underline', 'blockQuote' ]
+    } )
+    .catch( error => {
+        console.log( error );
+    } );
+</script>
+
+<.back navigate={~p"/recipes"}>See all recipes</.back>

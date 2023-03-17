@@ -12,7 +12,7 @@
 </div>
 
 <.list>
-  <:item title="by"><%= if user =Map.get(@recipe, :user, nil) do user.email end %></:item>
+  <:item title="by"><%= if user = Map.get(@recipe, :user, nil) do user.username end %></:item>
   <:item title="Description"><%= @recipe.description %></:item>
   <:item title="Ingredients"><.ingredients info={@recipe.ingredients} /></:item>
   <:item title="Directions"><%= @recipe.directions %></:item>
@@ -20,7 +20,7 @@
   <:item title="Likes"><%= @recipe.likes %></:item>
   <:item title="Tags"><.tags info={@recipe.tags}/></:item>
   <:item title="Link"><%= @recipe.link %></:item>
-  <:item title="Last edited by"><%= if editor = Map.get(@recipe, :editor, nil) do editor.email end %></:item>
+  <:item title="Last edited by"><%= if editor = Map.get(@recipe, :editor, nil) do editor.username end %></:item>
 </.list>
 
 

@@ -56,10 +56,6 @@ defmodule MariaWeb.RecipeController do
   def update(conn, %{"id" => id, "recipe" => recipe_params}) do
     recipe = Recipes.get_recipe!(id)
 
-  #  if to = Map.get(recipe_params, "newcover") do
-  #    link = MariaWeb.File.replace(link, to, recipe_params["title"])
-  #  else "" end
-
     params =
       recipe_params
       |> format_list_params()
@@ -78,12 +74,19 @@ defmodule MariaWeb.RecipeController do
 
   def delete(conn, %{"id" => id}) do
     recipe = Recipes.get_recipe!(id)
-    {:ok, _recipe} = Recipes.delete_recipe(recipe)
 
-    MariaWeb.File.delete(recipe.cover)
+    {type, info} =
+      case conn.assigns.current_user.id == recipe.user_id do
+        :true ->
+          {:ok, _recipe} = Recipes.delete_recipe(recipe)
+          MariaWeb.File.delete(recipe.cover)
+          {:info, "Recipe deleted successfully."}
+        _ ->
+          {:error, "You can only delete your own recipes"}
+      end
 
     conn
-    |> put_flash(:info, "Recipe deleted successfully.")
+    |> put_flash(type, info)
     |> redirect(to: ~p"/recipes")
   end
 

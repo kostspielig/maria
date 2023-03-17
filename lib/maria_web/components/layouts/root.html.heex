@@ -15,8 +15,8 @@
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="bg-white antialiased">
-    <ul class="mt-[33px] relative float-right z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+  <body class="bg-white antialiased selection:bg-blood selection:text-white">
+    <ul class="mt-[33px] fixed top-0 right-0 z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
       <%= if @current_user do %>
         <li>
           <.link

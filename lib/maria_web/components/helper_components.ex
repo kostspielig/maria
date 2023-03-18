@@ -39,7 +39,7 @@ defmodule MariaWeb.HelperComponents do
     ~H"""
     <header class="px-4 py-6 sm:px-6 lg:px-8 xl:px-28 bg-white sticky top-0">
       <div class="mx-auto max-w-xl lg:mx-auto">
-        <a  href="/"  class="flex justify-center text-4xl font-racing font-semibold text-brand bg-white uppercase">
+        <a  href="/"  class="flex md:justify-center text-4xl font-racing font-semibold text-brand bg-white uppercase">
           carras.co
         </a>
       </div>

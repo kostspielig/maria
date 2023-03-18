@@ -25,7 +25,10 @@
 <script>
   ClassicEditor
     .create( document.querySelector( '#product_directions' ) , {
-        toolbar: [ 'bold', 'italic', 'underline', 'blockQuote' ]
+        toolbar: [ 'bold', 'italic', 'strikethrough', 'underline', '|',
+                   'numberedList', 'bulletedList', '|',
+                   'link', 'insertImage', 'blockQuote', '|', 'undo', 'redo' ],
+        shouldNotGroupWhenFull: true
     } )
     .catch( error => {
         console.log( error );

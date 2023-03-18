@@ -29,3 +29,19 @@ body::-webkit-scrollbar-thumb {
 ::-webkit-scrollbar-thumb {
   background-color: #181A18;
 }
+
+
+/* CKEditor Custom styles */
+
+.ck-editor a {
+  color:  #3aadec;
+  font-weight: 800;
+}
+.ck-editor a:hover {
+  color:  #ef7801;
+}
+.ck-editor ol {
+  margin: 1em 0;
+  padding-left: 40px;
+  list-style: decimal;
+}

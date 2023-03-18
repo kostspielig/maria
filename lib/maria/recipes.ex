@@ -18,7 +18,15 @@ defmodule Maria.Recipes do
 
   """
   def list_recipes do
-    Repo.all(Recipe) |> Repo.preload(:user) |> Repo.preload(:editor)
+    query = from r in Recipe,
+      order_by: [
+        desc: coalesce(r.updated_at, r.inserted_at)
+      ]
+
+    query
+    |> Repo.all()
+    |> Repo.preload(:user)
+    |> Repo.preload(:editor)
   end
 
   def list_recipes(user) do

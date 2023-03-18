@@ -23,7 +23,7 @@ defmodule Maria.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :tags, :user_id])
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :link, :tags, :user_id])
     |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
     |> validate_cover(:required)
     |> foreign_key_constraint(:user_id)
@@ -32,7 +32,7 @@ defmodule Maria.Recipes.Recipe do
   @doc false
   def changeset_update(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :tags, :editor_id])
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :link, :tags, :editor_id])
     |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
     |> validate_cover(:not_required)
     |> foreign_key_constraint(:editor_id)

@@ -22,7 +22,7 @@ defmodule Maria.RecipesTest do
 
     test "create_recipe/1 with valid data creates a recipe" do
       cover = %Plug.Upload{content_type: "image/png", filename: "cover.png", path: "/tmp/plug"}
-      valid_attrs = %{cover: cover, description: "some description", directions: "some directions", ingredients: ["option1", "option2"], likes: 42, mins: 42, tags: ["option1", "option2"], title: "some title"}
+      valid_attrs = %{cover: cover, description: "some description", directions: "some directions", ingredients: ["option1", "option2"], likes: 42, mins: 42, link: "link", tags: ["option1", "option2"], title: "some title"}
 
       assert {:ok, %Recipe{} = recipe} = Recipes.create_recipe(valid_attrs)
       assert recipe.cover =~ "some-title"
@@ -31,6 +31,7 @@ defmodule Maria.RecipesTest do
       assert recipe.ingredients == ["option1", "option2"]
       assert recipe.likes == 42
       assert recipe.mins == 42
+      assert recipe.link == "link"
       assert recipe.tags == ["option1", "option2"]
       assert recipe.title == "some title"
     end
@@ -42,7 +43,7 @@ defmodule Maria.RecipesTest do
     test "update_recipe/2 with valid data updates the recipe" do
       recipe = recipe_fixture()
       cover = %Plug.Upload{content_type: "image/png", filename: "cover.png", path: "/tmp/plug"}
-      update_attrs = %{cover: cover, description: "some updated description", directions: "some updated directions", ingredients: ["option1"], likes: 43, mins: 43, tags: ["option1"], title: "some updated title"}
+      update_attrs = %{cover: cover, description: "some updated description", directions: "some updated directions", ingredients: ["option1"], likes: 43, mins: 43, link: "updated link", tags: ["option1"], title: "some updated title"}
 
       assert {:ok, %Recipe{} = recipe} = Recipes.update_recipe(recipe, update_attrs)
       assert recipe.cover =~ "some-updated-title"
@@ -51,6 +52,7 @@ defmodule Maria.RecipesTest do
       assert recipe.ingredients == ["option1"]
       assert recipe.likes == 43
       assert recipe.mins == 43
+      assert recipe.link == "updated link"
       assert recipe.tags == ["option1"]
       assert recipe.title == "some updated title"
     end

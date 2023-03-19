@@ -9,9 +9,9 @@ defmodule Maria.Recipes.Recipe do
     field :description, :string
     field :directions, :string
     field :ingredients, {:array, :string}
-    field :likes, :integer
-    field :link, :string
     field :mins, :integer
+    field :link, :string
+    field :yield, :integer
     field :tags, {:array, :string}
     field :title, :string
 
@@ -23,16 +23,17 @@ defmodule Maria.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :link, :tags, :user_id])
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :link, :tags, :user_id])
     |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
     |> validate_cover(:required)
+    |> unique_constraint(:title)
     |> foreign_key_constraint(:user_id)
   end
 
   @doc false
   def changeset_update(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :likes, :link, :tags, :editor_id])
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :link, :tags, :editor_id])
     |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
     |> validate_cover(:not_required)
     |> foreign_key_constraint(:editor_id)

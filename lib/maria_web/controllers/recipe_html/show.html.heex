@@ -16,8 +16,8 @@
   <:item title="Description"><%= @recipe.description %></:item>
   <:item title="Ingredients"><.ingredients info={@recipe.ingredients} /></:item>
   <:item title="Directions"><%= raw(@recipe.directions) %></:item>
-  <:item title="Mins"><%= @recipe.mins %></:item>
-  <:item title="Likes"><%= @recipe.likes %></:item>
+  <:item title="Time"><%= @recipe.mins %></:item>
+  <:item title="Yields"><%= @recipe.yield %></:item>
   <:item title="Tags"><.tags info={@recipe.tags}/></:item>
   <:item title="Link"><a href={"#{@recipe.link}"} target="_blank" class="text-brand hover:text-blood font-bold"><%= @recipe.link %></a></:item>
   <:item title="Last edited by"><%= if editor = Map.get(@recipe, :editor, nil) do editor.username end %></:item>

@@ -40,6 +40,7 @@ defmodule MariaWeb.RecipeController do
 
   def show(conn, %{"id" => id}) do
     recipe = Recipes.get_recipe!(id)
+    recipe = %{recipe | mins: mins_to_duration(recipe.mins)}
 
     render(conn, :show, recipe: recipe)
   end
@@ -47,7 +48,8 @@ defmodule MariaWeb.RecipeController do
   def edit(conn, %{"id" => id}) do
     recipe = Recipes.get_recipe!(id)
     params = %{recipe | ingredients: Enum.join(recipe.ingredients, ","),
-         tags: Enum.join(recipe.tags, ",")}
+               tags: Enum.join(recipe.tags, ","),
+               mins: mins_to_duration(recipe.mins)}
 
     changeset = Recipes.change_recipe(params)
     render(conn, :edit, recipe: params, changeset: changeset)
@@ -92,6 +94,49 @@ defmodule MariaWeb.RecipeController do
 
   defp format_list_params(recipe_params) do
     %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "") |> String.split(",", trim: true),
-      "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true)}
+      "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true),
+      "mins" => Map.get(recipe_params, "mins", "0m") |> duration_in_minutes()}
   end
+
+  def mins_to_duration(minutes) do
+    {days, leftover_minutes} = {div(minutes, 60 * 24), rem(minutes, 60 * 24)}
+    {hours, final_minutes} = {div(leftover_minutes, 60), rem(leftover_minutes, 60)}
+
+    parts =
+      [
+        {days, "d"},
+        {hours, "h"},
+        {final_minutes, "m"}
+      ]
+
+    formatted_parts =
+      for {value, suffix} <- parts, value > 0 do
+        "#{value}#{suffix}"
+      end
+
+    Enum.join(formatted_parts, " ")
+  end
+
+  @rx ~r/^(?=.*\d)(\d+ ?d(ays?)?)? ?(\d+ ?h(ours?)?)? ?(\d+ ?m(inutes?)?)?$/i
+  def duration_in_minutes(str) do
+    if String.match?(str,@rx) do
+      parts = str |> String.split(" ") |> Enum.map(&parse_part/1)
+      Enum.reduce(parts, 0, fn x, acc -> x + acc end)
+    else
+      str
+    end
+  end
+
+  defp parse_part(str) do
+    IO.puts(str)
+    [value, suffix] = Regex.split(~r/(?<=\d)(?=\D)/, str)
+
+    case suffix do
+      n when n in ["d", "day", "days"] -> String.to_integer(value) * 24 * 60
+      n when n in ["h", "hour", "hours"] -> String.to_integer(value) * 60
+      n when n in ["m", "minute", "minutes"] -> String.to_integer(value)
+      _ -> 0
+    end
+  end
+
 end

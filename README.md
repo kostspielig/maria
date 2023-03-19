@@ -27,6 +27,8 @@ If there are changes in the DB run:
 
 To see production logs 💬 run `gigalixir logs`
 
+To connect to prod DB run `gigalixir pg:psql`
+
 Also 👀 [phoenix deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
 # Test 🧪

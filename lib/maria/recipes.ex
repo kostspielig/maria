@@ -61,10 +61,10 @@ defmodule Maria.Recipes do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_recipe(attrs \\ %{}) do
+  def create_recipe(socket, attrs \\ %{}) do
     %Recipe{}
     |> Recipe.changeset(attrs)
-    |> Recipe.upload_cover()
+    |> Recipe.upload_cover(socket)
     |> Repo.insert()
   end
 
@@ -80,10 +80,10 @@ defmodule Maria.Recipes do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_recipe(%Recipe{} = recipe, attrs) do
+  def update_recipe(%Recipe{} = recipe, socket, attrs) do
     recipe
     |> Recipe.changeset_update(attrs)
-    |> Recipe.upload_cover()
+    |> Recipe.upload_cover(socket)
     |> Repo.update()
   end
 
@@ -100,7 +100,9 @@ defmodule Maria.Recipes do
 
   """
   def delete_recipe(%Recipe{} = recipe) do
-    Repo.delete(recipe)
+    recipe
+    |> Recipe.delete_cover()
+    |> Repo.delete()
   end
 
   @doc """
@@ -114,5 +116,19 @@ defmodule Maria.Recipes do
   """
   def change_recipe(%Recipe{} = recipe, attrs \\ %{}) do
     Recipe.changeset(recipe, attrs)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking recipe changes
+  during validation.
+
+  ## Examples
+
+      iex> validate_recipe(recipe)
+      %Ecto.Changeset{data: %Recipe{}}
+
+  """
+  def validate_recipe(%Recipe{} = recipe, attrs \\ %{}) do
+    Recipe.changeset_validate(recipe, attrs)
   end
 end

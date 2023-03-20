@@ -92,7 +92,7 @@ defmodule MariaWeb.RecipeController do
     |> redirect(to: ~p"/recipes")
   end
 
-  defp format_list_params(recipe_params) do
+  def format_list_params(recipe_params) do
     %{recipe_params | "ingredients" => Map.get(recipe_params, "ingredients", "") |> String.split(",", trim: true),
       "tags" => Map.get(recipe_params, "tags", "") |> String.split(",", trim: true),
       "mins" => Map.get(recipe_params, "mins", "0m") |> duration_in_minutes()}
@@ -111,7 +111,7 @@ defmodule MariaWeb.RecipeController do
 
     formatted_parts =
       for {value, suffix} <- parts, value > 0 do
-        "#{value}#{suffix}"
+        "#{value} #{suffix}"
       end
 
     Enum.join(formatted_parts, " ")
@@ -128,7 +128,6 @@ defmodule MariaWeb.RecipeController do
   end
 
   defp parse_part(str) do
-    IO.puts(str)
     [value, suffix] = Regex.split(~r/(?<=\d)(?=\D)/, str)
 
     case suffix do

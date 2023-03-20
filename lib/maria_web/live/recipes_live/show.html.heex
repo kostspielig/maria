@@ -1,0 +1,40 @@
+ <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+<.header>
+  <%= @recipe.title %>
+  <:actions>
+    <.link patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit recipe</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<div class="mt-14  max-w-screen-lg mx-auto">
+  <img src={"#{@recipe.cover}"}>
+</div>
+
+<.list>
+  <:item title="by"><%= if user = Map.get(@recipe, :user, nil) do user.username end %></:item>
+  <:item title="Description"><%= @recipe.description %></:item>
+  <:item title="Ingredients"><.ingredients info={@recipe.ingredients} /></:item>
+  <:item title="Directions"><%= raw(@recipe.directions) %></:item>
+  <:item title="Time"><%= @recipe.mins %></:item>
+  <:item title="Yields"><%= @recipe.yield %></:item>z
+  <:item title="Tags"><.tags info={@recipe.tags}/></:item>
+  <:item title="Link"><a href={"#{@recipe.link}"} target="_blank" class="text-brand hover:text-blood font-bold"><%= @recipe.link %></a></:item>
+  <:item title="Last edited by"><%= if editor = Map.get(@recipe, :editor, nil) do editor.username end %></:item>
+</.list>
+
+<.back navigate={~p"/recipes"}>Back to recipes</.back>
+
+<.modal :if={@live_action == :edit} id="recipes-modal" show on_cancel={JS.patch(~p"/recipes/#{@recipe}")}>
+  <.live_component
+    module={MariaWeb.RecipesLive.FormComponent}
+    id={@recipe.id}
+    title={@page_title}
+    action={@live_action}
+    recipe={@recipe}
+    current_user={@current_user}
+    navigate={~p"/recipes/#{@recipe}"}
+  />
+</.modal>

@@ -1,0 +1,48 @@
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+<.header>
+  Listing Recipes
+  <:actions>
+    <.link patch={~p"/recipes/new"}>
+      <.button>New Recipe</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="recipe" rows={@recipes} row_click={&JS.navigate(~p"/recipes/#{&1}")}>
+  <:col :let={recipe} label="Title"><%= recipe.title %></:col>
+  <:col :let={recipe} label="Description"><%= recipe.description %></:col>
+  <:col :let={recipe} label="Ingredients"><.ingredients info={recipe.ingredients} /></:col>
+  <:col :let={recipe} label="Mins"><%= recipe.mins %></:col>
+  <:col :let={recipe} label="By"><%= if user = Map.get(recipe, :user, nil) do user.username end %></:col>
+  <:col :let={recipe} label="Tags"><.tags info={recipe.tags}/></:col>
+  <:col :let={recipe} label="Cover"><img src={"#{recipe.cover}"} class="w-28"></:col>
+  <:action :let={recipe}>
+    <div class="sr-only">
+      <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>
+    </div>
+    <.link patch={~p"/recipes/#{recipe}/edit"} class="hover:text-brand">Edit</.link>
+  </:action>
+  <:action :let={recipe}>
+    <.link phx-click={JS.push("delete", value: %{id: recipe.id})} data-confirm="Are you sure?" class="hover:text-blood">
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="recipes-modal"
+  show
+  on_cancel={JS.navigate(~p"/recipes")}
+>
+  <.live_component
+    module={MariaWeb.RecipesLive.FormComponent}
+    id={@recipe.id || :new}
+    title={@page_title}
+    action={@live_action}
+    recipe={@recipe}
+    current_user={@current_user}
+    navigate={~p"/recipes"}
+  />
+</.modal>

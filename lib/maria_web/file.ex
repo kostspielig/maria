@@ -10,16 +10,18 @@ defmodule MariaWeb.File do
   @doc """
   Uploads a blob to S3.
   """
-  def upload(file, filename) do
-    {_, image_binary} = File.read(file.path)
-    # Upload picture to AWS
-    case @storage_dependency.S3.put_object(bucket(), filename, image_binary) |> @storage_dependency.request do
-      {:ok, _} ->
-        "https://#{bucket()}.s3.#{region()}.amazonaws.com/#{filename}"
-      {:error, exception} ->
-        Logger.debug("Failed to upload file: #{exception}")
-        ""
-    end
+  def upload(file, filename, socket) do
+    Phoenix.LiveView.consume_uploaded_entry(socket, file, fn %{path: path} ->
+      {_, image_binary} = File.read(path)
+
+      case @storage_dependency.S3.put_object(bucket(), filename, image_binary) |> @storage_dependency.request do
+        {:ok, _} ->
+          {:ok, "https://#{bucket()}.s3.#{region()}.amazonaws.com/#{filename}"}
+        {:error, exception} ->
+          Logger.debug("Failed to upload file: #{exception}")
+         {:ok, ""}
+      end
+    end)
   end
 
   def delete(url) do

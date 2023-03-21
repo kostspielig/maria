@@ -21,12 +21,14 @@
     <div class="sr-only">
       <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>
     </div>
-    <.link patch={~p"/recipes/#{recipe}/edit"} class="hover:text-brand">Edit</.link>
+    <%= if recipe.user_id == @current_user.id do %><.link patch={~p"/recipes/#{recipe}/edit"} class="hover:text-brand">Edit</.link><%= end %>
   </:action>
   <:action :let={recipe}>
+    <%= if recipe.user_id == @current_user.id do %>
     <.link phx-click={JS.push("delete", value: %{id: recipe.id})} data-confirm="Are you sure?" class="hover:text-blood">
       Delete
     </.link>
+    <%= end %>
   </:action>
 </.table>
 

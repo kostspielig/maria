@@ -3,9 +3,11 @@
 <.header>
   <%= @recipe.title %>
   <:actions>
+  <%= if @recipe.user_id == @current_user.id do %>
     <.link patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit recipe</.button>
     </.link>
+  <%= end %>
   </:actions>
 </.header>
 

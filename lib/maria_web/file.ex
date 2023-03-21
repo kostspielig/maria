@@ -2,6 +2,10 @@ defmodule MariaWeb.File do
   @storage_dependency Application.compile_env(
     :maria, :storage_dependency, ExAws
   )
+  @upload_dependency Application.compile_env(
+    :maria, :upload_dependency, Phoenix.LiveView
+  )
+
   require Logger
 
   def bucket, do: Application.get_env(:maria, MariaWeb.RecipeController)[:s3][:bucket]
@@ -11,7 +15,7 @@ defmodule MariaWeb.File do
   Uploads a blob to S3.
   """
   def upload(file, filename, socket) do
-    Phoenix.LiveView.consume_uploaded_entry(socket, file, fn %{path: path} ->
+    @upload_dependency.consume_uploaded_entry(socket, file, fn %{path: path} ->
       {_, image_binary} = File.read(path)
 
       case @storage_dependency.S3.put_object(bucket(), filename, image_binary) |> @storage_dependency.request do

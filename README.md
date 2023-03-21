@@ -45,6 +45,9 @@ To get into a console with test environment:
 
 `MIX_ENV=test iex -S mix`
 
+**Note:** If you wanna use the Logger while executing test, you should use warn level or
+above (Logger.warn, Logger.error). [See test config here](config/test.exs#L35)
+
 # Mail
 
 We are using [Swoosh](https://hexdocs.pm/swoosh/Swoosh.html) [not yet configured live]

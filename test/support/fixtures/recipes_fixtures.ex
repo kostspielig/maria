@@ -10,22 +10,22 @@ defmodule Maria.RecipesFixtures do
   def recipe_fixture(attrs \\ %{}) do
     user = Maria.AccountsFixtures.user_fixture()
 
-    cover = %Plug.Upload{content_type: "image/png", filename: "cover.png", path: "/tmp/plug"}
-    {:ok, recipe} =
+    cover = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
+    new_attrs =
       attrs
       |> Enum.into(%{
         cover: cover,
         description: "some description",
         directions: "some directions",
-        ingredients: ["option1", "option2"],
-        likes: 42,
-        mins: 42,
-        tags: ["option1", "option2"],
+        ingredients: "option1, option2",
+        yield: 1,
+        mins: "4h",
+        tags: "option1, option2",
         title: "some title",
         user_id: user.id,
-        editor_id: user.id
-      })
-      |> Maria.Recipes.create_recipe()
+        editor_id: user.id})
+
+    {:ok, recipe} = Maria.Recipes.create_recipe("", new_attrs)
 
     recipe |> Maria.Repo.preload(:user) |> Maria.Repo.preload(:editor)
   end

@@ -8,8 +8,8 @@ defmodule MariaWeb.RecipesLive.FormComponent do
     ~H"""
     <div>
       <.header>
-        <%= @title  %>
-        <img src={"#{@recipe.cover}"}>
+        <%= @title %>
+        <img class="mt-4" src={"#{@recipe.cover}"}>
       </.header>
 
 

@@ -24,6 +24,7 @@ config :maria, MariaWeb.Endpoint,
   server: false
 
 config :maria, :storage_dependency, Maria.Test.Stub.Storage
+config :maria, :upload_dependency, Maria.Test.Stub.Storage
 
 # In test we don't send emails.
 config :maria, Maria.Mailer, adapter: Swoosh.Adapters.Test

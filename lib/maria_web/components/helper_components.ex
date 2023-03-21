@@ -19,7 +19,7 @@ defmodule MariaWeb.HelperComponents do
 
   def ingredients(assigns) do
     ~H"""
-    <%= for ingredient <- @info do %>
+    <%= for ingredient <- String.split(@info, ",") do %>
       <div class=""><%= ingredient %></div>
     <% end %>
     """
@@ -27,7 +27,7 @@ defmodule MariaWeb.HelperComponents do
 
   def tags(assigns) do
     ~H"""
-    <%= for tag <- @info do %>
+    <%= for tag <- String.split(@info, ",") do %>
       <span class="rounded-full bg-brand text-white text-semibold px-3 py-1 m-2">
         <%= tag %>
       </span>

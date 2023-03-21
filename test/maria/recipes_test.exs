@@ -21,45 +21,45 @@ defmodule Maria.RecipesTest do
     end
 
     test "create_recipe/1 with valid data creates a recipe" do
-      cover = %Plug.Upload{content_type: "image/png", filename: "cover.png", path: "/tmp/plug"}
-      valid_attrs = %{cover: cover, description: "some description", directions: "some directions", ingredients: ["option1", "option2"], likes: 42, mins: 42, link: "link", tags: ["option1", "option2"], title: "some title"}
+      cover = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
+      valid_attrs = %{cover: cover, description: "some description", directions: "some directions", ingredients: "option1, option2", mins: "4h", link: "link", tags: "option1, option2", title: "some title", yield: 1}
 
-      assert {:ok, %Recipe{} = recipe} = Recipes.create_recipe(valid_attrs)
+      assert {:ok, %Recipe{} = recipe} = Recipes.create_recipe("some-title", valid_attrs)
       assert recipe.cover =~ "some-title"
       assert recipe.description == "some description"
       assert recipe.directions == "some directions"
-      assert recipe.ingredients == ["option1", "option2"]
-      assert recipe.likes == 42
-      assert recipe.mins == 42
+      assert recipe.ingredients == "option1, option2"
+      assert recipe.yield == 1
+      assert recipe.mins == "4h"
       assert recipe.link == "link"
-      assert recipe.tags == ["option1", "option2"]
+      assert recipe.tags == "option1, option2"
       assert recipe.title == "some title"
     end
 
     test "create_recipe/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Recipes.create_recipe(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Recipes.create_recipe("", @invalid_attrs)
     end
 
-    test "update_recipe/2 with valid data updates the recipe" do
+    test "update_recipe/3 with valid data updates the recipe" do
       recipe = recipe_fixture()
-      cover = %Plug.Upload{content_type: "image/png", filename: "cover.png", path: "/tmp/plug"}
-      update_attrs = %{cover: cover, description: "some updated description", directions: "some updated directions", ingredients: ["option1"], likes: 43, mins: 43, link: "updated link", tags: ["option1"], title: "some updated title"}
+      cover = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
+      update_attrs = %{cover: cover, description: "some updated description", directions: "some updated directions", ingredients: "option1", yield: 1, mins: "4h", link: "updated link", tags: "option1", title: "some updated title"}
 
-      assert {:ok, %Recipe{} = recipe} = Recipes.update_recipe(recipe, update_attrs)
+      assert {:ok, %Recipe{} = recipe} = Recipes.update_recipe(recipe, "some-updated-title",  update_attrs)
       assert recipe.cover =~ "some-updated-title"
       assert recipe.description == "some updated description"
       assert recipe.directions == "some updated directions"
-      assert recipe.ingredients == ["option1"]
-      assert recipe.likes == 43
-      assert recipe.mins == 43
+      assert recipe.ingredients == "option1"
+      assert recipe.yield == 1
+      assert recipe.mins == "4h"
       assert recipe.link == "updated link"
-      assert recipe.tags == ["option1"]
+      assert recipe.tags == "option1"
       assert recipe.title == "some updated title"
     end
 
-    test "update_recipe/2 with invalid data returns error changeset" do
+    test "update_recipe/3 with invalid data returns error changeset" do
       recipe = recipe_fixture()
-      assert {:error, %Ecto.Changeset{}} = Recipes.update_recipe(recipe, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Recipes.update_recipe(recipe, "socket", @invalid_attrs)
       assert recipe == Recipes.get_recipe!(recipe.id)
     end
 

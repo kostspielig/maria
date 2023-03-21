@@ -345,6 +345,15 @@ defmodule MariaWeb.CoreComponents do
     """
   end
 
+  def input(%{type: "slot"} = assigns) do
+    ~H"""
+    <div phx-feedback-for={@name}>
+      <%= render_slot(@inner_block) %>
+      <.error :for={msg <- @errors}><%= msg %></.error>
+    </div>
+    """
+  end
+
   def input(%{type: "file"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>

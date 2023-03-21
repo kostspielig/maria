@@ -6,7 +6,7 @@ defmodule MariaWeb.UserSettingsLive do
 
   def render(assigns) do
     ~H"""
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <div class="text-base font-head leading-8 text-zinc-800">👏 <%= @current_username %>
 
     </div>

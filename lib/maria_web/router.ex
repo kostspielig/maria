@@ -23,14 +23,9 @@ defmodule MariaWeb.Router do
     get "/", PageController, :home
 
     live "/reading", ReadingLive
+
     # Created an alias for nicer path, might rename
     get "/cooking", RecipeController, :cook
-  end
-
- scope "/", MariaWeb do
-    pipe_through [:browser, :require_authenticated_user]
-
-    resources "/recipes", RecipeController
   end
 
 
@@ -74,6 +69,14 @@ defmodule MariaWeb.Router do
       on_mount: [{MariaWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+
+      live "/recipes", RecipesLive.Index, :index
+      live "/recipes/new", RecipesLive.Index, :new
+      live "/recipes/:id/edit", RecipesLive.Index, :edit
+
+      live "/recipes/:id", RecipesLive.Show, :show
+      live "/recipes/:id/show/edit", RecipesLive.Show, :edit
     end
   end
 

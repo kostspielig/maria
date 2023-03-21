@@ -124,7 +124,7 @@ defmodule MariaWeb.ReadingLive do
 
   def get_books() do
     feed = get_feed("https://www.goodreads.com/user/updates_rss/50420888")
-    Enum.filter(feed.entries, &(String.contains?(&1.title, "currently reading")))
+    Enum.filter(feed.entries, &(String.contains?(&1.title, "currently reading") || String.contains?(&1.title, "wants to read")))
     |>
     Enum.map(
       fn(x) ->

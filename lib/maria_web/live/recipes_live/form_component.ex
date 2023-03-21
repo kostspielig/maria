@@ -1,7 +1,6 @@
 defmodule MariaWeb.RecipesLive.FormComponent do
   use MariaWeb, :live_component
 
- # import Logger
   alias Maria.Recipes
 
   @impl true

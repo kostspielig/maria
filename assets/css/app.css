@@ -26,6 +26,7 @@ body::-webkit-scrollbar-thumb {
   height: 0.18em;
   background-color: #cdd5cd;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: #181A18;
 }
@@ -37,11 +38,17 @@ body::-webkit-scrollbar-thumb {
   color:  #3aadec;
   font-weight: 800;
 }
+
 .ck-editor a:hover {
   color:  #ef7801;
 }
+
 .ck-editor ol {
   margin: 1em 0;
   padding-left: 40px;
   list-style: decimal;
+}
+
+.ck-editor__editable {
+    min-height: 25vh;
 }

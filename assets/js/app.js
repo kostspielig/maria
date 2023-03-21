@@ -23,12 +23,47 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let Hooks = {}
+Hooks.RecipeDirections = {
+    mounted() {
+        ClassicEditor
+            .create( this.el , {
+                toolbar: [ 'bold', 'italic', '|',
+                           'numberedList', 'bulletedList', '|',
+                           'link', 'blockQuote', '|', 'undo', 'redo' ],
+                shouldNotGroupWhenFull: true
+            } )
+            .catch( error => {
+                console.log( error );
+            }).then(e => window.recipe_editor = e);
+    },
+    beforeUpdate() {
+        window.recipe_editor_data = window.recipe_editor.getData()
+    },
+    updated(){
+        ClassicEditor
+            .create( this.el , {
+                toolbar: [ 'bold', 'italic', '|',
+                           'numberedList', 'bulletedList', '|',
+                           'link', 'blockQuote', '|', 'undo', 'redo' ],
+                shouldNotGroupWhenFull: true
+            } )
+            .catch( error => {
+                console.log( error );
+            }).then(e => {
+                window.recipe_editor = e;
+                window.recipe_editor.setData(window.recipe_editor_data);
+            });
+    }
+}
+
+let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", info => topbar.delayedShow(200))
 window.addEventListener("phx:page-loading-stop", info => topbar.hide())
+
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
@@ -38,4 +73,3 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
-

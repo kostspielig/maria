@@ -110,7 +110,10 @@ defmodule MariaWeb.ReadingLive do
   def get_feed(url) do
     {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(url)
     {:ok, feed, _} = FeederEx.parse(body)
-    feed
+
+    Map.update(feed, :entries, nil, fn current_value ->
+      Enum.take(current_value, 5)
+    end)
   end
 
   def get_feeds(urls) do
@@ -118,13 +121,13 @@ defmodule MariaWeb.ReadingLive do
   end
 
   def get_podcasts() do
-    podcast = ["https://feeds.megaphone.fm/darknetdiaries"]
+    podcast = ["https://feeds.megaphone.fm/darknetdiaries"] # "https://changelog.com/master/feed"
     get_feed(List.first(podcast))
   end
 
   def get_books() do
     feed = get_feed("https://www.goodreads.com/user/updates_rss/50420888")
-    Enum.filter(feed.entries, &(String.contains?(&1.title, "currently reading") || String.contains?(&1.title, "wants to read")))
+    Enum.filter(feed.entries, &(!String.contains?(&1.title, "Maria liked")))
     |>
     Enum.map(
       fn(x) ->

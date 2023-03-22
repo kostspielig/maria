@@ -3,7 +3,6 @@ defmodule MariaWeb.ReadingLive do
 
 
   def mount(_params, _session, socket) do
-
     socket = assign(socket,
       page_title: "Reading",
       newsletter: get_newsletters(),

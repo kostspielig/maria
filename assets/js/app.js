@@ -22,40 +22,51 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let Hooks = {}
-Hooks.RecipeDirections = {
-    mounted() {
-        ClassicEditor
-            .create( this.el , {
-                toolbar: [ 'bold', 'italic', '|',
-                           'numberedList', '|',
-                           'link', 'blockQuote', '|', 'undo', 'redo' ],
-                shouldNotGroupWhenFull: true
-            } )
-            .catch( error => {
-                console.log( error );
-            }).then(e => window.recipe_editor = e);
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+
+let EditorSettings = {
+    directions: {
+        toolbar: [ 'bold', 'italic', '|',
+                   'numberedList', '|',
+                   'link', 'blockQuote', '|', 'undo', 'redo' ],
+        shouldNotGroupWhenFull: true
     },
-    beforeUpdate() {
-        window.recipe_editor_data = window.recipe_editor.getData()
-    },
-    updated(){
-        ClassicEditor
-            .create( this.el , {
-                toolbar: [ 'bold', 'italic', '|',
-                           'numberedList', '|',
-                           'link', 'blockQuote', '|', 'undo', 'redo' ],
-                shouldNotGroupWhenFull: true
-            } )
+    description: {
+        toolbar: [ 'bold', 'italic', '|',
+                   'undo', 'redo' ],
+        shouldNotGroupWhenFull: true
+    }
+};
+
+
+function CKEditorHook(settings) {
+    return {
+        mounted() {
+            ClassicEditor
+                .create( this.el , settings )
+                .catch( error => {
+                    console.log( error );
+                }).then(e => window.recipe_editor = e);
+        },
+        beforeUpdate() {
+            window.recipe_editor_data = window.recipe_editor.getData()
+        },
+        updated(){
+            ClassicEditor
+                .create( this.el , settings )
             .catch( error => {
                 console.log( error );
             }).then(e => {
                 window.recipe_editor = e;
                 window.recipe_editor.setData(window.recipe_editor_data);
             });
+        }
     }
 }
+
+let Hooks = {}
+Hooks.RecipeDirections = CKEditorHook(EditorSettings.directions)
+Hooks.RecipeDescription = CKEditorHook(EditorSettings.description)
 
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
 

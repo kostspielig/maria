@@ -3,7 +3,7 @@
   <%= @recipe.title %>
   <:subtitle>
     by <b><%= if user = Map.get(@recipe, :user, nil) do user.username end %></b>
-    <%= if (editor = Map.get(@recipe, :editor, nil)) !== @recipe.user do %>
+    <%= if (editor = Map.get(@recipe, :editor, nil)) && editor !== @recipe.user do %>
     <span class="text-zinc-400">(✎ <b><%= editor.username %></b>)</span>
     <% end %>
     </:subtitle>
@@ -20,7 +20,7 @@
   <div class=""><img src={"#{@recipe.cover}"}></div>
   <div class="mt-6 mx-auto text-center"><.tags info={@recipe.tags}/></div>
 </div>
-<div class="mt-6 text-brand tracking-tight font text-xl"><%= @recipe.description %></div>
+<div class="mt-6 text-brand tracking-tight font text-xl"><%= raw(@recipe.description) %></div>
 
 <div class="block xl:flex">
   <.recipe_list class="mr-12 w-full max-w-xs" title="Ingredients">

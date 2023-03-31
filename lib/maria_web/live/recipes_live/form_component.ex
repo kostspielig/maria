@@ -24,9 +24,9 @@ defmodule MariaWeb.RecipesLive.FormComponent do
         phx-submit="save"
       >
         <.input field={{f, :title}} type="text" label="Title" />
-        <.input field={{f, :description}} type="textarea" label="Description" />
+        <.input field={{f, :description}} type="textarea" label="Description" phx-hook="RecipeDescription" />
         <.input field={{f, :ingredients}} type="textarea" rows="8" label="Ingredients" placeholder="1 egg, 2 tsp sugar" />
-        <.input field={{f, :directions}} type="textarea" label="Directions" phx-hook="RecipeDirections" id="product_directions" />
+        <.input field={{f, :directions}} type="textarea" label="Directions" phx-hook="RecipeDirections" />
         <.input field={{f, :mins}} type="text" label="Time" placeholder="1d 2h 30m" />
         <.input field={{f, :yield}} type="number" label="Yields" />
         <.input field={{f, :link}} type="text" label="Link" />

@@ -39,7 +39,7 @@ body::-webkit-scrollbar-thumb {
   font-weight: 800;
 }
 
-.ck-editor a:hover, .recipe a {
+.ck-editor a:hover, .recipe a:hover {
   color:  #ef7801;
 }
 

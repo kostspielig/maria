@@ -107,7 +107,7 @@ defmodule MariaWeb.ReadingLive do
 # To be defined as private!
 
   def get_feed(url) do
-    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(url)
+    {:ok, %HTTPoison.Response{body: body}} = MariaWeb.Cache.get(url)
     {:ok, feed, _} = FeederEx.parse(body)
 
     Map.update(feed, :entries, nil, fn current_value ->

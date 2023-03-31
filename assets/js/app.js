@@ -46,10 +46,10 @@ function CKEditorHook(settings) {
                 .create( this.el , settings )
                 .catch( error => {
                     console.log( error );
-                }).then(e => window.recipe_editor = e);
+                }).then(e => window.recipe_editor[this.id] = e);
         },
         beforeUpdate() {
-            window.recipe_editor_data = window.recipe_editor.getData()
+            window.recipe_editor_data = window.recipe_editor[this.id].getData()
         },
         updated(){
             ClassicEditor
@@ -58,7 +58,7 @@ function CKEditorHook(settings) {
                 console.log( error );
             }).then(e => {
                 window.recipe_editor = e;
-                window.recipe_editor.setData(window.recipe_editor_data);
+                window.recipe_editor.setData(window.recipe_editor_data[this.id]);
             });
         }
     }

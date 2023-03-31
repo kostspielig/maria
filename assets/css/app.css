@@ -34,12 +34,12 @@ body::-webkit-scrollbar-thumb {
 
 /* CKEditor Custom styles */
 
-.ck-editor a {
+.ck-editor a, .recipe a{
   color:  #3aadec;
   font-weight: 800;
 }
 
-.ck-editor a:hover {
+.ck-editor a:hover, .recipe a {
   color:  #ef7801;
 }
 
@@ -51,4 +51,31 @@ body::-webkit-scrollbar-thumb {
 
 .ck-editor__editable {
     min-height: 25vh;
+}
+
+/* Recipe */
+.recipe ol {
+  margin: 1em 0;
+  list-style: none;
+  counter-reset: step-counter;
+}
+
+.recipe ol li {
+  margin: 1em 0;
+  counter-increment: step-counter;
+}
+
+.recipe ol li::before {
+  content: 'Step ' counter(step-counter) '. ';
+  font-weight: 600;
+}
+
+.recipe blockquote {
+  border-left: 7px solid #3aadec94;
+  font-style: italic;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: hidden;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
 }

@@ -29,7 +29,7 @@ Hooks.RecipeDirections = {
         ClassicEditor
             .create( this.el , {
                 toolbar: [ 'bold', 'italic', '|',
-                           'numberedList', 'bulletedList', '|',
+                           'numberedList', '|',
                            'link', 'blockQuote', '|', 'undo', 'redo' ],
                 shouldNotGroupWhenFull: true
             } )
@@ -44,7 +44,7 @@ Hooks.RecipeDirections = {
         ClassicEditor
             .create( this.el , {
                 toolbar: [ 'bold', 'italic', '|',
-                           'numberedList', 'bulletedList', '|',
+                           'numberedList', '|',
                            'link', 'blockQuote', '|', 'undo', 'redo' ],
                 shouldNotGroupWhenFull: true
             } )

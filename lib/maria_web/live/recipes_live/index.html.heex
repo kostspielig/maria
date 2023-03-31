@@ -12,8 +12,7 @@
 <.table id="recipe" rows={@recipes} row_click={&JS.navigate(~p"/recipes/#{&1}")}>
   <:col :let={recipe} label="Title"><%= recipe.title %></:col>
   <:col :let={recipe} label="Description"><%= recipe.description %></:col>
-  <:col :let={recipe} label="Ingredients"><.ingredients info={recipe.ingredients} /></:col>
-  <:col :let={recipe} label="Mins"><%= recipe.mins %></:col>
+  <:col :let={recipe} label="Time"><%= recipe.mins %></:col>
   <:col :let={recipe} label="By"><%= if user = Map.get(recipe, :user, nil) do user.username end %></:col>
   <:col :let={recipe} label="Tags"><.tags info={recipe.tags}/></:col>
   <:col :let={recipe} label="Cover"><img src={"#{recipe.cover}"} class="w-28"></:col>

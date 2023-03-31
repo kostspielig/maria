@@ -17,20 +17,47 @@ defmodule MariaWeb.HelperComponents do
     """
   end
 
+  def recipe_item(assigns) do
+    ~H"""
+    <div class="mb-6 text-sm">
+      <span class="uppercase font-semibold"> ┃ <%= @tag %></span> — <%= @info %>
+    </div>
+    """
+  end
+
+  attr :title, :string, required: true
+  attr :class, :string, default: nil
+
+  slot :inner_block, required: true
+
+  def recipe_list(assigns) do
+    ~H"""
+    <div class={["mt-10", @class]}>
+      <h1 class="text-2xl font-head font-semibold leading-8 text-zinc-800">
+        <%= @title %>
+      </h1>
+      <div class="mt-3 text-lg leading-6 text-zinc-800">
+        <%= render_slot(@inner_block) %>
+      </div>
+    </div>
+    """
+  end
+
   def ingredients(assigns) do
     ~H"""
+    <ul class="pl-5 list-disc font-serif text-xl">
     <%= for ingredient <- String.split(@info, ",") do %>
-      <div class=""><%= ingredient %></div>
+      <li class="my-2 capitalize"><%= ingredient %></li>
     <% end %>
+    </ul>
     """
   end
 
   def tags(assigns) do
     ~H"""
     <%= for tag <- String.split(@info, ",") do %>
-      <span class="rounded-full bg-brand text-white text-semibold px-3 py-1 m-2">
-        <%= tag %>
-      </span>
+      <span class="rounded-full bg-brand text-white text-semibold px-3 py-1 m-1"><%= String.trim(tag) %></span>
+      <%= if !(List.last(String.split(@info, ",")) == tag) do %><span class="text-zinc-600">•</span><% end %>
     <% end %>
     """
   end

@@ -441,6 +441,7 @@ defmodule MariaWeb.CoreComponents do
   Renders a header with title.
   """
   attr :class, :string, default: nil
+  attr :large, :boolean, default: false
 
   slot :inner_block, required: true
   slot :subtitle
@@ -450,10 +451,10 @@ defmodule MariaWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
-        <h1 class="text-lg font-head font-semibold leading-8 text-zinc-800">
+        <h1 class={["font-head font-semibold leading-8 text-zinc-800", @large && "text-4xl" || "text-xl"]}>
           <%= render_slot(@inner_block) %>
         </h1>
-        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
+        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-700">
           <%= render_slot(@subtitle) %>
         </p>
       </div>

@@ -1,7 +1,12 @@
- <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-
-<.header>
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<.header large>
   <%= @recipe.title %>
+  <:subtitle>
+    by <b><%= if user = Map.get(@recipe, :user, nil) do user.username end %></b>
+    <%= if (editor = Map.get(@recipe, :editor, nil)) !== @recipe.user do %>
+    <span class="text-zinc-400">(✎ <b><%= editor.username %></b>)</span>
+    <% end %>
+    </:subtitle>
   <:actions>
   <%= if @recipe.user_id == @current_user.id do %>
     <.link patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
@@ -11,24 +16,34 @@
   </:actions>
 </.header>
 
-<div class="mt-14  max-w-screen-lg mx-auto">
-  <img src={"#{@recipe.cover}"}>
+<div class="mt-10 max-w-screen-lg mx-auto">
+  <div class=""><img src={"#{@recipe.cover}"}></div>
+  <div class="mt-6 mx-auto text-center"><.tags info={@recipe.tags}/></div>
+</div>
+<div class="mt-6 text-brand tracking-tight font text-xl"><%= @recipe.description %></div>
+
+<div class="block xl:flex">
+  <.recipe_list class="mr-12 w-full max-w-xs" title="Ingredients">
+    <.recipe_item tag="yield" info={@recipe.yield}/>
+    <.ingredients info={@recipe.ingredients} />
+  </.recipe_list>
+  <.recipe_list class="grow" title="Directions">
+    <.recipe_item tag="◕" info={@recipe.mins}/>
+    <div class="recipe"><%= raw(@recipe.directions) %></div>
+  </.recipe_list>
 </div>
 
-<.list>
-  <:item title="by"><%= if user = Map.get(@recipe, :user, nil) do user.username end %></:item>
-  <:item title="Description"><%= @recipe.description %></:item>
-  <:item title="Ingredients"><.ingredients info={@recipe.ingredients} /></:item>
-  <:item title="Directions"><%= raw(@recipe.directions) %></:item>
-  <:item title="Time"><%= @recipe.mins %></:item>
-  <:item title="Yields"><%= @recipe.yield %></:item>z
-  <:item title="Tags"><.tags info={@recipe.tags}/></:item>
-  <:item title="Link"><a href={"#{@recipe.link}"} target="_blank" class="text-brand hover:text-blood font-bold"><%= @recipe.link %></a></:item>
-  <:item title="Last edited by"><%= if editor = Map.get(@recipe, :editor, nil) do editor.username end %></:item>
-</.list>
+<%= if @recipe.link do %>
+<div class="mt-12">
+  <a href={"#{@recipe.link}"} target="_blank" class="underline underline-offset-4 text-brand hover:text-blood font-bold">
+    See Similar Recipes
+  </a>
+</div>
+<% end %>
 
-<.back navigate={~p"/recipes"}>Back to recipes</.back>
-
+<%= if @recipe.user_id == @current_user.id do %>
+<.back navigate={~p"/recipes"}>Manage recipes</.back>
+<% end %>
 <.modal :if={@live_action == :edit} id="recipes-modal" show on_cancel={JS.patch(~p"/recipes/#{@recipe}")}>
   <.live_component
     module={MariaWeb.RecipesLive.FormComponent}

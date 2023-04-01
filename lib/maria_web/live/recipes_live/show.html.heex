@@ -2,7 +2,7 @@
 <div class="block xl:flex">
   <.header large class="mr-12 w-full xl:max-w-sm">
     <:pretitle>
-      <%= Calendar.strftime(~U[2020-04-02 13:52:06.0Z], "%B %-d, %Y") %>
+      <%= Calendar.strftime(@recipe.inserted_at, "%B %-d, %Y") %>
     </:pretitle>
 
     <%= @recipe.title %>

@@ -444,6 +444,7 @@ defmodule MariaWeb.CoreComponents do
   attr :large, :boolean, default: false
 
   slot :inner_block, required: true
+  slot :pretitle
   slot :subtitle
   slot :actions
 
@@ -451,7 +452,10 @@ defmodule MariaWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
-        <h1 class={["font-head font-semibold leading-8 text-zinc-800", @large && "text-4xl" || "text-xl"]}>
+        <p :if={@pretitle != []} class="mb-4 text-xs underline underline-offset-2 leading-6 font-bold inline-block px-1">
+          <%= render_slot(@pretitle) %>
+        </p>
+        <h1 class={["font-head font-semibold text-zinc-800", @large && "text-4xl leading-10" || "text-xl leading-8"]}>
           <%= render_slot(@inner_block) %>
         </h1>
         <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-700">

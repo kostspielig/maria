@@ -38,6 +38,8 @@ let EditorSettings = {
     }
 };
 
+window.recipe_editor = {};
+window.recipe_editor_data = {};
 
 function CKEditorHook(settings) {
     return {
@@ -46,10 +48,10 @@ function CKEditorHook(settings) {
                 .create( this.el , settings )
                 .catch( error => {
                     console.log( error );
-                }).then(e => window.recipe_editor[this.id] = e);
+                }).then(e => window.recipe_editor[this.el.id] = e);
         },
         beforeUpdate() {
-            window.recipe_editor_data = window.recipe_editor[this.id].getData()
+            window.recipe_editor_data[this.el.id] = window.recipe_editor[this.el.id].getData()
         },
         updated(){
             ClassicEditor
@@ -57,8 +59,9 @@ function CKEditorHook(settings) {
             .catch( error => {
                 console.log( error );
             }).then(e => {
-                window.recipe_editor = e;
-                window.recipe_editor.setData(window.recipe_editor_data[this.id]);
+                window.recipe_editor[this.el.id] = e;
+                let data = window.recipe_editor_data[this.el.id];
+                data && window.recipe_editor[this.el.id].setData(data);
             });
         }
     }

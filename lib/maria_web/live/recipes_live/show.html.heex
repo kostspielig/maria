@@ -1,29 +1,42 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-<.header large>
-  <%= @recipe.title %>
-  <:subtitle>
-    by <b><%= if user = Map.get(@recipe, :user, nil) do user.username end %></b>
-    <%= if (editor = Map.get(@recipe, :editor, nil)) && editor !== @recipe.user do %>
-    <span class="text-zinc-400">(✎ <b><%= editor.username %></b>)</span>
-    <% end %>
-    </:subtitle>
-  <:actions>
-  <%= if @recipe.user_id == @current_user.id do %>
-    <.link patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit recipe</.button>
-    </.link>
-  <% end %>
-  </:actions>
-</.header>
+<div class="block xl:flex">
+  <.header large class="mr-12 w-full xl:max-w-sm">
+    <:pretitle>
+      <%= Calendar.strftime(~U[2020-04-02 13:52:06.0Z], "%B %-d, %Y") %>
+    </:pretitle>
 
-<div class="mt-10 max-w-screen-lg mx-auto">
+    <%= @recipe.title %>
+    <:subtitle>
+      by <b><%= if user = Map.get(@recipe, :user, nil) do user.username end %></b>
+      <%= if (editor = Map.get(@recipe, :editor, nil)) && editor !== @recipe.user do %>
+      <span class="text-zinc-400">(✎ <b><%= editor.username %></b>)</span>
+      <% end %>
+
+      <%= if @recipe.user_id == @current_user.id do %>
+      <.link class="block mt-6 hidden xl:block" patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
+        <.button>Edit recipe</.button>
+      </.link>
+      <% end %>
+    </:subtitle>
+    <:actions>
+      <%= if @recipe.user_id == @current_user.id do %>
+      <.link class="xl:hidden"patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
+        <.button>Edit recipe</.button>
+      </.link>
+      <% end %>
+    </:actions>
+  </.header>
+
+<div class="mt-10 xl:mt-0 max-w-screen-lg mx-auto">
   <div class=""><img src={"#{@recipe.cover}"}></div>
   <div class="mt-6 mx-auto text-center"><.tags info={@recipe.tags}/></div>
 </div>
-<div class="mt-6 text-brand tracking-tight font text-xl"><%= raw(@recipe.description) %></div>
+
+</div>
+  <div class="mt-6 text-brand tracking-tight font text-xl"><%= raw(@recipe.description) %></div>
 
 <div class="block xl:flex">
-  <.recipe_list class="mr-12 w-full max-w-xs" title="Ingredients">
+  <.recipe_list class="mr-12 w-full basis-1/2 grow-0 shrink-0 max-w-xs xl:max-w-sm" title="Ingredients">
     <.recipe_item tag="yield" info={@recipe.yield}/>
     <.ingredients info={@recipe.ingredients} />
   </.recipe_list>

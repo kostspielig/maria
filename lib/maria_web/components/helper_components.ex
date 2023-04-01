@@ -55,8 +55,7 @@ defmodule MariaWeb.HelperComponents do
   def tags(assigns) do
     ~H"""
     <%= for tag <- String.split(@info, ",") do %>
-      <span class="rounded-full bg-brand text-white text-semibold px-3 py-1 m-1"><%= String.trim(tag) %></span>
-      <%= if !(List.last(String.split(@info, ",")) == tag) do %><span class="text-zinc-600">•</span><% end %>
+      <span class="rounded-full bg-brand text-white text-sm font-semibold px-3 py-1 m-1"><%= String.trim(tag) %></span>
     <% end %>
     """
   end

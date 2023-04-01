@@ -17,7 +17,9 @@ defmodule Maria.Application do
       # Start Finch
       {Finch, name: Maria.Finch},
       # Start the Endpoint (http/https)
-      MariaWeb.Endpoint
+      MariaWeb.Endpoint,
+      #start cache for HTTP requests
+      {Cachex, name: :http_cache}
       # Start a worker by calling: Maria.Worker.start_link(arg)
       # {Maria.Worker, arg}
     ]

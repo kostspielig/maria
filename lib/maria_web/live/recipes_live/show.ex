@@ -1,5 +1,5 @@
 defmodule MariaWeb.RecipesLive.Show do
-  use MariaWeb, :live_view
+  use MariaWeb, :live_view_basic
 
   alias Maria.Recipes
 

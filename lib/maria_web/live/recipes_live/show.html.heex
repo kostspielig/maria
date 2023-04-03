@@ -1,6 +1,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-<div class="block xl:flex">
-  <.header large class="mr-12 w-full xl:max-w-sm">
+<div class="lg:px-0">
+<div class="block xl:flex mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
+  <.header large class="px-6 pt-6 sm:px-6 mr-12 w-full xl:max-w-sm">
     <:pretitle>
       <%= Calendar.strftime(@recipe.inserted_at, "%B %-d, %Y") %>
     </:pretitle>
@@ -27,36 +28,41 @@
     </:actions>
   </.header>
 
-<div class="mt-10 xl:mt-0 max-w-screen-lg mx-auto">
-  <div class=""><img src={"#{@recipe.cover}"}></div>
-  <div class="mt-6 mx-auto text-center"><.tags info={@recipe.tags}/></div>
+  <div class="mt-10 xl:mt-0 max-w-screen-lg mx-auto">
+    <div class=""><img src={"#{@recipe.cover}"}></div>
+    <div class="mt-6 mx-auto text-center"><.tags info={@recipe.tags}/></div>
+  </div>
+</div>
 </div>
 
-</div>
-  <div class="mt-6 text-brand tracking-tight font text-xl"><%= raw(@recipe.description) %></div>
+<div class="px-6 pb-6 lg:px-8">
+  <div class="mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
+    <div class="mt-6 text-brand tracking-tight font text-xl"><%= raw(@recipe.description) %></div>
 
-<div class="block xl:flex">
-  <.recipe_list class="mr-12 w-full basis-1/2 grow-0 shrink-0 max-w-xs xl:max-w-sm" title="Ingredients">
-    <.recipe_item tag="yield" info={@recipe.yield}/>
-    <.ingredients info={@recipe.ingredients} />
-  </.recipe_list>
-  <.recipe_list class="grow" title="Directions">
-    <.recipe_item tag="◕" info={@recipe.mins}/>
-    <div class="recipe"><%= raw(@recipe.directions) %></div>
-  </.recipe_list>
-</div>
+    <div class="block xl:flex">
+      <.recipe_list class="mr-12 w-full basis-1/2 grow-0 shrink-0 max-w-xs xl:max-w-sm" title="Ingredients">
+        <.recipe_item tag="yield" info={@recipe.yield}/>
+        <.ingredients info={@recipe.ingredients} />
+      </.recipe_list>
+      <.recipe_list class="grow" title="Directions">
+        <.recipe_item tag="◕" info={@recipe.mins}/>
+        <div class="recipe"><%= raw(@recipe.directions) %></div>
+      </.recipe_list>
+    </div>
 
-<%= if @recipe.link do %>
-<div class="mt-12">
-  <a href={"#{@recipe.link}"} target="_blank" class="underline underline-offset-4 text-brand hover:text-blood font-bold">
-    See Similar Recipes
-  </a>
-</div>
-<% end %>
+    <%= if @recipe.link do %>
+    <div class="mt-12">
+      <a href={"#{@recipe.link}"} target="_blank" class="underline underline-offset-4 text-brand hover:text-blood font-bold">
+        See Similar Recipes
+      </a>
+    </div>
+    <% end %>
 
-<%= if @recipe.user_id == @current_user.id do %>
-<.back navigate={~p"/recipes"}>Manage recipes</.back>
-<% end %>
+    <%= if @recipe.user_id == @current_user.id do %>
+    <.back navigate={~p"/recipes"}>Manage recipes</.back>
+    <% end %>
+  </div>
+</div>
 <.modal :if={@live_action == :edit} id="recipes-modal" show on_cancel={JS.patch(~p"/recipes/#{@recipe}")}>
   <.live_component
     module={MariaWeb.RecipesLive.FormComponent}

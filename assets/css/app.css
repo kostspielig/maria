@@ -16,7 +16,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #ef7801;
+  @apply bg-blood;
 
 }
 
@@ -32,15 +32,14 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-/* CKEditor Custom styles */
+/* CKEditor and Recipe display custom styles */
 
 .ck-editor a, .recipe a{
-  color:  #3aadec;
-  font-weight: 800;
+  @apply text-brand font-bold;
 }
 
 .ck-editor a:hover, .recipe a:hover {
-  color:  #ef7801;
+  @apply text-blood;
 }
 
 .ck-editor ol {

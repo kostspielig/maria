@@ -22,18 +22,27 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
 let EditorSettings = {
     directions: {
-        toolbar: [ 'bold', 'italic', '|',
+        toolbar: [ 'undo', 'redo', '|',
+                   'heading', '|',
+                   'bold', 'italic', '|',
                    'numberedList', '|',
-                   'link', 'blockQuote', '|', 'undo', 'redo' ],
-        shouldNotGroupWhenFull: true
+                   'link', 'blockQuote'],
+        shouldNotGroupWhenFull: true,
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading', class: 'ck-heading_title' }
+            ]
+        }
     },
     description: {
-        toolbar: [ 'bold', 'italic', '|',
-                   'undo', 'redo' ],
+        toolbar: [ 'undo', 'redo', '|',
+                   'bold', 'italic'],
         shouldNotGroupWhenFull: true
     }
 };

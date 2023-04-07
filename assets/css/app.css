@@ -52,15 +52,25 @@ body::-webkit-scrollbar-thumb {
     min-height: 25vh;
 }
 
-/* Recipe */
+.ck.ck-button.ck-heading_title {
+  @apply text-xl font-bold;
+}
+
+.recipe h1,
+.ck-editor h1,
+.ck-editor .ck-heading_title {
+  @apply text-xl font-bold mt-6 mb-2;
+}
+
+
 .recipe ol {
-  margin: 1em 0;
+  margin: 1rem 0;
   list-style: none;
   counter-reset: step-counter;
 }
 
 .recipe ol li {
-  margin: 1em 0;
+  margin: 1rem 0;
   counter-increment: step-counter;
 }
 

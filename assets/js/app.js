@@ -76,9 +76,47 @@ function CKEditorHook(settings) {
     }
 }
 
+let SearchBar = {
+  mounted() {
+    const searchBarContainer = this.el
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+        return
+      }
+
+      const focusElement = document.querySelector(':focus')
+
+      if (!focusElement) {
+        return
+      }
+
+      if (!searchBarContainer.contains(focusElement)) {
+        return
+      }
+
+      event.preventDefault()
+
+      const tabElements = document.querySelectorAll(
+        '#search-input, #searchbox__results_list a',
+      )
+      const focusIndex = Array.from(tabElements).indexOf(focusElement)
+      const tabElementsCount = tabElements.length - 1
+
+      if (event.key === 'ArrowUp') {
+        tabElements[focusIndex > 0 ? focusIndex - 1 : tabElementsCount].focus()
+      }
+
+      if (event.key === 'ArrowDown') {
+        tabElements[focusIndex < tabElementsCount ? focusIndex + 1 : 0].focus()
+      }
+    })
+  },
+}
+
 let Hooks = {}
 Hooks.RecipeDirections = CKEditorHook(EditorSettings.directions)
 Hooks.RecipeDescription = CKEditorHook(EditorSettings.description)
+Hooks.SearchBar = SearchBar
 
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
 

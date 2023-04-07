@@ -50,6 +50,29 @@ defmodule Maria.Recipes do
   def get_recipe!(id), do: Repo.get!(Recipe, id) |> Repo.preload(:user) |> Repo.preload(:editor)
 
   @doc """
+  Searches for recipes, max # results is 5.
+
+  ## Examples
+
+      iex> search("kimchi")
+      [%Recipe{}, ...]
+  """
+  def search(search_query) do
+    search_query = "%#{search_query}%"
+
+    Recipe
+    |> order_by(desc: :updated_at)
+    |> or_where([p], ilike(p.directions, ^search_query))
+    |> or_where([p], ilike(p.tags, ^search_query))
+    |> or_where([p], ilike(p.title, ^search_query))
+    |> or_where([p], ilike(p.description, ^search_query))
+    |> limit(5)
+    |> Repo.all()
+    |> Repo.preload(:user)
+  end
+
+
+  @doc """
   Creates a recipe.
 
   ## Examples

@@ -23,6 +23,7 @@ defmodule MariaWeb.Router do
     get "/", PageController, :home
 
     live "/reading", ReadingLive
+    live "/cooks", CookingLive
 
     # Created an alias for nicer path, might rename
     get "/cooking", RecipeController, :cook

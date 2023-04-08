@@ -47,7 +47,7 @@ defmodule MariaWeb.CookingLive do
       <div class="fixed inset-0 overflow-y-auto px-4 py-4 sm:py-20 sm:px-6 md:py-32 lg:px-8 lg:py-[15vh]">
         <div
           id="searchbox_container"
-          class="mx-auto overflow-hidden rounded-lg bg-zinc-50 shadow-xl ring-zinc-900/7.5 sm:max-w-xl opacity-100 scale-100"
+          class="mx-auto overflow-hidden rounded-3xl bg-zinc-50 shadow-xl ring-zinc-900/7.5 sm:max-w-xl opacity-100 scale-100"
           phx-hook="SearchBar"
         >
           <div
@@ -87,7 +87,7 @@ defmodule MariaWeb.CookingLive do
                   autocapitalize="off"
                   enterkeyhint="search"
                   spellcheck="false"
-                  placeholder="Find something..."
+                  placeholder="Find Recipes..."
                   type="search"
                   value=""
                   tabindex="0"

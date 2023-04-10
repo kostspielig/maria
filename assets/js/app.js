@@ -78,38 +78,44 @@ function CKEditorHook(settings) {
 
 let SearchBar = {
   mounted() {
-    const searchBarContainer = this.el
-    document.addEventListener('keydown', (event) => {
-      if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
-        return
+      let searchParams = new URLSearchParams(window.location.search);
+      let query = searchParams.get('q');
+      if (query) {
+          let input = document.querySelector('#search-input');
+          input.value = query
       }
+      const searchBarContainer = this.el
+      document.addEventListener('keydown', (event) => {
+          if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+              return
+          }
 
-      const focusElement = document.querySelector(':focus')
+          const focusElement = document.querySelector(':focus')
 
-      if (!focusElement) {
-        return
-      }
+          if (!focusElement) {
+              return
+          }
 
-      if (!searchBarContainer.contains(focusElement)) {
-        return
-      }
+          if (!searchBarContainer.contains(focusElement)) {
+              return
+          }
 
-      event.preventDefault()
+          event.preventDefault()
 
-      const tabElements = document.querySelectorAll(
-        '#search-input, #searchbox__results_list a',
-      )
-      const focusIndex = Array.from(tabElements).indexOf(focusElement)
-      const tabElementsCount = tabElements.length - 1
+          const tabElements = document.querySelectorAll(
+              '#search-input, #searchbox__results_list a',
+          )
+          const focusIndex = Array.from(tabElements).indexOf(focusElement)
+          const tabElementsCount = tabElements.length - 1
 
-      if (event.key === 'ArrowUp') {
-        tabElements[focusIndex > 0 ? focusIndex - 1 : tabElementsCount].focus()
-      }
+          if (event.key === 'ArrowUp') {
+              tabElements[focusIndex > 0 ? focusIndex - 1 : tabElementsCount].focus()
+          }
 
-      if (event.key === 'ArrowDown') {
-        tabElements[focusIndex < tabElementsCount ? focusIndex + 1 : 0].focus()
-      }
-    })
+          if (event.key === 'ArrowDown') {
+              tabElements[focusIndex < tabElementsCount ? focusIndex + 1 : 0].focus()
+          }
+      })
   },
 }
 

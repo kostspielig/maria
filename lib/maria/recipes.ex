@@ -50,7 +50,7 @@ defmodule Maria.Recipes do
   def get_recipe!(id), do: Repo.get!(Recipe, id) |> Repo.preload(:user) |> Repo.preload(:editor)
 
   @doc """
-  Searches for recipes, max # results is 5.
+  Searches for recipes, max # results is 10.
 
   ## Examples
 
@@ -66,7 +66,7 @@ defmodule Maria.Recipes do
     |> or_where([p], ilike(p.tags, ^search_query))
     |> or_where([p], ilike(p.title, ^search_query))
     |> or_where([p], ilike(p.description, ^search_query))
-    |> limit(5)
+    |> limit(10)
     |> Repo.all()
     |> Repo.preload(:user)
   end

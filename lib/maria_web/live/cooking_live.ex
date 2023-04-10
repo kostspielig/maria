@@ -4,8 +4,18 @@ defmodule MariaWeb.CookingLive do
   alias Phoenix.LiveView.JS
   alias Maria.Recipes
 
+  def handle_params(params, _uri, socket) do
+    query = Map.get(params, "q", nil)
+    recipes = if query do Recipes.search(query) else [] end
+    list = if query do recipes else Recipes.list_recipes() end
+    socket = assign(socket, recipes: recipes, list: list, query: query)
+
+    {:noreply, socket}
+  end
+
   def mount(_params, _session, socket) do
-    socket = assign(socket, recipes: [], list: Recipes.list_recipes())
+    socket = assign(socket, recipes: [], list: [], query: nil)
+
     {:ok, socket}
   end
 
@@ -24,7 +34,7 @@ defmodule MariaWeb.CookingLive do
           d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z">
         </path>
         </svg>
-        Find Recipes...
+        <%= @query || "Find Recipes..." %>
       </button>
     </div>
 
@@ -74,7 +84,7 @@ defmodule MariaWeb.CookingLive do
 
                 <input
                   id="search-input"
-                  name="search[query]"
+                  name="q"
                   class="flex-auto rounded-lg appearance-none bg-transparent pl-10 text-zinc-900 outline-none focus:outline-none border-slate-200 focus:border-slate-200 focus:ring-0 focus:shadow-none placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden pr-4"
                   style={
                     @recipes != [] &&
@@ -121,15 +131,23 @@ defmodule MariaWeb.CookingLive do
   end
 
 
-  def handle_event("change", %{"search" => %{"query" => ""}}, socket) do
-    socket = assign(socket, :recipes, [])
+  def handle_event("change", %{"q" =>  ""}, socket) do
+    socket =
+      socket
+      |> assign(:recipes, [])
+      |> assign(:list, Recipes.list_recipes())
+      |> assign(:query, nil)
+
     {:noreply, socket}
   end
 
-  def handle_event("change", %{"search" => %{"query" => search_query}}, socket) do
+  def handle_event("change", %{"q" => search_query}, socket) do
     recipes = Recipes.search(search_query)
-    socket = assign(socket, :recipes, recipes)
-    socket = assign(socket, :list, recipes)
+    socket =
+      socket
+      |> assign(:recipes, recipes)
+      |> assign(:list, recipes)
+      |> assign(:query, search_query)
 
     {:noreply, socket}
   end

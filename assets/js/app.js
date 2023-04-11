@@ -27,11 +27,11 @@ let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("
 
 let EditorSettings = {
     directions: {
-        toolbar: [ 'undo', 'redo', '|',
-                   'heading', '|',
+        toolbar: [ 'heading', '|',
                    'bold', 'italic', '|',
                    'numberedList', '|',
-                   'link', 'blockQuote'],
+                   'blockQuote', 'link', '|',
+                   'undo', 'redo'],
         shouldNotGroupWhenFull: true,
         heading: {
             options: [
@@ -41,8 +41,8 @@ let EditorSettings = {
         }
     },
     description: {
-        toolbar: [ 'undo', 'redo', '|',
-                   'bold', 'italic'],
+        toolbar: [ 'bold', 'italic', '|',
+                   'undo', 'redo'],
         shouldNotGroupWhenFull: true
     }
 };

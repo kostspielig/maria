@@ -19,7 +19,7 @@ config :maria, MariaWeb.Endpoint,
     "//*.#{System.get_env("PHX_HOST")}"
   ]
 
-config :maria, MariaWeb.RecipeController,
+config :maria, MariaWeb.File,
   s3: [
     bucket: "gigalixir-maria"
   ]

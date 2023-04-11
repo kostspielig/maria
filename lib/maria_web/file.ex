@@ -8,7 +8,7 @@ defmodule MariaWeb.File do
 
   require Logger
 
-  def bucket, do: Application.get_env(:maria, MariaWeb.RecipeController)[:s3][:bucket]
+  def bucket, do: Application.get_env(:maria, MariaWeb.File)[:s3][:bucket]
   def region, do: Application.get_env(:ex_aws, :region)
 
   @doc """

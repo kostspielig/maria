@@ -62,7 +62,7 @@ config :maria, MariaWeb.Endpoint,
     ]
   ]
 
-config :maria, MariaWeb.RecipeController,
+config :maria, MariaWeb.File,
   s3: [
     bucket: "local-maria"
   ]

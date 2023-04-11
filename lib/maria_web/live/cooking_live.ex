@@ -1,5 +1,5 @@
 defmodule MariaWeb.CookingLive do
-  use MariaWeb, :live_view_basic
+  use MariaWeb, :live_view
 
   alias Phoenix.LiveView.JS
   alias Maria.Recipes

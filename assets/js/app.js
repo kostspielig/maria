@@ -50,28 +50,32 @@ let EditorSettings = {
 window.recipe_editor = {};
 window.recipe_editor_data = {};
 
-function CKEditorHook(settings) {
-    return {
-        mounted() {
-            ClassicEditor
-                .create( this.el , settings )
-                .catch( error => {
-                    console.log( error );
-                }).then(e => window.recipe_editor[this.el.id] = e);
-        },
-        beforeUpdate() {
-            window.recipe_editor_data[this.el.id] = window.recipe_editor[this.el.id].getData()
-        },
-        updated(){
-            ClassicEditor
-                .create( this.el , settings )
+function CKEditorHook(settings, name) {
+    let createEditor = (el, name) => {
+        ClassicEditor
+            .create( el , settings )
             .catch( error => {
                 console.log( error );
             }).then(e => {
-                window.recipe_editor[this.el.id] = e;
-                let data = window.recipe_editor_data[this.el.id];
-                data && window.recipe_editor[this.el.id].setData(data);
+                window.recipe_editor[name] = e;
+                let data = window.recipe_editor_data[name];
+                data && window.recipe_editor[name].setData(data);
             });
+    }
+
+    return {
+        mounted() { createEditor(this.el, name) },
+        beforeUpdate() {
+            window.recipe_editor_data[name] = window.recipe_editor[name].getData()
+        },
+        updated() {
+            let editor = window.recipe_editor[name];
+            if (editor) { editor.destroy() }
+            createEditor(this.el, name)
+        },
+        destroyed() {
+            window.recipe_editor_data[name] = window.recipe_editor[name].getData()
+            window.recipe_editor[name].destroy();
         }
     }
 }
@@ -120,8 +124,8 @@ let SearchBar = {
 }
 
 let Hooks = {}
-Hooks.RecipeDirections = CKEditorHook(EditorSettings.directions)
-Hooks.RecipeDescription = CKEditorHook(EditorSettings.description)
+Hooks.RecipeDirections = CKEditorHook(EditorSettings.directions, 'directions')
+Hooks.RecipeDescription = CKEditorHook(EditorSettings.description, 'description')
 Hooks.SearchBar = SearchBar
 
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})

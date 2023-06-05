@@ -14,6 +14,7 @@ defmodule Maria.Recipes.Recipe do
     field :yield, :integer
     field :tags,  :string
     field :title, :string
+    field :is_draft, :boolean
 
     belongs_to :user, User
     belongs_to :editor, User, foreign_key: :editor_id

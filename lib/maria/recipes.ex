@@ -44,7 +44,7 @@ defmodule Maria.Recipes do
 
   """
   def list_recipes_by(user) do
-    Recipe |> where(user_id: ^user.id) |> Repo.all() |> Repo.preload(:user) |> Repo.preload(:editor)
+    Recipe |> where(user_id: ^user.id) |> order_by([r], desc: coalesce(r.updated_at, r.inserted_at)) |> Repo.all() |> Repo.preload(:user) |> Repo.preload(:editor)
   end
 
   @doc """

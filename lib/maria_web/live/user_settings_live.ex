@@ -141,7 +141,7 @@ defmodule MariaWeb.UserSettingsLive do
     email_changeset = Accounts.change_user_email(user)
     username_changeset = Accounts.change_username(user)
     password_changeset = Accounts.change_user_password(user)
-    recipes = Recipes.list_recipes(user)
+    recipes = Recipes.list_recipes_by(user)
 
     socket =
       socket

@@ -44,18 +44,22 @@ defmodule MariaWeb.HelperComponents do
 
   def ingredients(assigns) do
     ~H"""
-    <ul class="pl-5 list-disc font-serif text-xl">
-    <%= for ingredient <- String.split(@info, ",") do %>
-      <li class="my-2 capitalize"><%= ingredient %></li>
+    <%= if @info do %>
+      <ul class="pl-5 list-disc font-serif text-xl">
+      <%= for ingredient <- String.split(@info, ",") do %>
+        <li class="my-2 capitalize"><%= ingredient %></li>
+      <% end %>
+      </ul>
     <% end %>
-    </ul>
     """
   end
 
   def tags(assigns) do
     ~H"""
-    <%= for tag <- String.split(@info, ",") do %>
-      <span class="inline-block rounded-full bg-brand text-white text-sm font-semibold px-3 py-1 m-1"><%= String.trim(tag) %></span>
+    <%= if @info do %>
+      <%= for tag <- String.split(@info, ",") do %>
+        <span class="inline-block rounded-full bg-brand text-white text-sm font-semibold px-3 py-1 m-1"><%= String.trim(tag) %></span>
+      <% end %>
     <% end %>
     """
   end

@@ -7,7 +7,7 @@ defmodule MariaWeb.CookingLive do
   def handle_params(params, _uri, socket) do
     query = Map.get(params, "q", nil)
     recipes = if query do Recipes.search(query) else [] end
-    list = if query do recipes else Recipes.list_recipes() end
+    list = if query do recipes else Recipes.list_recipes(true) end
     socket = assign(socket, recipes: recipes, list: list, query: query)
 
     {:noreply, socket}
@@ -135,7 +135,7 @@ defmodule MariaWeb.CookingLive do
     socket =
       socket
       |> assign(:recipes, [])
-      |> assign(:list, Recipes.list_recipes())
+      |> assign(:list, Recipes.list_recipes(true))
       |> assign(:query, nil)
 
     {:noreply, socket}

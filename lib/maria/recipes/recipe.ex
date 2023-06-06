@@ -14,6 +14,7 @@ defmodule Maria.Recipes.Recipe do
     field :yield, :integer
     field :tags,  :string
     field :title, :string
+    field :is_draft, :boolean
 
     belongs_to :user, User
     belongs_to :editor, User, foreign_key: :editor_id
@@ -23,9 +24,10 @@ defmodule Maria.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :link, :tags, :user_id])
-    |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
-    |> validate_cover(:required)
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :link, :tags, :is_draft, :user_id])
+    |> validate_required([:title])
+    |> validate_required_not_draft([:description, :directions, :mins, :ingredients, :tags])
+    |> validate_cover(:required, true)
     |> unique_constraint(:title)
     |> foreign_key_constraint(:user_id)
   end
@@ -33,8 +35,9 @@ defmodule Maria.Recipes.Recipe do
   @doc false
   def changeset_update(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :link, :tags, :editor_id])
-    |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :link, :tags, :is_draft, :editor_id])
+    |> validate_required([:title])
+    |> validate_required_not_draft([:description, :directions, :mins, :ingredients, :tags])
     |> validate_cover(:not_required)
     |> foreign_key_constraint(:editor_id)
   end
@@ -42,13 +45,29 @@ defmodule Maria.Recipes.Recipe do
   @doc false
   def changeset_validate(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :tags])
-    |> validate_required([:title, :description, :directions, :mins, :ingredients, :tags])
+    |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :tags, :is_draft])
+    |> validate_required([:title])
+    |> validate_required_not_draft([:description, :directions, :mins, :ingredients, :tags])
     |> foreign_key_constraint(:user_id)
   end
 
+  defp validate_required_not_draft(changeset, attrs) do
+    if get_field(changeset, :is_draft) do
+      changeset
+    else
+      changeset
+      |> validate_required(attrs)
+    end
+  end
+
   @rx  ~r/(?i)\.(jpg|jpeg|png|gif)$/
-  def validate_cover(changeset, required \\ :required) do
+  def validate_cover(changeset, required \\ :required, is_draft \\ false) do
+    required = if is_draft and get_field(changeset, :is_draft) do
+      :not_required
+    else
+      required
+    end
+
     case Map.get(changeset.params, "cover", nil) do
       %Phoenix.LiveView.UploadEntry {client_name: filename} ->
         if String.match?(filename, @rx) do
@@ -66,7 +85,9 @@ defmodule Maria.Recipes.Recipe do
   end
 
   def delete_cover(recipe) do
-    MariaWeb.File.delete(recipe.cover)
+    if recipe.cover do
+      MariaWeb.File.delete(recipe.cover)
+    end
 
     recipe
   end

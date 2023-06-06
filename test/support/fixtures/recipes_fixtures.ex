@@ -22,6 +22,7 @@ defmodule Maria.RecipesFixtures do
         mins: "4h",
         tags: "option1, option2",
         title: "some title",
+        is_draft: false,
         user_id: user.id,
         editor_id: user.id})
 

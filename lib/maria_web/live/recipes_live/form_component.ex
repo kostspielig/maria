@@ -52,6 +52,7 @@ defmodule MariaWeb.RecipesLive.FormComponent do
           <% end %>
         </div>
         </.input>
+        <.input field={{f, :is_draft}} type="checkbox" label="Keep me as a draft" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Recipe</.button>
         </:actions>

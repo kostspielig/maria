@@ -2,14 +2,13 @@ defmodule Maria.Recipes do
   @moduledoc """
   The Recipes context.
   """
-
   import Ecto.Query, warn: false
   alias Maria.Repo
 
   alias Maria.Recipes.Recipe
 
   @doc """
-  Returns the list of recipes.
+  Returns the list of recipes. If draft is true, only recipes not in draft will be returned
 
   ## Examples
 
@@ -17,11 +16,17 @@ defmodule Maria.Recipes do
       [%Recipe{}, ...]
 
   """
-  def list_recipes do
-    query = from r in Recipe,
-      order_by: [
-        desc: coalesce(r.updated_at, r.inserted_at)
-      ]
+  def list_recipes(draft \\ false) do
+
+    query = if draft do
+      from r in Recipe,
+        where: is_nil(r.is_draft) or r.is_draft == false,
+        order_by: [desc: coalesce(r.updated_at, r.inserted_at)]
+    else
+        from r in Recipe,
+        order_by: [desc: coalesce(r.updated_at, r.inserted_at)]
+    end
+
 
     query
     |> Repo.all()
@@ -29,7 +34,16 @@ defmodule Maria.Recipes do
     |> Repo.preload(:editor)
   end
 
-  def list_recipes(user) do
+  @doc """
+  Returns the list of recipes by its author.
+
+  ## Examples
+
+      iex> list_recipes( %User{id: 1})
+      [%Recipe{}, ...]
+
+  """
+  def list_recipes_by(user) do
     Recipe |> where(user_id: ^user.id) |> Repo.all() |> Repo.preload(:user) |> Repo.preload(:editor)
   end
 

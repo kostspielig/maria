@@ -44,7 +44,7 @@ defmodule Maria.Recipes do
 
   """
   def list_recipes_by(user) do
-    Recipe |> where(user_id: ^user.id) |> Repo.all() |> Repo.preload(:user) |> Repo.preload(:editor)
+    Recipe |> where(user_id: ^user.id) |> order_by([r], desc: coalesce(r.updated_at, r.inserted_at)) |> Repo.all() |> Repo.preload(:user) |> Repo.preload(:editor)
   end
 
   @doc """
@@ -76,10 +76,8 @@ defmodule Maria.Recipes do
 
     Recipe
     |> order_by(desc: :updated_at)
-    |> or_where([p], ilike(p.directions, ^search_query))
-    |> or_where([p], ilike(p.tags, ^search_query))
-    |> or_where([p], ilike(p.title, ^search_query))
-    |> or_where([p], ilike(p.description, ^search_query))
+    |> where([p], is_nil(p.is_draft) or p.is_draft == false)  # Exclude recipes with is_draft true
+    |> where([p], ilike(p.directions, ^search_query) or ilike(p.tags, ^search_query) or ilike(p.title, ^search_query) or ilike(p.description, ^search_query))
     |> limit(10)
     |> Repo.all()
     |> Repo.preload(:user)

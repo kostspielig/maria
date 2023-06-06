@@ -150,7 +150,7 @@ defmodule MariaWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "fixed hidden top-2 right-4 w-80 sm:w-96 z-50 p-3 text-white shadow-md shadow-zinc-900/5 ring-1",
+        "relative hidden top-0 right-0 w-full z-50 p-3 text-white shadow-md shadow-zinc-900/5 ring-1",
         @kind == :info && "bg-brand  ring-brand fill-cyan-900",
         @kind == :error && "bg-blood p-3  shadow-md ring-blood fill-blood"
       ]}
@@ -165,7 +165,7 @@ defmodule MariaWeb.CoreComponents do
       <button
         :if={@close}
         type="button"
-        class="group absolute top-2 right-1 p-2"
+        class="group absolute top-0 right-1 p-2"
         aria-label={gettext("close")}
       >
         <Heroicons.x_mark solid class="h-5 w-5 stroke-current opacity-40 group-hover:opacity-70" />

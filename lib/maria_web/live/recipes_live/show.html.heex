@@ -9,7 +9,7 @@
 
     <:subtitle>
       <%= if @recipe.is_draft do %>
-      <span class="inline-block rounded-full bg-blood text-white text-sm font-semibold px-3 py-1 m-1"> DRAFT </span>
+      <.tag text="DRAFT"/>
       <% end %>
       by <b><%= if user = Map.get(@recipe, :user, nil) do user.username end %></b>
       <%= if (editor = Map.get(@recipe, :editor, nil)) && editor !== @recipe.user do %>

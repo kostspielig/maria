@@ -64,6 +64,14 @@ defmodule MariaWeb.HelperComponents do
     """
   end
 
+  attr :text, :string, required: true
+  attr :class, :string, default: nil
+  def tag(assigns) do
+    ~H"""
+       <span class={[@class, "inline-block rounded-full bg-blood text-white text-sm font-semibold px-3 py-1 m-1"]}><%= @text %></span>
+    """
+  end
+
   def page_header(assigns) do
     ~H"""
     <header class="px-4 py-6 sm:px-6 lg:px-8 xl:px-28 bg-white sticky top-0">

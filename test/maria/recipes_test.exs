@@ -8,11 +8,16 @@ defmodule Maria.RecipesTest do
 
     import Maria.RecipesFixtures
 
-    @invalid_attrs %{cover: nil, description: nil, directions: nil, ingredients: nil, likes: nil, mins: nil, tags: nil, title: nil, user_id: nil}
+    @invalid_attrs %{cover: nil, description: nil, directions: nil, ingredients: nil, likes: nil, mins: nil, tags: nil, title: nil, user_id: nil, is_draft: nil}
 
-    test "list_recipes/0 returns all recipes" do
+    test "list_recipes/1 returns all recipes" do
       recipe = recipe_fixture()
-      assert Recipes.list_recipes() == [recipe]
+      assert Recipes.list_recipes(false) == [recipe]
+    end
+
+    test "list_recipes/1 returns all recipes that are not in a draft state" do
+      recipe = recipe_fixture(%{is_draft: true})
+      assert Recipes.list_recipes(true) == []
     end
 
     test "get_recipe!/1 returns the recipe with given id" do
@@ -33,6 +38,15 @@ defmodule Maria.RecipesTest do
       assert recipe.mins == "4h"
       assert recipe.link == "link"
       assert recipe.tags == "option1, option2"
+      assert recipe.title == "some title"
+    end
+
+    test "create_recipe/1 with valid draft data creates a recipe" do
+      cover = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
+      valid_attrs = %{cover: cover, title: "some title", is_draft: true}
+
+      assert {:ok, %Recipe{} = recipe} = Recipes.create_recipe("some-title", valid_attrs)
+      assert recipe.cover =~ "some-title"
       assert recipe.title == "some title"
     end
 

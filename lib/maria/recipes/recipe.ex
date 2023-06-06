@@ -27,7 +27,7 @@ defmodule Maria.Recipes.Recipe do
     |> cast(attrs, [:title, :description, :directions, :mins, :ingredients, :yield, :link, :tags, :is_draft, :user_id])
     |> validate_required([:title])
     |> validate_required_not_draft([:description, :directions, :mins, :ingredients, :tags])
-    |> validate_cover(:required)
+    |> validate_cover(:required, true)
     |> unique_constraint(:title)
     |> foreign_key_constraint(:user_id)
   end
@@ -61,7 +61,13 @@ defmodule Maria.Recipes.Recipe do
   end
 
   @rx  ~r/(?i)\.(jpg|jpeg|png|gif)$/
-  def validate_cover(changeset, required \\ :required) do
+  def validate_cover(changeset, required \\ :required, is_draft \\ false) do
+    required = if is_draft and get_field(changeset, :is_draft) do
+      :not_required
+    else
+      required
+    end
+
     case Map.get(changeset.params, "cover", nil) do
       %Phoenix.LiveView.UploadEntry {client_name: filename} ->
         if String.match?(filename, @rx) do

@@ -16,7 +16,7 @@ defmodule Maria.RecipesTest do
     end
 
     test "list_recipes/1 returns all recipes that are not in a draft state" do
-      recipe = recipe_fixture(%{is_draft: true})
+      _recipe = recipe_fixture(%{is_draft: true})
       assert Recipes.list_recipes(true) == []
     end
 
@@ -42,11 +42,9 @@ defmodule Maria.RecipesTest do
     end
 
     test "create_recipe/1 with valid draft data creates a recipe" do
-      cover = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
-      valid_attrs = %{cover: cover, title: "some title", is_draft: true}
+      valid_attrs = %{ title: "some title", is_draft: true}
 
       assert {:ok, %Recipe{} = recipe} = Recipes.create_recipe("some-title", valid_attrs)
-      assert recipe.cover =~ "some-title"
       assert recipe.title == "some title"
     end
 

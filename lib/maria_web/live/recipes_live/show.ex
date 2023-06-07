@@ -10,12 +10,14 @@ defmodule MariaWeb.RecipesLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
+    recipe = Recipes.get_recipe!(id)
+
     {:noreply,
      socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:recipe, Recipes.get_recipe!(id))}
+     |> assign(:page_title, page_title(socket.assigns.live_action, recipe.title))
+     |> assign(:recipe, recipe)}
   end
 
-  defp page_title(:show), do: "Show Recipe"
-  defp page_title(:edit), do: "Edit Recipe"
+  defp page_title(:show, title), do: "#{title}"
+  defp page_title(:edit, title), do: "Edit #{title}"
 end

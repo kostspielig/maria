@@ -10,6 +10,19 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦪</text></svg>">
     <meta name="theme-color" content="#3aadec" />
     <meta name="description" content="Personal recommendations by Maria Carrasco" />
+    <%= if assigns[:page_og] do %>
+    <meta property="og:url" content={assigns.page_og.url}>
+    <meta property="og:title" content={assigns.page_title}>
+    <meta property="og:image" content={assigns.page_og.image}>
+    <meta property="og:description" content={assigns.page_og.description}>
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="twitter:title" content={assigns.page_title}>
+    <meta property="twitter:description" content={assigns.page_og.description}>
+    <meta property="twitter:image" content={assigns.page_og.image}>
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content={assigns.page_og.url}>
+    <% end %>
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦪</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

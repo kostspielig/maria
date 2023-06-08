@@ -24,7 +24,7 @@ defmodule MariaWeb.Router do
 
     live "/reading", ReadingLive
     live "/cooking", CookingLive
-    live "/recipes/:id", RecipesLive.Show, :show
+
   end
 
 
@@ -86,6 +86,8 @@ defmodule MariaWeb.Router do
       on_mount: [{MariaWeb.UserAuth, :mount_current_user}] do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
+
+      live "/recipes/:id", RecipesLive.Show, :show
     end
   end
 end

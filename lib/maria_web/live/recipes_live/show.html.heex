@@ -16,14 +16,15 @@
       <span class="text-zinc-400">(✎ <b><%= editor.username %></b>)</span>
       <% end %>
 
-      <%= if get_in(assigns, [:current_user, :id]) == @recipe.user_id do %>
+      <%= if not is_nil(@current_user) and @current_user.id == @recipe.user_id do %>
       <.link class="block mt-6 hidden xl:block" patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
         <.button>Edit recipe</.button>
       </.link>
       <% end %>
     </:subtitle>
     <:actions>
-      <%= if get_in(assigns, [:current_user, :id]) == @recipe.user_id do %>
+
+      <%= if not is_nil(@current_user) and @current_user.id == @recipe.user_id do %>
       <.link class="xl:hidden"patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
         <.button>Edit recipe</.button>
       </.link>
@@ -61,7 +62,7 @@
     </div>
     <% end %>
 
-    <%= if get_in(assigns, [:current_user, :id]) == @recipe.user_id do %>
+    <%= if not is_nil(@current_user) and @current_user.id == @recipe.user_id do %>
     <.back navigate={~p"/recipes"}>Manage recipes</.back>
     <% else %>
     <.back navigate={~p"/cooking"}>See all recipes</.back>

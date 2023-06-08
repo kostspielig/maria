@@ -24,6 +24,7 @@ defmodule MariaWeb.Router do
 
     live "/reading", ReadingLive
     live "/cooking", CookingLive
+    live "/recipes/:id", RecipesLive.Show, :show
   end
 
 
@@ -72,8 +73,6 @@ defmodule MariaWeb.Router do
       live "/recipes", RecipesLive.Index, :index
       live "/recipes/new", RecipesLive.Index, :new
       live "/recipes/:id/edit", RecipesLive.Index, :edit
-
-      live "/recipes/:id", RecipesLive.Show, :show
       live "/recipes/:id/show/edit", RecipesLive.Show, :edit
     end
   end

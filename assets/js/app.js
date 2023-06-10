@@ -74,8 +74,9 @@ function CKEditorHook(settings, name) {
             createEditor(this.el, name)
         },
         destroyed() {
-            window.recipe_editor_data[name] = window.recipe_editor[name].getData()
-            window.recipe_editor[name].destroy();
+            window.recipe_editor_data = {}
+            window.recipe_editor = {}
+
         }
     }
 }

@@ -73,9 +73,10 @@ defmodule MariaWeb.HelperComponents do
     """
   end
 
+  attr :class, :string, default: nil
   def rating(assigns) do
   ~H"""
-  <div>
+  <div class={[@class]}>
       <%= for i <- 1..5 do %>
         <.star color={ if i <= @star, do: "#a855f7", else: "#ddd6fe" }/>
       <% end %>

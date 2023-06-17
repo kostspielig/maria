@@ -4,7 +4,7 @@
       <:pretitle>
       <%= Calendar.strftime(@wine.inserted_at, "%B %-d, %Y") %>
     </:pretitle>
-    <%= @wine.name %> <%= if @wine.is_featured do %> ⚡<% end %>
+    <%= @wine.name %> <%= if @wine.is_featured do %>⚡<% end %>
 
     <:subtitle>
       <%= if @wine.is_draft do %>
@@ -39,7 +39,7 @@
   <:item title="Vintage"><%= @wine.vintage %></:item>
   <:item title="Color"><%= @wine.color %></:item>
 
-  <:item title="Sweetness">  <.tag text={@wine.sweetness} class="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400" /></:item>
+  <:item title="Sweetness"><.tag text={@wine.sweetness} class="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400" /></:item>
   <:item title="Body"><.tag text={@wine.body} class="bg-gradient-to-r from-blue-400 to-emerald-400" /></:item>
   <:item title="Region"><%= @wine.region %></:item>
   <:item title="Grapes"><%= @wine.grapes %></:item>

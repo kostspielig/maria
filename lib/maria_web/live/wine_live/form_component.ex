@@ -41,12 +41,13 @@ defmodule MariaWeb.WineLive.FormComponent do
         </div>
         <CC.input field={@form[:producer]} type="text" label="Producer" />
 
-        <CC.input field={@form[:rating]} type="number" label="Rating" min="0" max="5" step="1" />
-        <CC.input field={@form[:price]} type="number" label="Price" step="any" />
+        <div class="grid grid-cols-2 gap-4">
+          <CC.input field={@form[:rating]} type="number" label="Rating" min="0" max="5" step="1" />
+          <CC.input field={@form[:price]} type="number" label="Price" step="any" />
+        </div>
         <CC.input field={@form[:buy_link]} type="text" label="Buy link" />
         <CC.input field={@form[:image]} type="text" label="Image" />
         <CC.input field={@form[:is_featured]} type="checkbox" label="Is featured ⚡" />
-
         <CC.input field={@form[:is_draft]} type="checkbox" label="Keep me as a draft 🚧" />
         <CC.input field={@form[:food_pairig]} type="text" label="Food pairig" />
         <:actions>
@@ -82,8 +83,11 @@ defmodule MariaWeb.WineLive.FormComponent do
   end
 
   defp save_wine(socket, :edit, wine_params) do
+    params =
+      wine_params
+      |> Map.put("editor_id", socket.assigns.current_user.id)
 
-    case Drinking.update_wine(socket.assigns.wine, wine_params) do
+    case Drinking.update_wine(socket.assigns.wine, params) do
       {:ok, wine} ->
         notify_parent({:saved, wine})
 

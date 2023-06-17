@@ -27,7 +27,6 @@ defmodule Maria.Recipes do
         order_by: [desc: coalesce(r.updated_at, r.inserted_at)]
     end
 
-
     query
     |> Repo.all()
     |> Repo.preload(:user)

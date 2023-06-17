@@ -1,8 +1,7 @@
 defmodule MariaWeb.WineLive.Show do
-  use MariaWeb, :live_view
+  use MariaWeb, :live_view_basic
 
   alias Maria.Drinking
-
   alias MariaWeb.CoreComponentsUp, as: CC
 
   @impl true

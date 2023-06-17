@@ -17,8 +17,21 @@ defmodule Maria.Drinking do
       [%Wine{}, ...]
 
   """
-  def list_wines do
-    Repo.all(Wine) |> Repo.preload(:user) |> Repo.preload(:editor)
+  def list_wines(draft \\ false) do
+
+    query = if draft do
+      from w in Wine,
+        where: is_nil(w.is_draft) or w.is_draft == false,
+        order_by: [desc: coalesce(w.updated_at, w.inserted_at)]
+    else
+        from w in Wine,
+          order_by: [desc: coalesce(w.updated_at, w.inserted_at)]
+    end
+
+    query
+    |> Repo.all()
+    |> Repo.preload(:user)
+    |> Repo.preload(:editor)
   end
 
   @doc """
@@ -36,6 +49,19 @@ defmodule Maria.Drinking do
 
   """
   def get_wine!(id), do: Repo.get!(Wine, id) |> Repo.preload(:user)  |> Repo.preload(:editor)
+
+  @doc """
+  Returns the list of wines by its author.
+
+  ## Examples
+
+      iex> list_wines( %User{id: 1})
+      [%Wine{}, ...]
+
+  """
+  def list_wines_by(user) do
+    Wine |> where(user_id: ^user.id) |> order_by([w], desc: coalesce(w.updated_at, w.inserted_at)) |> Repo.all() |> Repo.preload(:user) |> Repo.preload(:editor)
+  end
 
   @doc """
   Creates a wine.
@@ -69,7 +95,7 @@ defmodule Maria.Drinking do
   """
   def update_wine(%Wine{} = wine, attrs) do
     wine
-    |> Wine.changeset(attrs)
+    |> Wine.changeset_update(attrs)
     |> Repo.update()
   end
 

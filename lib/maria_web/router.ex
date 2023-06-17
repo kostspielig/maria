@@ -69,6 +69,12 @@ defmodule MariaWeb.Router do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
 
+      live "/wines", WineLive.Index, :index
+      live "/wines/new", WineLive.Index, :new
+      live "/wines/:id/edit", WineLive.Index, :edit
+
+      live "/wines/:id", WineLive.Show, :show
+      live "/wines/:id/show/edit", WineLive.Show, :edit
 
       live "/recipes", RecipesLive.Index, :index
       live "/recipes/new", RecipesLive.Index, :new

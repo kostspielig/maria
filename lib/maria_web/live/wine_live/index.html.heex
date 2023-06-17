@@ -1,0 +1,60 @@
+<CC.header>
+  Listing Wines
+  <:actions>
+    <.link patch={~p"/wines/new"}>
+      <.button>New Wine</.button>
+    </.link>
+  </:actions>
+</CC.header>
+
+<CC.table
+  id="wines"
+  rows={@streams.wines}
+  row_click={fn {_id, wine} -> JS.navigate(~p"/wines/#{wine}") end}
+>
+  <:col :let={{_id, wine}} label="Name"><%= wine.name %></:col>
+  <:col :let={{_id, wine}} label="Description"><%= wine.description %></:col>
+  <:col :let={{_id, wine}} label="Vintage"><%= wine.vintage %></:col>
+  <:col :let={{_id, wine}} label="Color"><%= wine.color %></:col>
+  <:col :let={{_id, wine}} label="Sweetness"><%= wine.sweetness %></:col>
+  <:col :let={{_id, wine}} label="Body"><%= wine.body %></:col>
+  <:col :let={{_id, wine}} label="Region"><%= wine.region %></:col>
+  <:col :let={{_id, wine}} label="Grapes"><%= wine.grapes %></:col>
+  <:col :let={{_id, wine}} label="Alcohol"><%= wine.alcohol %></:col>
+  <:col :let={{_id, wine}} label="Rating"><%= wine.rating %></:col>
+  <:col :let={{_id, wine}} label="Price"><%= wine.price %></:col>
+  <:col :let={{_id, wine}} label="Producer"><%= wine.producer %></:col>
+  <:col :let={{_id, wine}} label="Country"><%= wine.country %></:col>
+  <:col :let={{_id, wine}} label="Image"><%= wine.image %></:col>
+  <:col :let={{_id, wine}} label="Is featured"><%= wine.is_featured %></:col>
+  <:col :let={{_id, wine}} label="Buy link"><%= wine.buy_link %></:col>
+  <:col :let={{_id, wine}} label="Is draft"><%= wine.is_draft %></:col>
+  <:col :let={{_id, wine}} label="Food pairig"><%= wine.food_pairig %></:col>
+  <:col :let={{_id, wine}} label="UserID"><%= wine.user_id %></:col>
+  <:action :let={{_id, wine}}>
+    <div class="sr-only">
+      <.link navigate={~p"/wines/#{wine}"}>Show</.link>
+    </div>
+    <.link patch={~p"/wines/#{wine}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, wine}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: wine.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</CC.table>
+
+<CC.modal :if={@live_action in [:new, :edit]} id="wine-modal" show on_cancel={JS.patch(~p"/wines")}>
+  <.live_component
+    module={MariaWeb.WineLive.FormComponent}
+    id={@wine.id || :new}
+    title={@page_title}
+    action={@live_action}
+    current_user={@current_user}
+    wine={@wine}
+    patch={~p"/wines"}
+  />
+</CC.modal>

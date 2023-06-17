@@ -1,0 +1,68 @@
+<div class="lg:px-0">
+  <div class="block xl:flex mx-auto max-w-4xl xl:max-w-6xl">
+    <CC.header>
+      <:pretitle>
+      <%= Calendar.strftime(@wine.inserted_at, "%B %-d, %Y") %>
+    </:pretitle>
+    <%= @wine.name %> <%= if @wine.is_featured do %> ⚡<% end %>
+
+    <:subtitle>
+      <%= if @wine.is_draft do %>
+      <.tag text="DRAFT"/>
+      <% end %>
+      by <b><%= if user = Map.get(@wine, :user, nil) do user.username end %></b>
+      <%= if (editor = Map.get(@wine, :editor, nil)) && editor !== @wine.user do %>
+      <span class="text-zinc-400">(✎ <b><%= editor.username %></b>)</span>
+      <% end %>
+
+      <%= if not is_nil(@current_user) and @current_user.id == @wine.user_id do %>
+      <.link class="block mt-6 hidden xl:block" patch={~p"/wines/#{@wine}/show/edit"} phx-click={JS.push_focus()}>
+        <.button>Edit wine</.button>
+      </.link>
+      <% end %>
+    </:subtitle>
+    <:actions>
+
+      <%= if not is_nil(@current_user) and @current_user.id == @wine.user_id do %>
+      <.link class="xl:hidden"patch={~p"/wines/#{@wine}/show/edit"} phx-click={JS.push_focus()}>
+        <.button>Edit wine</.button>
+      </.link>
+      <% end %>
+    </:actions>
+</CC.header>
+</div>
+</div>
+
+
+<CC.list>
+  <:item title="Description"><%= @wine.description %></:item>
+  <:item title="Vintage"><%= @wine.vintage %></:item>
+  <:item title="Color"><%= @wine.color %></:item>
+
+  <:item title="Sweetness">  <.tag text={@wine.sweetness} class="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400" /></:item>
+  <:item title="Body"><.tag text={@wine.body} class="bg-gradient-to-r from-blue-400 to-emerald-400" /></:item>
+  <:item title="Region"><%= @wine.region %></:item>
+  <:item title="Grapes"><%= @wine.grapes %></:item>
+  <:item title="Alcohol"><%= @wine.alcohol %></:item>
+  <:item title="Rating"><.rating star={@wine.rating} /></:item>
+  <:item title="Price"><%= @wine.price %> €</:item>
+  <:item title="Producer"><%= @wine.producer %></:item>
+  <:item title="Country"><%= @wine.country %></:item>
+  <:item title="Image"><%= @wine.image %></:item>
+  <:item title="Buy link"><%= @wine.buy_link %></:item>
+  <:item title="Food pairig"><%= @wine.food_pairig %></:item>
+</CC.list>
+
+<.back navigate={~p"/wines"}>Back to wines</.back>
+
+<CC.modal :if={@live_action == :edit} id="wine-modal" show on_cancel={JS.patch(~p"/wines/#{@wine}")}>
+  <.live_component
+    module={MariaWeb.WineLive.FormComponent}
+    id={@wine.id}
+    title={@page_title}
+    action={@live_action}
+    wine={@wine}
+    current_user={@current_user}
+    patch={~p"/wines/#{@wine}"}
+  />
+</CC.modal>

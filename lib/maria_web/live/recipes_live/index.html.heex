@@ -15,7 +15,7 @@
   <:col :let={recipe} label="Description"><%= raw(recipe.description) %></:col>
   <:col :let={recipe} label="By"><%= if user = Map.get(recipe, :user, nil) do user.username end %></:col>
   <:col :let={recipe} label="Tags"><.tags info={recipe.tags}/></:col>
-  <:col :let={recipe} label="Cover"><img src={"#{recipe.cover}"} class="w-28"></:col>
+  <:col :let={recipe} label="Cover"><img src={"#{recipe.cover}"} class="min-w-[100px] max-w-[180px]"></:col>
   <:action :let={recipe}>
     <div class="sr-only">
       <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>

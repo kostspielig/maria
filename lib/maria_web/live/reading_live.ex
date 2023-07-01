@@ -16,7 +16,7 @@ defmodule MariaWeb.ReadingLive do
   def render(assigns) do
     ~H"""
     <section id="goodreads" class="px-6 py-10 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
-      <h1 class="font-head text-2xl font-bold text-blk"> Books </h1>
+      <h1 class="font-head text-2xl font-bold text-black"> Books </h1>
       <h2 class="mt-8 text-base font-normal">Lost in Translation: The Latest Book Obsessions</h2>
     <div class="overflow-x-auto flex">
       <%= for book <- @goodreads do %>
@@ -24,7 +24,7 @@ defmodule MariaWeb.ReadingLive do
           <a href={"#{book["link"]}"} target="_blank">
           <img class="max-h-80" src={"#{Regex.replace(~r/_\w+_/u, book["src"], "")|> String.replace("..jpg", ".jpg")}"}>
           <div class="block w-40 mt-4">
-          <!--<div class="inline leading-6 font-serif font-bold text-blk text-lg"><%= book["title"] %></div>-->
+          <!--<div class="inline leading-6 font-serif font-bold text-black text-lg"><%= book["title"] %></div>-->
           </div>
           </a>
         </div>
@@ -76,10 +76,10 @@ defmodule MariaWeb.ReadingLive do
       <% end %>
     </section>
 
-    <section id="youtube" class="bg-neutral text-blk">
+    <section id="youtube" class="bg-neutral text-black">
       <h1 class="px-6 pt-10 font-head font-bold text-2xl  mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Youtube </h1>
       <%= for yc <- @youtube do %>
-      <div class="font-sans odd:bg-blk odd:bg-opacity-10">
+      <div class="font-sans odd:bg-black odd:bg-opacity-10">
       <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-2xl font-bold"><%= yc.title %> </h1>
         <div class="overflow-x-auto flex">

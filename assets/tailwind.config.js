@@ -14,7 +14,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-          'xs': '455px'
+          'xs': '415px'
       },
       fontFamily: {
         'sans': ['Helvetica', 'Arial', 'sans-serif'],
@@ -29,7 +29,7 @@ module.exports = {
         },
         blood: "#ef7801",
         skin: "#fbb506",
-        blk: "#181A18",
+        black: "#181A18",
         grey: "#181A18",
         neutral: "#f2f2f2"
       }

@@ -58,12 +58,13 @@ defmodule MariaWeb.HelperComponents do
 
   attr :href, :string, required: true
   attr :class, :string, default: nil
+  attr :color, :string, default: "blood" # tailwind: from-skin to-skin
 
   slot :inner_block, required: true
   def link_hover(assigns) do
     ~H"""
     <a class={["group transition-all duration-300 ease-in-out", @class]} href={"#{@href}"}>
-      <span class="bg-left-bottom bg-gradient-to-r from-blood to-blood bg-[length:0%_12px] bg-no-repeat group-hover:bg-[length:100%_12px] transition-all duration-500 ease-out">
+      <span class={"bg-left-bottom bg-gradient-to-r from-#{@color} to-#{@color} bg-[length:0%_33%] bg-no-repeat group-hover:bg-[length:100%_33%] transition-all duration-500 ease-out"}>
         <%= render_slot(@inner_block) %>
       </span>
     </a>
@@ -135,6 +136,7 @@ defmodule MariaWeb.HelperComponents do
     """
   end
 
+  attr :star, :integer, default: 0
   attr :class, :string, default: nil
   def rating(assigns) do
   ~H"""

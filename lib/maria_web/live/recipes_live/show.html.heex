@@ -56,9 +56,9 @@
 
     <%= if @recipe.link do %>
     <div class="mt-12">
-      <a href={"#{@recipe.link}"} target="_blank" class="underline underline-offset-4 text-brand hover:text-blood font-bold">
+      <.link_hover href={"#{@recipe.link}"} target="_blank" class="text-brand font-bold" color="skin">
         See Similar Recipes
-      </a>
+      </.link_hover>
     </div>
     <% end %>
 

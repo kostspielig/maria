@@ -17,6 +17,53 @@ defmodule MariaWeb.HelperComponents do
     """
   end
 
+  attr :title, :string, required: true
+  attr :class, :string, default: nil
+
+  slot :item, required: true do
+    attr :title, :string, required: true
+  end
+
+  def attr_card(assigns) do
+    ~H"""
+    <div class={["text-white rounded-lg max-w-xl capitalize p-8 bg-gradient-to-r from-brand to-emerald-400", @class]}>
+      <h1 class="text-4xl pb-4 font-racing  leading-8">
+        <%= @title %>
+      </h1>
+      <div class="grid grid-cols-1 xs:grid-cols-2">
+        <div :for={item <- @item} class="flex fex-row py-1 font-semibold text-sm leading-6 gap-4">
+          <p class=""><%= render_slot(item) %></p>
+          <p class="p-0.5"><%= item.title %></p>
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  attr :icon, :string, required: false
+  attr :href, :string, required: true
+
+  slot :inner_block, required: false
+  def link_item(assigns) do
+    ~H"""
+    <div class="mt-2"><span class="font-racing">➭ <%= render_slot(@inner_block) %></span> <%= @icon %>
+      <a href={"#{@href}"} target="_blank" class="underline underline-offset-2 decoration-skin  decoration-4 py-1 hover:bg-skin  hover:text-white hover:no-underline ">
+         <%= extract_host(@href) %>
+      </a>
+    </div>
+    """
+  end
+
+
+  defp extract_host(url) do
+    case URI.parse(url).host do
+      nil ->
+        url
+      host ->
+        String.replace_prefix(host, "www.", "")
+    end
+  end
+
   def recipe_item(assigns) do
     ~H"""
     <div class="mb-6 text-sm">
@@ -29,7 +76,6 @@ defmodule MariaWeb.HelperComponents do
   attr :class, :string, default: nil
 
   slot :inner_block, required: true
-
   def recipe_list(assigns) do
     ~H"""
     <div class={["mt-10", @class]}>
@@ -78,7 +124,7 @@ defmodule MariaWeb.HelperComponents do
   ~H"""
   <div class={[@class]}>
       <%= for i <- 1..5 do %>
-        <.star color={ if i <= @star, do: "#a855f7", else: "#ddd6fe" }/>
+        <.star color={ if i <= @star, do: "#fbb506", else: "#fbb5064f" }/>
       <% end %>
   </div>
   """

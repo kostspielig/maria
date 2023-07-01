@@ -447,11 +447,12 @@ defmodule MariaWeb.CoreComponents do
   slot :pretitle
   slot :subtitle
   slot :actions
+  slot :other
 
   def header(assigns) do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
-      <div>
+      <div class="w-full">
         <p :if={@pretitle != []} class="mb-4 text-xs underline underline-offset-2 leading-6 font-bold inline-block px-1">
           <%= render_slot(@pretitle) %>
         </p>
@@ -461,6 +462,7 @@ defmodule MariaWeb.CoreComponents do
         <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-700">
           <%= render_slot(@subtitle) %>
         </p>
+        <div><%= render_slot(@other) %></div>
       </div>
       <div class="flex-none"><%= render_slot(@actions) %></div>
     </header>

@@ -13,6 +13,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+          'xs': '455px'
+      },
       fontFamily: {
         'sans': ['Helvetica', 'Arial', 'sans-serif'],
         'serif': ['Georgia', 'Times', 'Times New Roman', 'serif' ],
@@ -23,6 +26,7 @@ module.exports = {
         brand: "#3aadec",
         lbrand: "#e4eef3",
         blood: "#ef7801",
+        skin: "#fbb506",
         blk: "#181A18",
         grey: "#181A18",
         neutral: "#f2f2f2"

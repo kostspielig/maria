@@ -22,18 +22,19 @@ defmodule MariaWeb.HelperComponents do
 
   slot :item, required: true do
     attr :title, :string, required: true
+    attr :suffix, :string, required: false
   end
 
   def attr_card(assigns) do
     ~H"""
-    <div class={["text-black rounded-lg max-w-xl capitalize p-8 bg-gradient-to-r from-brand to-emerald-400", @class]}>
+    <div class={["text-black max-w-xl capitalize p-8 bg-gradient-to-r from-skin-lighter to-skin-lighter", @class]}>
       <h1 class="text-4xl pb-4 font-racing  leading-8">
         <%= @title %>
       </h1>
       <div class="grid grid-cols-1 xs:grid-cols-2">
         <div :for={item <- @item} class="flex fex-row py-1 text-sm leading-6 gap-4">
           <p class=""><%= render_slot(item) %></p>
-          <p class="p-0.5"><%= item.title %></p>
+          <p class="p-0.5"><%= item.title %> <%= Map.get(item, :suffix, "") %></p>
         </div>
       </div>
     </div>

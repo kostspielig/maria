@@ -28,7 +28,11 @@ module.exports = {
           light: "#e4eef3",
         },
         blood: "#ef7801",
-        skin: "#fbb506",
+        skin: {
+          DEFAULT: "#fbb506",
+          light: "#ffca22",
+          lighter: "#ffcb23",
+        },
         black: "#181A18",
         grey: "#181A18",
         neutral: "#f2f2f2"

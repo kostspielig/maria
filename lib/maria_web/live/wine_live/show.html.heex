@@ -16,7 +16,7 @@
         <% end %>
 
         <%= if not is_nil(@current_user) and @current_user.id == @wine.user_id do %>
-        <.link class="block mt-6 hidden md:block" patch={~p"/wines/#{@wine}/show/edit"} phx-click={JS.push_focus()}>
+        <.link class="block mt-6 md:block" patch={~p"/wines/#{@wine}/show/edit"} phx-click={JS.push_focus()}>
           <.button>Edit wine</.button>
         </.link>
         <% end %>

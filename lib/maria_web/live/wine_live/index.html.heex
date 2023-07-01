@@ -1,0 +1,52 @@
+<CC.header>
+  Listing Wines
+  <:actions>
+    <.link patch={~p"/wines/new"}>
+      <.button>New Wine</.button>
+    </.link>
+  </:actions>
+</CC.header>
+
+<CC.table
+  id="wines"
+  rows={@streams.wines}
+  row_click={fn {_id, wine} -> JS.navigate(~p"/wines/#{wine}") end}
+>
+  <:col :let={{_id, wine}} label="Name"><%= wine.name %><%= if wine.is_featured do %>⚡<% end %></:col>
+  <:col :let={{_id, wine}} label="Status"><%= if wine.is_draft do %> <.tag text="DRAFT"/> <% else %> <.tag text="LIVE" class="bg-lime-400"/><% end %></:col>
+  <:col :let={{_id, wine}} label="Description"><%= wine.description %></:col>
+  <:col :let={{_id, wine}} label="Color"><%= wine.color %></:col>
+  <:col :let={{_id, wine}} label="Image"><img src={"#{wine.image}"} class="h-28"></:col>
+  <:col :let={{_id, wine}} label="By"><%= if user = Map.get(wine, :user, nil) do user.username end %></:col>
+  <:col :let={{_id, wine}} label="Rating"><.rating class="whitespace-nowrap" star={wine.rating} /></:col>
+  <:action :let={{_id, wine}}>
+    <div class="sr-only">
+      <.link navigate={~p"/wines/#{wine}"}>Show</.link>
+    </div>
+    <%= if wine.user_id == @current_user.id do %>
+      <.link patch={~p"/wines/#{wine}/edit"}>Edit</.link>
+    <% end %>
+  </:action>
+  <:action :let={{id, wine}}>
+    <%= if wine.user_id == @current_user.id do %>
+      <.link
+        phx-click={JS.push("delete", value: %{id: wine.id}) |> hide("##{id}")}
+        data-confirm="Are you sure?"
+      >
+        Delete
+      </.link>
+   <% end %>
+  </:action>
+</CC.table>
+
+<CC.modal :if={@live_action in [:new, :edit]} id="wine-modal" show on_cancel={JS.patch(~p"/wines")}>
+  <.live_component
+    module={MariaWeb.WineLive.FormComponent}
+    id={@wine.id || :new}
+    title={@page_title}
+    action={@live_action}
+    current_user={@current_user}
+    wine={@wine}
+    patch={~p"/wines"}
+  />
+</CC.modal>

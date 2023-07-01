@@ -31,13 +31,14 @@ defmodule MariaWeb.WineLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Wines")
+    |> assign(:page_title, "Wines")
     |> assign(:wine, nil)
   end
 
   @impl true
   def handle_info({MariaWeb.WineLive.FormComponent, {:saved, wine}}, socket) do
-    {:noreply, stream_insert(socket, :wines, wine)}
+    wine = Drinking.get_wine!(wine.id)
+    {:noreply, stream_insert(socket, :wines, wine, at: 0)}
   end
 
   @impl true

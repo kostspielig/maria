@@ -13,14 +13,12 @@
   row_click={fn {_id, wine} -> JS.navigate(~p"/wines/#{wine}") end}
 >
   <:col :let={{_id, wine}} label="Name"><%= wine.name %><%= if wine.is_featured do %>⚡<% end %></:col>
-    <:col :let={{_id, wine}} label="Status"><%= if wine.is_draft do %> <.tag text="DRAFT"/> <% else %> <.tag text="LIVE" class="bg-lime-400"/><% end %></:col>
+  <:col :let={{_id, wine}} label="Status"><%= if wine.is_draft do %> <.tag text="DRAFT"/> <% else %> <.tag text="LIVE" class="bg-lime-400"/><% end %></:col>
   <:col :let={{_id, wine}} label="Description"><%= wine.description %></:col>
   <:col :let={{_id, wine}} label="Color"><%= wine.color %></:col>
-  <:col :let={{_id, wine}} label="Rating"><.rating class="whitespace-nowrap" star={wine.rating} /></:col>
-  <:col :let={{_id, wine}} label="Price"><%= wine.price %></:col>
-  <:col :let={{_id, wine}} label="Country"><%= wine.country %></:col>
-  <:col :let={{_id, wine}} label="Image"><%= wine.image %></:col>
+  <:col :let={{_id, wine}} label="Image"><img src={"#{wine.image}"} class="h-28"></:col>
   <:col :let={{_id, wine}} label="By"><%= if user = Map.get(wine, :user, nil) do user.username end %></:col>
+  <:col :let={{_id, wine}} label="Rating"><.rating class="whitespace-nowrap" star={wine.rating} /></:col>
   <:action :let={{_id, wine}}>
     <div class="sr-only">
       <.link navigate={~p"/wines/#{wine}"}>Show</.link>

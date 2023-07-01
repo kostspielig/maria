@@ -47,8 +47,10 @@ defmodule MariaWeb.HelperComponents do
   def link_item(assigns) do
     ~H"""
     <div class="mt-2"><span class="font-racing">➭ <%= render_slot(@inner_block) %></span> <%= @icon %>
-      <a href={"#{@href}"} target="_blank" class="underline underline-offset-2 decoration-skin  decoration-4 py-1 hover:bg-skin  hover:text-white hover:no-underline ">
-         <%= extract_host(@href) %>
+      <a href={"#{@href}"} target="_blank" class="group">
+          <span class="bg-left-bottom bg-gradient-to-r from-skin to-skin bg-[length:100%_6px] bg-no-repeat group-hover:bg-[length:100%_16px] transition-all duration-500 ease-out">
+        <%= extract_host(@href) %>
+      </span>
       </a>
     </div>
     """

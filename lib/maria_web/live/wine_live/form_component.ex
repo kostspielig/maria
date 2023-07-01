@@ -105,6 +105,7 @@ defmodule MariaWeb.WineLive.FormComponent do
     params =
       wine_params
       |> Map.put("user_id", socket.assigns.current_user.id)
+
     case Drinking.create_wine(params) do
       {:ok, wine} ->
         notify_parent({:saved, wine})

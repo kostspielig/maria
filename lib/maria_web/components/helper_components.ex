@@ -8,9 +8,9 @@ defmodule MariaWeb.HelperComponents do
   def card(assigns) do
     ~H"""
     <div phx-click={@row_click && @row_click.(@info)} class="w-full overflow-hidden text-center">
-      <div class="pb-8 cursor-pointer">
-        <div class="w-full h-56 bg-brand overflow-hidden"><img class="object-cover w-full h-full" src={"#{@info.cover}"}></div>
-        <div class="text-2xl font-semibold font-head mt-4 ml-4"><%= @info.title %></div>
+      <div class="card pb-8 cursor-pointer">
+        <div class="card-img relative w-full h-56 bg-brand overflow-hidden "><img class="object-cover w-full h-full" src={"#{@info.cover}"}></div>
+        <div class="card-title text-2xl font-semibold font-head mt-4 ml-4"><%= @info.title %></div>
         <div class="text-sm font-medium mt-1 ml-4 font-sans text-zinc-800">by <span class="font-bold"><%= @info.user.username %></span></div>
       </div>
     </div>

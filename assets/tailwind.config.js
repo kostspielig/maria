@@ -23,8 +23,10 @@ module.exports = {
         'racing': ['Racing Sans One', 'Helvetica', 'sans']
       },
       colors: {
-        brand: "#3aadec",
-        lbrand: "#e4eef3",
+        brand: {
+          DEFAULT: "#3aadec",
+          light: "#e4eef3",
+        },
         blood: "#ef7801",
         skin: "#fbb506",
         blk: "#181A18",
@@ -39,7 +41,6 @@ module.exports = {
     plugin(({addVariant}) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
     plugin(({addVariant}) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),
     plugin(({addVariant}) => addVariant("phx-change-loading", [".phx-change-loading&", ".phx-change-loading &"])),
-
     // Embeds Heroicons (https://heroicons.com) into your app.css bundle
     // See your `CoreComponents.icon/1` for more information.
     //

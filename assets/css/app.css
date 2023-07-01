@@ -2,7 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-
 /* This file is for your main application CSS */
 
 body::-webkit-scrollbar {
@@ -87,4 +86,19 @@ body::-webkit-scrollbar-thumb {
   overflow: hidden;
   padding-left: 1.25em;
   padding-right: 1.25em;
+}
+
+.card .card-img:hover::before {
+    border-radius: 50%;
+}
+
+.card .card-img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 0 6em #ef7801;
+    transition: border-radius .2s;
 }

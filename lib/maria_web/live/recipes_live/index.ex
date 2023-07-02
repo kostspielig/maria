@@ -3,7 +3,7 @@ defmodule MariaWeb.RecipesLive.Index do
 
   alias Maria.Recipes
   alias Maria.Recipes.Recipe
-
+  alias MariaWeb.CoreComponentsUp, as: CC
 
   @impl true
   def mount(_params, _session, socket) do

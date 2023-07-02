@@ -3,6 +3,7 @@ defmodule MariaWeb.UserSettingsLive do
 
   alias Maria.Accounts
   alias Maria.Recipes
+  alias MariaWeb.CoreComponentsUp, as: CC
 
   def render(assigns) do
     ~H"""
@@ -13,10 +14,10 @@ defmodule MariaWeb.UserSettingsLive do
     <.header class="mt-12">My Recipes
       <:actions>
         <.link href={~p"/recipes"}>
-          <.button>See All</.button>
+          <CC.button>See All</CC.button>
         </.link>
         <.link href={~p"/recipes/new"}>
-          <.button>New Recipe</.button>
+          <CC.button>New Recipe</CC.button>
           </.link>
       </:actions>
     </.header>
@@ -63,7 +64,7 @@ defmodule MariaWeb.UserSettingsLive do
         required
       />
       <:actions>
-        <.button phx-disable-with="Changing...">Change Username</.button>
+        <CC.button phx-disable-with="Changing...">Change Username</CC.button>
       </:actions>
     </.simple_form>
 
@@ -86,7 +87,7 @@ defmodule MariaWeb.UserSettingsLive do
         required
       />
       <:actions>
-        <.button phx-disable-with="Changing...">Change Email</.button>
+        <CC.button phx-disable-with="Changing...">Change Email</CC.button>
       </:actions>
     </.simple_form>
 
@@ -118,7 +119,7 @@ defmodule MariaWeb.UserSettingsLive do
         required
       />
       <:actions>
-        <.button phx-disable-with="Changing...">Change Password</.button>
+        <CC.button phx-disable-with="Changing...">Change Password</CC.button>
       </:actions>
     </.simple_form>
     """

@@ -59,7 +59,7 @@ defmodule MariaWeb.HelperComponents do
 
   attr :href, :string, required: true
   attr :class, :string, default: nil
-  attr :color, :string, default: "blood" # tailwind: from-skin to-skin
+  attr :color, :string, default: "blood" # tailwind: from-skin to-skin from-blood to-blood
 
   slot :inner_block, required: true
   def link_hover(assigns) do

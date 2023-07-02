@@ -1,6 +1,7 @@
 defmodule MariaWeb.RecipesLive.FormComponent do
   use MariaWeb, :live_component
 
+  alias MariaWeb.CoreComponentsUp, as: CC
   alias Maria.Recipes
 
   @impl true
@@ -23,7 +24,7 @@ defmodule MariaWeb.RecipesLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={{f, :title}} type="text" label="Title" />
+        <.input field={{f, :title}} type="text" label="Title" required />
         <.input field={{f, :description}} type="textarea" label="Description" phx-hook="RecipeDescription" id="product_description"/>
         <.input field={{f, :ingredients}} type="textarea" rows="8" label="Ingredients" placeholder="1 egg, 2 tsp sugar" />
         <.input field={{f, :directions}} type="textarea" label="Directions" phx-hook="RecipeDirections" id="product_directions" />
@@ -52,9 +53,9 @@ defmodule MariaWeb.RecipesLive.FormComponent do
           <% end %>
         </div>
         </.input>
-        <.input field={{f, :is_draft}} type="checkbox" label="Keep me as a draft" />
+        <.input field={{f, :is_draft}} type="checkbox" label="Keep me as a draft 🚧" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Recipe</.button>
+          <CC.button phx-disable-with="Saving...">Save Recipe</CC.button>
         </:actions>
         </.simple_form>
     </div>

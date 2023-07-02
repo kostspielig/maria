@@ -16,6 +16,7 @@ defmodule Maria.Drinking.Wine do
     field :image, :string
     field :is_draft, :boolean, default: false
     field :is_featured, :boolean, default: false
+    field :is_good_next_day, :boolean, default: false
     field :name, :string
     field :price, :float
     field :producer, :string
@@ -33,7 +34,7 @@ defmodule Maria.Drinking.Wine do
   @doc false
   def changeset(wine, attrs) do
     wine
-    |> cast(attrs, [:name, :description, :vintage, :color, :sweetness, :body, :region, :grapes, :alcohol, :rating, :price, :producer, :country, :image, :is_featured, :buy_link, :is_draft, :food_pairig, :user_id])
+    |> cast(attrs, [:name, :description, :vintage, :color, :sweetness, :body, :region, :grapes, :alcohol, :rating, :price, :producer, :country, :image, :is_featured, :is_good_next_day, :buy_link, :is_draft, :food_pairig, :user_id])
     |> validate_required([:name, :description, :vintage, :color])
     |> foreign_key_constraint(:user_id)
   end
@@ -41,7 +42,7 @@ defmodule Maria.Drinking.Wine do
   @doc false
   def changeset_update(wine, attrs) do
     wine
-    |> cast(attrs, [:name, :description, :vintage, :color, :sweetness, :body, :region, :grapes, :alcohol, :rating, :price, :producer, :country, :image, :is_featured, :buy_link, :is_draft, :food_pairig, :editor_id])
+    |> cast(attrs, [:name, :description, :vintage, :color, :sweetness, :body, :region, :grapes, :alcohol, :rating, :price, :producer, :country, :image, :is_featured, :is_good_next_day, :buy_link, :is_draft, :food_pairig, :editor_id])
     |> validate_required([:name, :description, :vintage, :color])
     |> foreign_key_constraint(:editor_id)
   end

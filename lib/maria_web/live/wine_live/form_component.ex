@@ -19,15 +19,15 @@ defmodule MariaWeb.WineLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <CC.input field={@form[:name]} type="text" label="Name" required="true" />
-        <CC.input field={@form[:description]} type="textarea" label="Description" phx-hook="WineDescription" id="wine_description" />
+        <CC.input field={@form[:name]} type="text" label="Name" required />
+        <CC.input field={@form[:description]} type="textarea" label="Description" required phx-hook="WineDescription" id="wine_description" />
 
         <div class="grid grid-cols-2 gap-4">
-        <CC.input field={@form[:vintage]} type="number" label="Vintage" />
+        <CC.input field={@form[:vintage]} type="number" label="Vintage" required />
         <CC.input field={@form[:alcohol]} type="number" label="Alcohol" step="any" />
         </div>
         <div class="grid grid-cols-2 gap-4">
-        <CC.input field={@form[:color]} type="select" label="Color" options={[{"White", "white"}, {"Rose", "rose"}, {"Red", "red"}, {"Orange", "orange"}, {"Bubbles", "bubbles"}, {"Sweet", "sweet"}, {"Fino", "fino"}]} />
+        <CC.input field={@form[:color]} type="select" label="Color" required options={[{"White", "white"}, {"Rose", "rose"}, {"Red", "red"}, {"Orange", "orange"}, {"Bubbles", "bubbles"}, {"Sweet", "sweet"}, {"Fino", "fino"}]} />
         <CC.input field={@form[:grapes]} type="text" label="Grapes" />
         </div>
         <div class="grid grid-cols-2 gap-4">
@@ -49,9 +49,10 @@ defmodule MariaWeb.WineLive.FormComponent do
         <CC.input field={@form[:image]} type="text" label="Image" />
         <CC.input field={@form[:is_featured]} type="checkbox" label="Is featured ⚡" />
         <CC.input field={@form[:is_draft]} type="checkbox" label="Keep me as a draft 🚧" />
+        <CC.input field={@form[:is_good_next_day]} type="checkbox" label="Is good the next day? ⏳" />
         <CC.input field={@form[:food_pairig]} type="text" label="Food pairig" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Wine</.button>
+          <CC.button phx-disable-with="Saving...">Save Wine</CC.button>
         </:actions>
       </CC.simple_form>
     </div>

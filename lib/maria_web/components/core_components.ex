@@ -289,7 +289,7 @@ defmodule MariaWeb.CoreComponents do
     assigns = assign_new(assigns, :checked, fn -> input_equals?(assigns.value, "true") end)
 
     ~H"""
-    <label phx-feedback-for={@name} class="flex items-center gap-4 text-sm leading-6 text-zinc-600">
+    <label phx-feedback-for={@name}  required={Map.get(@rest, :required)} class="flex items-center gap-4 text-sm leading-6 text-zinc-600">
       <input type="hidden" name={@name} value="false" />
       <input
         type="checkbox"
@@ -308,7 +308,7 @@ defmodule MariaWeb.CoreComponents do
   def input(%{type: "select"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
-      <.label for={@id}><%= @label %></.label>
+      <.label for={@id} required={Map.get(@rest, :required)}><%= @label %></.label>
       <select
         id={@id}
         name={@name}
@@ -327,7 +327,7 @@ defmodule MariaWeb.CoreComponents do
   def input(%{type: "textarea"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
-      <.label for={@id}><%= @label %></.label>
+      <.label for={@id} required={Map.get(@rest, :required)}><%= @label %></.label>
       <textarea
         id={@id || @name}
         name={@name}
@@ -384,7 +384,7 @@ defmodule MariaWeb.CoreComponents do
   def input(assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
-      <.label for={@id}><%= @label %></.label>
+      <.label for={@id} required={Map.get(@rest, :required)}><%= @label %></.label>
       <input
         type={@type}
         name={@name}
@@ -413,12 +413,13 @@ defmodule MariaWeb.CoreComponents do
   Renders a label.
   """
   attr :for, :string, default: nil
+  attr :required, :boolean, default: false
   slot :inner_block, required: true
 
   def label(assigns) do
     ~H"""
     <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
-      <%= render_slot(@inner_block) %>
+      <%= render_slot(@inner_block) %>  <%= if @required do %> <span class="text-green">*</span><% end %>
     </label>
     """
   end

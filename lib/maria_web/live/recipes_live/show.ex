@@ -2,6 +2,7 @@ defmodule MariaWeb.RecipesLive.Show do
   use MariaWeb, :live_view_basic
 
   alias Maria.Recipes
+  alias MariaWeb.CoreComponentsUp, as: CC
 
   @impl true
   def mount(_params, _session, socket) do

@@ -14,7 +14,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-          'xs': '415px'
+          'xs': '405px'
       },
       fontFamily: {
         'sans': ['Helvetica', 'Arial', 'sans-serif'],
@@ -34,9 +34,37 @@ module.exports = {
           lighter: "#ffcb23",
         },
         black: "#181A18",
+        green: "#8fff73",
         grey: "#181A18",
         neutral: "#f2f2f2"
-      }
+      },
+
+      keyframes: {
+        wave: {
+          '0%': { transform: 'rotate(0.0deg)' },
+          '10%': { transform: 'rotate(14deg)' },
+          '20%': { transform: 'rotate(-8deg)' },
+          '30%': { transform: 'rotate(14deg)' },
+          '40%': { transform: 'rotate(-4deg)' },
+          '50%': { transform: 'rotate(10.0deg)' },
+          '60%': { transform: 'rotate(0.0deg)' },
+          '100%': { transform: 'rotate(0.0deg)' },
+        },
+
+        bounceBack: {
+          '0%, 100%': {
+            transform: 'translateX(-3px)',
+          },
+          '50%': {
+            transform: 'translateX(0)',
+          },
+        },
+      },
+      animation: {
+        'bounce-left-to-right': 'bounceBack 1s infinite',
+        'waving': 'wave 2s linear infinite',
+        'wave': 'wave 2s linear 2',
+      },
     },
   },
   plugins: [

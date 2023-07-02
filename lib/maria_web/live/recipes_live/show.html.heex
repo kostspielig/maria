@@ -18,7 +18,7 @@
 
       <%= if not is_nil(@current_user) and @current_user.id == @recipe.user_id do %>
       <.link class="block mt-6 hidden xl:block" patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
-        <.button>Edit recipe</.button>
+        <CC.button>Edit recipe</CC.button>
       </.link>
       <% end %>
     </:subtitle>
@@ -26,7 +26,7 @@
 
       <%= if not is_nil(@current_user) and @current_user.id == @recipe.user_id do %>
       <.link class="xl:hidden"patch={~p"/recipes/#{@recipe}/show/edit"} phx-click={JS.push_focus()}>
-        <.button>Edit recipe</.button>
+        <CC.button>Edit recipe</CC.button>
       </.link>
       <% end %>
     </:actions>
@@ -63,7 +63,7 @@
     <% end %>
 
     <%= if not is_nil(@current_user) and @current_user.id == @recipe.user_id do %>
-    <.back navigate={~p"/recipes"}>Manage recipes</.back>
+    <CC.button class="mt-12"><CC.back navigate={~p"/recipes"}></CC.back></CC.button>
     <% else %>
     <.back navigate={~p"/cooking"}>See all recipes</.back>
     <% end %>

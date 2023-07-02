@@ -19,6 +19,8 @@ defmodule MariaWeb.HelperComponents do
 
   attr :title, :string, required: true
   attr :class, :string, default: nil
+  attr :from, :string, default: "skin-lighter" # tailwind: from-skin-lighter from-green
+  attr :to, :string, default: "skin-lighter"   # tailwind: to-skin-lighter to-green
 
   slot :item, required: true do
     attr :title, :string, required: true
@@ -27,7 +29,7 @@ defmodule MariaWeb.HelperComponents do
 
   def attr_card(assigns) do
     ~H"""
-    <div class={["text-black max-w-xl capitalize p-8 bg-gradient-to-r from-skin-lighter to-skin-lighter", @class]}>
+    <div class={["text-black max-w-xl capitalize px-6 py-8 xs:p-8 bg-gradient-to-r from-#{@from} to-#{@to}", @class]}>
       <h1 class="text-4xl pb-4 font-racing  leading-8">
         <%= @title %>
       </h1>
@@ -59,7 +61,7 @@ defmodule MariaWeb.HelperComponents do
 
   attr :href, :string, required: true
   attr :class, :string, default: nil
-  attr :color, :string, default: "blood" # tailwind: from-skin to-skin from-blood to-blood
+  attr :color, :string, default: "blood" # tailwind: from-skin to-skin from-blood to-blood from-green to-green
 
   slot :inner_block, required: true
   def link_hover(assigns) do

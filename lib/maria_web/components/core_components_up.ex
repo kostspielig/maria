@@ -213,7 +213,7 @@ defmodule MariaWeb.CoreComponentsUp do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
+        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-green hover:text-black py-2 px-3",
         "text-sm font-semibold leading-6 text-white active:text-white/80",
         @class
       ]}
@@ -537,13 +537,11 @@ defmodule MariaWeb.CoreComponentsUp do
 
   def back(assigns) do
     ~H"""
-    <div class="mt-16">
+    <div class="hover:animate-bounce-left-to-right">
       <.link
         navigate={@navigate}
-        class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700"
-      >
-        <.icon name="hero-arrow-left-solid" class="h-3 w-3" />
-        <%= render_slot(@inner_block) %>
+        class="text-white hover:text-black"
+      >🡄<%= render_slot(@inner_block) %>
       </.link>
     </div>
     """

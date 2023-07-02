@@ -24,7 +24,7 @@ defmodule MariaWeb.UserSettingsLive do
     <%= if length(@recipes) != 0 do %>
     <.table id="recipes" rows={@recipes} row_click={&JS.navigate(~p"/recipes/#{&1}")}>
       <:col :let={recipe} label="Title"><%= recipe.title %></:col>
-      <:col :let={recipe} label="Status"><%= if recipe.is_draft do %> <.tag text="DRAFT"/> <% else %> <.tag text="LIVE" class="bg-lime-400"/><% end %></:col>
+      <:col :let={recipe} label="Status"><%= if recipe.is_draft do %> <.tag text="DRAFT"/> <% else %> <.tag text="LIVE" class="bg-green"/><% end %></:col>
       <:col :let={recipe} label="Description"><%= raw(recipe.description) %></:col>
       <:col :let={recipe} label="Tags"><.tags info={recipe.tags}/></:col>
       <:col :let={recipe} label="Cover"><img src={"#{recipe.cover}"} class="min-w-[100px] max-w-[180px]"></:col>

@@ -33,11 +33,11 @@ defmodule MariaWeb.UserSettingsLive do
         <div class="sr-only">
           <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>
         </div>
-        <.link navigate={~p"/recipes/#{recipe}/edit"} class="hover:text-brand">Edit</.link>
+        <.link navigate={~p"/recipes/#{recipe}/edit"}><CC.button primary={false}>Edit</CC.button></.link>
       </:action>
       <:action :let={recipe}>
-        <.link href={~p"/recipes/#{recipe}"} method="delete" data-confirm="Are you sure?" class="hover:text-blood">
-          Delete
+        <.link href={~p"/recipes/#{recipe}"} method="delete" data-confirm="Are you sure?">
+          <CC.button primary={false}>Delete</CC.button>
         </.link>
       </:action>
     </.table>

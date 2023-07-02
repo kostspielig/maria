@@ -204,6 +204,7 @@ defmodule MariaWeb.CoreComponentsUp do
   """
   attr :type, :string, default: nil
   attr :class, :string, default: nil
+  attr :primary, :boolean, default: true
   attr :rest, :global, include: ~w(disabled form name value)
 
   slot :inner_block, required: true
@@ -213,8 +214,9 @@ defmodule MariaWeb.CoreComponentsUp do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-green hover:text-black py-2 px-3",
-        "text-sm font-semibold leading-6 text-white active:text-white/80",
+        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3 text-sm font-semibold leading-6",
+        !@primary && "border-2 border-green hover:bg-green  focus:outline-none focus:bg-green",
+        @primary && "bg-zinc-900 hover:bg-green hover:text-black text-white active:text-white/80",
         @class
       ]}
       {@rest}

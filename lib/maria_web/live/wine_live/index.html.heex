@@ -26,16 +26,13 @@
       <.link navigate={~p"/wines/#{wine}"}>Show</.link>
     </div>
     <%= if wine.user_id == @current_user.id do %>
-      <.link patch={~p"/wines/#{wine}/edit"}>Edit</.link>
+      <.link patch={~p"/wines/#{wine}/edit"}><CC.button primary={false}>Edit</CC.button></.link>
     <% end %>
   </:action>
   <:action :let={{id, wine}}>
     <%= if wine.user_id == @current_user.id do %>
-      <.link
-        phx-click={JS.push("delete", value: %{id: wine.id}) |> hide("##{id}")}
-        data-confirm="Are you sure?"
-      >
-        Delete
+      <.link phx-click={JS.push("delete", value: %{id: wine.id}) |> hide("##{id}")} data-confirm="Are you sure?" >
+        <CC.button primary={false}>Delete</CC.button>
       </.link>
    <% end %>
   </:action>

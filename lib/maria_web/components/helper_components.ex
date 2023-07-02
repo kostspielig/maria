@@ -61,12 +61,13 @@ defmodule MariaWeb.HelperComponents do
 
   attr :href, :string, required: true
   attr :class, :string, default: nil
+  attr :target, :string, default: "_self"
   attr :color, :string, default: "blood" # tailwind: from-green to-green from-blood to-blood from-green to-green
 
   slot :inner_block, required: true
   def link_hover(assigns) do
     ~H"""
-    <a class={["group transition-all duration-300 ease-in-out", @class]} href={"#{@href}"}>
+    <a class={["group transition-all duration-300 ease-in-out", @class]} href={@href} target={@target}>
       <span class={"bg-left-bottom bg-gradient-to-r from-#{@color} to-#{@color} bg-[length:0%_33%] bg-no-repeat group-hover:bg-[length:100%_33%] transition-all duration-500 ease-out"}>
         <%= render_slot(@inner_block) %>
       </span>

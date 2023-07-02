@@ -17,9 +17,10 @@
 
         <%= if not is_nil(@current_user) and @current_user.id == @wine.user_id do %>
         <div class="mt-6">
-        <.link class="mt-6 leading-6" patch={~p"/wines/#{@wine}/show/edit"} phx-click={JS.push_focus()}>
-          <CC.button>Edit wine</CC.button>
-        </.link>
+          <CC.button><CC.back navigate={~p"/wines"}></CC.back></CC.button>
+          <.link patch={~p"/wines/#{@wine}/show/edit"} phx-click={JS.push_focus()}>
+            <CC.button>Edit wine</CC.button>
+          </.link>
         </div>
         <% end %>
      </:subtitle>
@@ -53,10 +54,6 @@
         <.link_item href={@wine.food_pairig} icon="🥢️" >What to drink this with? </.link_item>
       <% end %>
     </div>
-
-        <%= if not is_nil(@current_user) and @current_user.id == @wine.user_id do %>
-        <CC.button class="mt-12"><CC.back navigate={~p"/wines"}></CC.back></CC.button>
-        <%= end %>
   </div>
 </div>
 <CC.modal :if={@live_action == :edit} id="wine-modal" show on_cancel={JS.patch(~p"/wines/#{@wine}")}>

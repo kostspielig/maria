@@ -541,7 +541,7 @@ defmodule MariaWeb.CoreComponentsUp do
       <.link
         navigate={@navigate}
         class="text-white hover:text-black"
-      >🡄<%= render_slot(@inner_block) %>
+      >❮<%= render_slot(@inner_block) %>
       </.link>
     </div>
     """

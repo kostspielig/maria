@@ -1,3 +1,5 @@
+<script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+
 <CC.header>
   Listing Wines
   <:actions>
@@ -14,7 +16,7 @@
 >
   <:col :let={{_id, wine}} label="Name"><%= wine.name %><%= if wine.is_featured do %>⚡<% end %></:col>
   <:col :let={{_id, wine}} label="Status"><%= if wine.is_draft do %> <.tag text="DRAFT"/> <% else %> <.tag text="LIVE" class="bg-green"/><% end %></:col>
-  <:col :let={{_id, wine}} label="Description"><%= wine.description %></:col>
+  <:col :let={{_id, wine}} label="Description"><%= raw(wine.description) %></:col>
   <:col :let={{_id, wine}} label="Color"><%= wine.color %></:col>
   <:col :let={{_id, wine}} label="Image"><img src={"#{wine.image}"} class="h-28"></:col>
   <:col :let={{_id, wine}} label="By"><%= if user = Map.get(wine, :user, nil) do user.username end %></:col>

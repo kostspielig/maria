@@ -537,10 +537,10 @@ defmodule MariaWeb.CoreComponentsUp do
 
   def back(assigns) do
     ~H"""
-    <div class="hover:animate-bounce-left-to-right">
+    <div>
       <.link
         navigate={@navigate}
-        class="text-white hover:text-black"
+        class=""
       >❮<%= render_slot(@inner_block) %>
       </.link>
     </div>

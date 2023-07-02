@@ -127,6 +127,7 @@ let SearchBar = {
 let Hooks = {}
 Hooks.RecipeDirections = CKEditorHook(EditorSettings.directions, 'directions')
 Hooks.RecipeDescription = CKEditorHook(EditorSettings.description, 'description')
+Hooks.WineDescription = CKEditorHook(EditorSettings.description, 'winedescription')
 Hooks.SearchBar = SearchBar
 
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})

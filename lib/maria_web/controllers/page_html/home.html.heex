@@ -1,15 +1,15 @@
 <div class="sm:min-h-screen bg-brand">
-<.page_header />
-<div class="px-6 py-36 sm:py-40 sm:px-8 md:py-44 lg:px-8 xl:py-52 xl:px-28 bg-brand">
-  <div class="mx-auto lg:mx-0 text-white">
-    <p class="leading-none mt-4 text-[3.5rem] max-w-[28rem] sm:text-[4rem] sm:max-w-xl lg:max-w-2xl xl:max-w-3xl font-semibold tracking-tighter uppercase">
-      Welcome to the week of <%=Calendar.strftime(Date.utc_today(), "%B")%> <%=Date.utc_today().day %> 👏
-    </p>
-    <div class="mt-40 xl:mt-60 flex justify-end ">
-      <p class="font-head font-medium w-2/3 text-2xl sm:text-3xl">
-        Here is everything to <.link_hover href="/reading" class="italic">read</.link_hover>, <.link_hover href="/cooking" class="italic">cook</.link_hover>, <.link_hover href="/wines" class="italic">drink</.link_hover> or <.link_hover href="https://m.imdb.com/user/ur65531471/watchlist?sort=date_added%2Cdesc&view=detail" class="italic" target="_blank">watch</.link_hover> before 📅 <%=Calendar.strftime(Date.utc_today(), "%b")%> <%=Date.end_of_week(Date.utc_today()).day%>.
+  <.page_header />
+  <div class="px-6 py-36 sm:py-40 sm:px-8 md:py-44 lg:px-8 xl:py-52 xl:px-28 bg-brand">
+    <div class="mx-auto lg:mx-0 text-white">
+      <p class="leading-none mt-4 text-[3.5rem] max-w-[28rem] sm:text-[4rem] sm:max-w-xl lg:max-w-2xl xl:max-w-3xl font-semibold tracking-tighter uppercase">
+        Welcome to the week of <%=Calendar.strftime(Date.utc_today(), "%B")%> <%=Date.utc_today().day %> 👏
       </p>
+      <div class="mt-40 xl:mt-60 flex justify-end ">
+        <p class="font-head font-medium w-2/3 text-2xl sm:text-3xl">
+          Here is everything to <.link_hover href="/reading" class="italic">read</.link_hover>, <.link_hover href="/cooking" class="italic">cook</.link_hover>, <.link_hover href="/wines" class="italic">drink</.link_hover> or <.link_hover href="https://m.imdb.com/user/ur65531471/watchlist?sort=date_added%2Cdesc&view=detail" class="italic" target="_blank">watch</.link_hover> before 📅 <%=Calendar.strftime(Date.utc_today(), "%b")%> <%=Date.end_of_week(Date.utc_today()).day%>.
+        </p>
+      </div>
     </div>
   </div>
-</div>
 </div>

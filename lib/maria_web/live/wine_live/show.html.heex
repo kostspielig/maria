@@ -19,7 +19,7 @@
 
         <%= if not is_nil(@current_user) and @current_user.id == @wine.user_id do %>
         <div class="mt-6">
-          <CC.button><CC.back navigate={~p"/wines"}></CC.back></CC.button>
+          <CC.back navigate={~p"/wines"} />
           <.link patch={~p"/wines/#{@wine}/show/edit"} phx-click={JS.push_focus()}>
             <CC.button>Edit wine</CC.button>
           </.link>

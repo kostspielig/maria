@@ -533,17 +533,14 @@ defmodule MariaWeb.CoreComponentsUp do
       <.back navigate={~p"/posts"}>Back to posts</.back>
   """
   attr :navigate, :any, required: true
-  slot :inner_block, required: true
 
   def back(assigns) do
     ~H"""
-    <div>
-      <.link
-        navigate={@navigate}
-        class=""
-      >❮<%= render_slot(@inner_block) %>
-      </.link>
-    </div>
+    <.link
+      navigate={@navigate}
+      class="inline-block"
+    ><.button>❮</.button>
+    </.link>
     """
   end
 

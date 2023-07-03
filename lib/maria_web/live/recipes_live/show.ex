@@ -6,7 +6,8 @@ defmodule MariaWeb.RecipesLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, socket
+    |> push_event("clearflash", %{id: "flash"})}
   end
 
   @impl true

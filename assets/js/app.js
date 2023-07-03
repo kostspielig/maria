@@ -137,6 +137,17 @@ topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", info => topbar.delayedShow(200))
 window.addEventListener("phx:page-loading-stop", info => topbar.hide())
 
+window.addEventListener(`phx:clearflash`, (e) => {
+    hideFlashAfterTimeout(document.getElementById(e.detail.id))
+})
+
+function hideFlashAfterTimeout(flashElement) {
+  if (flashElement) {
+    setTimeout(() => {
+      flashElement.style.display = 'none';
+    }, 2500); // Hide after 2.5 seconds
+  }
+}
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()

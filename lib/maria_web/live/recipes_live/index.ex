@@ -8,7 +8,8 @@ defmodule MariaWeb.RecipesLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     {:ok, socket
-    |> assign(:recipes, list_recipes())}
+    |> assign(:recipes, list_recipes())
+    |> push_event("clearflash", %{id: "flash"})}
   end
 
   @impl true

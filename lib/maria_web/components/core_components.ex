@@ -150,18 +150,21 @@ defmodule MariaWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "relative hidden top-0 right-0 w-full z-50 p-3 text-white shadow-md shadow-zinc-900/5 ring-1",
+        "relative hidden top-0 right-0 w-full z-50 px-8 py-3 text-white shadow-md shadow-zinc-900/5 ring-1",
         @kind == :info && "bg-brand  ring-brand fill-cyan-900",
         @kind == :error && "bg-blood p-3  shadow-md ring-blood fill-blood"
       ]}
       {@rest}
-    >
-      <p :if={@title} class="flex items-center gap-1.5 text-[0.8125rem] font-semibold leading-6">
-        <.icon :if={@kind == :info} name="hero-information-circle-mini" class="h-4 w-4" />
-        <.icon :if={@kind == :error} name="hero-exclamation-circle-mini" class="h-4 w-4" />
-        <%= @title %>
-      </p>
-      <p class="mt-2 text-[0.8125rem] leading-5"><%= msg %></p>
+      >
+      <span class="flex gap-1.5 ">
+        <span class="text-[1.1rem]"><%= if(@kind == :info , do: "👏", else: "⚠️") %></span>
+        <span>
+          <p :if={@title} class="gap-1.5 text-[0.8325rem] font-semibold leading-8">
+            <%= @title %>
+          </p>
+          <p class="mt-1 text-[0.8325rem] leading-5"><%= msg %></p>
+        </span>
+      </span>
       <button
         :if={@close}
         type="button"

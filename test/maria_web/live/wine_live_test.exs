@@ -25,7 +25,7 @@ require Logger
         |> live(~p"/wines")
 
       assert html =~ "Listing Wines"
-      assert html =~ wine.body
+      assert html =~ wine.color
     end
 
     test "saves new wine", %{conn: conn} do
@@ -51,13 +51,13 @@ require Logger
 
       html = render(index_live)
       assert html =~ "Wine created successfully"
-      assert html =~ "some body"
+      assert html =~ "white"
     end
 
     test "updates wine in listing", %{conn: conn, wine: wine} do
       {:ok, index_live, _html} =
         conn
-        |> log_in_user(user_fixture())
+        |> log_in_user(wine.user)
         |> live(~p"/wines")
 
       assert index_live |> element("#wines-#{wine.id} a", "Edit") |> render_click() =~
@@ -83,7 +83,7 @@ require Logger
     test "deletes wine in listing", %{conn: conn, wine: wine} do
       {:ok, index_live, _html} =
         conn
-        |> log_in_user(user_fixture())
+        |> log_in_user(wine.user)
         |> live( ~p"/wines")
 
       assert index_live |> element("#wines-#{wine.id} a", "Delete") |> render_click()
@@ -110,7 +110,7 @@ require Logger
         |> log_in_user(wine.user)
         |> live(~p"/wines/#{wine}")
 
-      assert show_live |> element(".flex-none a", "Edit") |> render_click() =~
+      assert show_live |> element(".wine-actions a", "Edit") |> render_click() =~
                "Edit"
 
       assert_patch(show_live, ~p"/wines/#{wine}/show/edit")

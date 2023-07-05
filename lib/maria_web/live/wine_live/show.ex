@@ -18,7 +18,8 @@ defmodule MariaWeb.WineLive.Show do
      |> assign(:page_title, page_title(socket.assigns.live_action, wine.name))
      |> assign(:current_user, socket.assigns.current_user)
      |> assign(:page_og,  %{url: url(~p"/wines/#{id}"), image: wine.image, description: Floki.text(wine.description)})
-     |> assign(:wine, wine)}
+     |> assign(:wine, wine)
+     |> push_event("clearflash", %{id: "flash"})}
   end
 
 

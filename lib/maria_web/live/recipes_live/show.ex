@@ -6,8 +6,7 @@ defmodule MariaWeb.RecipesLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket
-    |> push_event("clearflash", %{id: "flash"})}
+    {:ok, socket}
   end
 
   @impl true
@@ -18,7 +17,8 @@ defmodule MariaWeb.RecipesLive.Show do
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action, recipe.title))
      |> assign(:page_og,  %{url: url(~p"/recipes/#{id}"), image: recipe.cover, description: Floki.text(recipe.description)})
-     |> assign(:recipe, recipe)}
+     |> assign(:recipe, recipe)
+     |> push_event("clearflash", %{id: "flash"})}
   end
 
   defp page_title(:show, title), do: "#{title}"

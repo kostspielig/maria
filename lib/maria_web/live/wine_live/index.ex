@@ -13,7 +13,9 @@ defmodule MariaWeb.WineLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+    {:noreply, socket
+    |> apply_action(socket.assigns.live_action, params)
+    |> push_event("clearflash", %{id: "flash"})}
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do

@@ -122,21 +122,24 @@ defmodule MariaWeb.HelperComponents do
     """
   end
 
-  def tags(assigns) do
-    ~H"""
-    <%= if @info do %>
-      <%= for tag <- String.split(@info, ",") do %>
-        <span class="inline-block rounded-full bg-brand text-white text-sm font-semibold px-3 py-1 m-1"><%= String.trim(tag) %></span>
-      <% end %>
-    <% end %>
-    """
-  end
 
   attr :text, :string, required: true
   attr :class, :string, default: nil
   def tag(assigns) do
     ~H"""
        <span class={[@class, "inline-block rounded-full bg-blood text-white text-sm font-semibold px-3 py-1 m-1"]}><%= @text %></span>
+    """
+  end
+
+
+  attr :href, :string, default: nil
+  def tags(assigns) do
+    ~H"""
+    <%= if @info do %>
+      <%= for tag <- String.split(@info, ",") do %>
+        <a href={if @href != nil, do: @href <> String.trim(tag), else: ""}><MariaWeb.HelperComponents.tag text={String.trim(tag)} class="!bg-brand"/></a>
+      <% end %>
+    <% end %>
     """
   end
 

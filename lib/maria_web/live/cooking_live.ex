@@ -47,7 +47,7 @@ defmodule MariaWeb.CookingLive do
 
     <div
       id="searchbar-dialog"
-      class="hidden fixed inset-0 z-50"
+      class="hidden fixed inset-0 z-[90]"
       role="dialog"
       aria-modal="true"
       phx-window-keydown={hide_modal()}

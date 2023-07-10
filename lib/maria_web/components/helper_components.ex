@@ -136,9 +136,13 @@ defmodule MariaWeb.HelperComponents do
   def tags(assigns) do
     ~H"""
     <%= if @info do %>
-      <%= for tag <- String.split(@info, ",") do %>
+    <%= for tag <- String.split(@info, ",") do %>
+      <%= if @href do %>
         <a href={if @href != nil, do: @href <> String.trim(tag), else: ""}><MariaWeb.HelperComponents.tag text={String.trim(tag)} class="!bg-brand"/></a>
+      <% else %>
+        <MariaWeb.HelperComponents.tag text={String.trim(tag)} class="!bg-brand"/>
       <% end %>
+    <% end %>
     <% end %>
     """
   end

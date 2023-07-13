@@ -35,6 +35,7 @@ module.exports = {
         },
         black: "#181A18",
         red: "#ef4444",
+        rose: "#F95087",
         orange: "#fb923c",
         sweet: "#f97316",
         green: "#8fff73",

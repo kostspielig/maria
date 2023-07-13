@@ -34,8 +34,13 @@ module.exports = {
           lighter: "#ffcb23",
         },
         black: "#181A18",
+        red: "#ef4444",
+        orange: "#fb923c",
+        sweet: "#f97316",
         green: "#8fff73",
         grey: "#181A18",
+        bubbles:"#fef08a",
+        fino: "#fbbf24",
         neutral: "#f2f2f2"
       },
 

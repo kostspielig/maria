@@ -11,7 +11,13 @@ defmodule MariaWeb.HelperComponents do
       <div class="card pb-8 cursor-pointer">
         <div class="card-img relative w-full h-56 bg-brand overflow-hidden "><img class="object-cover w-full h-full" src={"#{@info.cover}"}></div>
         <div class="card-title text-2xl font-semibold font-head mt-4 ml-4"><%= @info.title %></div>
-        <div class="text-sm font-medium mt-1 ml-4 font-sans text-zinc-800">by <span class="font-bold"><%= @info.user.username %></span></div>
+        <div class="text-sm font-medium mt-1 ml-4 font-sans text-zinc-800">
+        <%=if @info.subtitle do %>
+          <span class="font-bold"><%= @info.subtitle %></span>
+        <% else %>
+          by <span class="font-bold"><%= @info.user.username %></span>
+        <% end %>
+        </div>
       </div>
     </div>
     """

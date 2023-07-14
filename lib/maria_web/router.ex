@@ -21,6 +21,7 @@ defmodule MariaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/maria", PageController, :maria
 
     live "/reading", ReadingLive
     live "/cooking", CookingLive

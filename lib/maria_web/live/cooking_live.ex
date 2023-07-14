@@ -114,7 +114,7 @@ defmodule MariaWeb.CookingLive do
                   <li id={"#{recipe.id}"}>
                     <.link
                       navigate={~p"/recipes/#{recipe.id}"}
-                      class="block p-4 hover:bg-slate-100 focus:outline-none focus:bg-slate-100 focus:text-sky-800"
+                      class="block p-4 hover:bg-slate-100 focus:outline-none focus:bg-slate-100 focus:text-brand"
                     >
                       <div class="ml-1 text-base font-bold"><%= recipe.title %></div>
                       <div class="mt-2"><.tags info={recipe.tags} /></div>

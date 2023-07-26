@@ -51,7 +51,7 @@ defmodule MariaWeb.HelperComponents do
     ~H"""
     <div class="mt-2"><span class="font-racing">➭ <%= render_slot(@inner_block) %></span> <%= @icon %>
       <a href={"#{@href}"} target="_blank" class="group">
-          <span class="bg-left-bottom bg-gradient-to-r from-green to-green bg-[length:100%_6px] bg-no-repeat group-hover:bg-[length:100%_16px] transition-all duration-500 ease-out">
+          <span class="bg-left-bottom bg-gradient-to-r from-green to-green bg-[length:0%_33%] bg-no-repeat group-hover:bg-[length:100%_33%] transition-all duration-500 ease-out">
         <%= extract_host(@href) %>
       </span>
       </a>

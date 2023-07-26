@@ -30,9 +30,9 @@ defmodule MariaWeb.RecipesLive.FormComponent do
         <.input field={{f, :directions}} type="textarea" label="Directions" phx-hook="RecipeDirections" id="product_directions" />
         <.input field={{f, :mins}} type="text" label="Time" placeholder="1d 2h 30m" />
         <.input field={{f, :yield}} type="number" label="Yields" />
-        <.input field={{f, :link}} type="text" label="Link" />
+        <.input field={{f, :link}} type="text" label="Similar recipes" placeholder="https://bonappetit.com/recipe" />
         <.input field={{f, :tags}} type="text" label="Tags" placeholder="chinese, korean, spanish, russian" />
-        <.input field={{f, :cover}} type="slot" label="Link" >
+        <.input field={{f, :cover}} type="slot" label="Cover" >
         <div class="lg:flex lg:items-start">
           <.live_file_input upload={@uploads.cover} class={[
           "mt-2 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-zinc-300",

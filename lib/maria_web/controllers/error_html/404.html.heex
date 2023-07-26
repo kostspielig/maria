@@ -13,20 +13,55 @@
     <script defer type="text/javascript" src="/js/app.js"></script>
   </head>
   <body>
-<div class="sm:min-h-screen bg-brand">
-  <.page_header />
-  <div class="px-6 py-36 sm:py-40 sm:px-8 md:py-44 lg:px-8 xl:py-52 xl:px-28 bg-brand">
-    <div class="mx-auto text-white">
-      <p class="leading-none mt-4 text-[3.5rem] flex justify-center font-semibold tracking-tighter">
-        404 <span class="inline-block animate-wave hover:animate-waving cursor-grab">💔</span>
-      </p>
-      <div class="mt-10 flex justify-center text-center">
-        <p class="font-head font-medium w-[460px] text-2xl">
-          The page you are looking for is not here, go back <.link_hover class="italic" href="/">home</.link_hover>.
-        </p>
+    <div class="min-h-screen bg-skin">
+      <.page_header color="text-blood"/>
+      <div class="px-6 py-36 sm:py-40 sm:px-8 md:py-44 lg:px-8 xl:py-52 xl:px-28">
+            <div class="mx-auto text-white">
+          <p class="leading-none mt-4 text-[3.5rem] flex justify-center font-semibold tracking-tighter">
+            404 <span class="inline-block animate-wave hover:animate-waving cursor-grab pl-4">💔</span>
+          </p>
+          <div class="mt-10 flex justify-center text-center">
+            <p class="font-head font-medium w-[460px] text-2xl">
+              The page you are looking for is not here, go back <.link_hover class="italic" href="/">home</.link_hover>.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    <div class="fixed bottom-0 px-6 py-6 sm:px-8 lg:px-8 xl:px-28 flex justify-between bg-white w-full">
+      <div class="">
+        <div class="grid grid-cols-4 gap-y-4 gap-x-4 text-ml leading-6 text-brand  capitalize font-semibold">
+          <div>
+            <a
+              href="https://twitter.com/kostspielig"
+              target="_blank"
+              class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
+            >🐦</a>
+          </div>
+          <div>
+            <a
+              href="https://instagram.com/kostspielig"
+              target="_blank"
+              class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
+            >📸</a>
+          </div>
+          <div>
+            <a
+              href="https://github.com/kostspielig"
+              target="_blank"
+              class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
+            >🐈</a>
+          </div>
+          <div>
+            <a
+              href="https://www.tiktok.com/@kstsplg"
+              target="_blank"
+              class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-blood lowercase"
+            >🎥</a>
+          </div>
+        </div>
+      </div>
+      <div class="font-head">© Maria Carrasco</div>
+    </div>
   </body>
 </html>

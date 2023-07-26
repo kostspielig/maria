@@ -68,3 +68,7 @@ We are using [Swoosh](https://hexdocs.pm/swoosh/Swoosh.html) [not yet configured
 
 To see mailbox in dev go to: `http://localhost:4000/dev/mailbox/`
 or curl: `curl http://localhost:4000/dev/mailbox/json`
+
+# Error Pages
+
+In `maria/config/dev.exs` set `debug_errors: false` if you want to be able to debug error pages.

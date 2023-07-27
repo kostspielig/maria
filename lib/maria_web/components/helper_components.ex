@@ -45,11 +45,12 @@ defmodule MariaWeb.HelperComponents do
 
   attr :icon, :string, required: false
   attr :href, :string, required: true
+  attr :class, :string, default: nil
 
   slot :inner_block, required: false
   def link_item(assigns) do
     ~H"""
-    <div class="mt-2"><span class="font-racing">➭ <%= render_slot(@inner_block) %></span> <%= @icon %>
+    <div class={["mt-2", @class]}><span class="font-racing">➭ <%= render_slot(@inner_block) %></span> <%= @icon %>
       <a href={"#{@href}"} target="_blank" class="group">
           <span class="italic bg-left-bottom bg-gradient-to-r from-green to-green bg-[length:0%_33%] bg-no-repeat [@media(hover:none)]:bg-[length:100%_33%] group-hover:bg-[length:100%_33%] transition-all duration-500 ease-out">
         <%= extract_host(@href) %>

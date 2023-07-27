@@ -60,17 +60,12 @@
       </.recipe_list>
     </div>
 
-    <%= if @recipe.link do %>
-    <div class="mt-12">
-      <.link_item href={@recipe.link} icon="👀" >Similar recipes? </.link_item>
+    <div class="mt-12 flex">
+      <CC.back primary={false}  navigate={~p"/cooking"}>back</CC.back>
+      <%= if @recipe.link do %>
+        <.link_item href={@recipe.link} icon="👀" class="ml-4">Similar recipes? </.link_item>
+      <% end %>
     </div>
-    <% end %>
-
-    <%= if not is_nil(@current_user) and @current_user.id == @recipe.user_id do %>
-
-    <% else %>
-    <.back navigate={~p"/cooking"}>See all recipes</.back>
-    <% end %>
   </div>
 </div>
 <.modal :if={@live_action == :edit} id="recipes-modal" show on_cancel={JS.patch(~p"/recipes/#{@recipe}")}>

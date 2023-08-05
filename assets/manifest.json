@@ -1,0 +1,14 @@
+{
+    "lang": "en",
+    "dir": "ltr",
+    "name": "carras.co",
+    "short_name": "🦪",
+    "description": "An all day, everyday use app.",
+    "start_url": "."
+    "scope": "/",
+    "id": "carras.co",
+    "display": "fullscreen",
+    "orientation": "natural",
+    "theme_color": "#3aadec",
+    "background_color": "#3aadec"
+}

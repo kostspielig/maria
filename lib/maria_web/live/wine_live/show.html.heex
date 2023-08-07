@@ -6,7 +6,7 @@
       <:pretitle>
         <%= Calendar.strftime(@wine.inserted_at, "%B %-d, %Y") %>
       </:pretitle>
-       <%= @wine.name %> <span class="text-brand"><%= @wine.vintage %></span> <%= if @wine.is_featured do %>⚡<% end %>
+       <%= @wine.title %> <span class="text-brand"><%= @wine.vintage %></span> <%= if @wine.is_featured do %>⚡<% end %>
          <.rating star={@wine.rating} />
      <:subtitle>
         <%= if @wine.is_draft do %>

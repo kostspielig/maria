@@ -14,7 +14,7 @@
   rows={@streams.wines}
   row_click={fn {_id, wine} -> JS.navigate(~p"/wines/#{wine}") end}
 >
-  <:col :let={{_id, wine}} label="Name"><%= wine.name %><%= if wine.is_featured do %>⚡<% end %></:col>
+  <:col :let={{_id, wine}} label="Title"><%= wine.title %><%= if wine.is_featured do %>⚡<% end %></:col>
   <:col :let={{_id, wine}} label="Status"><%= if wine.is_draft do %> <.tag text="DRAFT"/> <% else %> <.tag text="LIVE" class="bg-green"/><% end %></:col>
   <:col :let={{_id, wine}} label="Color"><.wine_color color={wine.color} /></:col>
   <:col :let={{_id, wine}} label="Description"><%= raw(wine.description) %></:col>

@@ -5,9 +5,9 @@ defmodule MariaWeb.WineLiveTest do
   import Maria.DrinkingFixtures
   import Maria.AccountsFixtures
 require Logger
-  @create_attrs %{alcohol: 120.5, body: "light", buy_link: "some buy_link", color: "white", country: "some country", description: "some description", food_pairig: "some food_pairig", grapes: "some grapes", image: "some image", is_draft: true, is_featured: true, name: "some name", price: 120.5, producer: "some producer", rating: 42, region: "some region", sweetness: "sweet", vintage: 42}
-  @update_attrs %{alcohol: 456.7, body: "medium", buy_link: "some updated buy_link", color: "orange", country: "some updated country", description: "some updated description", food_pairig: "some updated food_pairig", grapes: "some updated grapes", image: "some updated image", is_draft: false, is_featured: false, name: "some updated name", price: 456.7, producer: "some updated producer", rating: 43, region: "some updated region", sweetness: "medium", vintage: 43}
-  @invalid_attrs %{alcohol: nil, body: "very light", buy_link: nil, color: "white", country: nil, description: nil, food_pairig: nil, grapes: nil, image: nil, is_draft: false, is_featured: false, name: nil, price: nil, producer: nil, rating: nil, region: nil, sweetness: "dry", vintage: nil}
+  @create_attrs %{alcohol: 120.5, body: "light", buy_link: "some buy_link", color: "white", country: "some country", description: "some description", food_pairig: "some food_pairig", grapes: "some grapes", image: "some image", is_draft: true, is_featured: true, title: "some name", price: 120.5, producer: "some producer", rating: 42, region: "some region", sweetness: "sweet", vintage: 42}
+  @update_attrs %{alcohol: 456.7, body: "medium", buy_link: "some updated buy_link", color: "orange", country: "some updated country", description: "some updated description", food_pairig: "some updated food_pairig", grapes: "some updated grapes", image: "some updated image", is_draft: false, is_featured: false, title: "some updated name", price: 456.7, producer: "some updated producer", rating: 43, region: "some updated region", sweetness: "medium", vintage: 43}
+  @invalid_attrs %{alcohol: nil, body: "very light", buy_link: nil, color: "white", country: nil, description: nil, food_pairig: nil, grapes: nil, image: nil, is_draft: false, is_featured: false, title: nil, price: nil, producer: nil, rating: nil, region: nil, sweetness: "dry", vintage: nil}
 
   defp create_wine(_) do
     wine = wine_fixture()
@@ -61,7 +61,7 @@ require Logger
         |> live(~p"/wines")
 
       assert index_live |> element("#wines-#{wine.id} a", "Edit") |> render_click() =~
-               "Edit #{wine.name}"
+               "Edit #{wine.title}"
 
       assert_patch(index_live, ~p"/wines/#{wine}/edit")
 
@@ -100,7 +100,7 @@ require Logger
         |> log_in_user(wine.user)
         |> live(~p"/wines/#{wine}")
 
-      assert html =~ "#{wine.name}"
+      assert html =~ "#{wine.title}"
       assert html =~ wine.body
     end
 

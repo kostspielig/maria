@@ -24,7 +24,7 @@ defmodule Maria.DrinkingFixtures do
         image: "some image",
         is_draft: true,
         is_featured: true,
-        name: "some name",
+        title: "some name",
         price: 120.5,
         producer: "some producer",
         rating: 42,

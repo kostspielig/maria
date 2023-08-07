@@ -19,7 +19,7 @@ defmodule MariaWeb.WineLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <CC.input field={@form[:name]} type="text" label="Name" required />
+        <CC.input field={@form[:title]} type="text" label="Title" required />
         <CC.input field={@form[:description]} type="textarea" label="Description" required phx-hook="WineDescription" id="wine_description" />
 
         <div class="grid grid-cols-2 gap-4">

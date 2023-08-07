@@ -10,11 +10,11 @@ defmodule Maria.RecipesFixtures do
   def recipe_fixture(attrs \\ %{}) do
     user = Maria.AccountsFixtures.user_fixture()
 
-    cover = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
+    image = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
     new_attrs =
       attrs
       |> Enum.into(%{
-        cover: cover,
+        image: image,
         description: "some description",
         directions: "some directions",
         ingredients: "option1, option2",

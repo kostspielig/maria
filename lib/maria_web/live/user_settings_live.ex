@@ -28,7 +28,7 @@ defmodule MariaWeb.UserSettingsLive do
       <:col :let={recipe} label="Status"><%= if recipe.is_draft do %> <.tag text="DRAFT"/> <% else %> <.tag text="LIVE" class="bg-green"/><% end %></:col>
       <:col :let={recipe} label="Description"><%= raw(recipe.description) %></:col>
       <:col :let={recipe} label="Tags"><.tags info={recipe.tags}/></:col>
-      <:col :let={recipe} label="Cover"><img src={"#{recipe.cover}"} class="min-w-[100px] max-w-[180px]"></:col>
+      <:col :let={recipe} label="Image"><img src={"#{recipe.image}"} class="min-w-[100px] max-w-[180px]"></:col>
       <:action :let={recipe}>
         <div class="sr-only">
           <.link navigate={~p"/recipes/#{recipe}"}>Show</.link>

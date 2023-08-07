@@ -10,7 +10,7 @@ defmodule MariaWeb.RecipesLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <img class="mt-4" src={"#{@recipe.cover}"}>
+        <img class="mt-4" src={"#{@recipe.image}"}>
       </.header>
 
 
@@ -32,9 +32,9 @@ defmodule MariaWeb.RecipesLive.FormComponent do
         <.input field={{f, :yield}} type="number" label="Yields" />
         <.input field={{f, :link}} type="text" label="Similar recipes" placeholder="https://bonappetit.com/recipe" />
         <.input field={{f, :tags}} type="text" label="Tags" placeholder="chinese, korean, spanish, russian" />
-        <.input field={{f, :cover}} type="slot" label="Cover" >
+        <.input field={{f, :image}} type="slot" label="Image" >
         <div class="lg:flex lg:items-start">
-          <.live_file_input upload={@uploads.cover} class={[
+          <.live_file_input upload={@uploads.image} class={[
           "mt-2 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-zinc-300",
           "text-zinc-900 sm:text-sm sm:leading-6 rounded-lg py-[7px] px-[11px]",
           "bg-white bg-clip-padding px-3 py-1 text-sm font-normal text-neutral-700 outline-none transition",
@@ -43,10 +43,10 @@ defmodule MariaWeb.RecipesLive.FormComponent do
           "file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px]",
           "hover:file:bg-neutral-200 focus:border-primary focus:bg-white focus:text-neutral-700 focus:shadow-[0_0_0_1px]",
           "focus:shadow-primary focus:outline-none dark:bg-transparent dark:text-neutral-200 dark:focus:bg-transparent"]} />
-          <%= for entry <- @uploads.cover.entries do %>
+          <%= for entry <- @uploads.image.entries do %>
             <div class="mt-8 max-w-sm mx-auto lg:mt-2 lg:ml-2">
             <.live_img_preview entry={entry} class="rounded" />
-            <%= for err <- upload_errors(@uploads.cover, entry) do %>
+            <%= for err <- upload_errors(@uploads.image, entry) do %>
               <.error><%= error_to_string(err) %></.error>
             <% end %>
           </div>
@@ -70,7 +70,7 @@ defmodule MariaWeb.RecipesLive.FormComponent do
      socket
      |> assign(assigns)
      |> assign(:uploaded_files, [])
-     |> allow_upload(:cover, accept: ~w(.jpg .jpeg .png .gif), max_entries: 1, max_file_size: 2_000_000   )
+     |> allow_upload(:image, accept: ~w(.jpg .jpeg .png .gif), max_entries: 1, max_file_size: 2_000_000   )
      |> assign(:changeset, changeset)}
   end
 
@@ -91,7 +91,7 @@ defmodule MariaWeb.RecipesLive.FormComponent do
   defp save_recipe(socket, :edit, recipe_params) do
     params =
       recipe_params
-      |> add_cover(socket)
+      |> add_image(socket)
       |> Map.put("editor_id", socket.assigns.current_user.id)
 
     case Recipes.update_recipe(socket.assigns.recipe, socket, params) do
@@ -109,7 +109,7 @@ defmodule MariaWeb.RecipesLive.FormComponent do
   defp save_recipe(socket, :new, recipe_params) do
     params =
       recipe_params
-      |> add_cover(socket)
+      |> add_image(socket)
       |> Map.put("user_id", socket.assigns.current_user.id)
 
     case Recipes.create_recipe(socket, params) do
@@ -127,11 +127,11 @@ defmodule MariaWeb.RecipesLive.FormComponent do
   def error_to_string(:too_large), do: "File is too large, please select one under 2MB"
   def error_to_string(:not_accepted), do: "You have selected an unacceptable file type"
 
-  defp add_cover(recipe_params, socket) do
-    cover = List.first(socket.assigns.uploads.cover.entries)
-    if cover != nil do
+  defp add_image(recipe_params, socket) do
+    image = List.first(socket.assigns.uploads.image.entries)
+    if image != nil do
       recipe_params
-      |> Map.put("cover", cover)
+      |> Map.put("image", image)
     else
       recipe_params
     end

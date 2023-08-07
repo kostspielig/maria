@@ -8,7 +8,7 @@ defmodule Maria.RecipesTest do
 
     import Maria.RecipesFixtures
 
-    @invalid_attrs %{cover: nil, description: nil, directions: nil, ingredients: nil, likes: nil, mins: nil, tags: nil, title: nil, user_id: nil, is_draft: nil}
+    @invalid_attrs %{image: nil, description: nil, directions: nil, ingredients: nil, likes: nil, mins: nil, tags: nil, title: nil, user_id: nil, is_draft: nil}
 
     test "list_recipes/1 returns all recipes" do
       recipe = recipe_fixture()
@@ -26,11 +26,11 @@ defmodule Maria.RecipesTest do
     end
 
     test "create_recipe/1 with valid data creates a recipe" do
-      cover = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
-      valid_attrs = %{cover: cover, description: "some description", directions: "some directions", ingredients: "option1, option2", mins: "4h", link: "link", tags: "option1, option2", title: "some title", yield: 1}
+      image = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
+      valid_attrs = %{image: image, description: "some description", directions: "some directions", ingredients: "option1, option2", mins: "4h", link: "link", tags: "option1, option2", title: "some title", yield: 1}
 
       assert {:ok, %Recipe{} = recipe} = Recipes.create_recipe("some-title", valid_attrs)
-      assert recipe.cover =~ "some-title"
+      assert recipe.image =~ "some-title"
       assert recipe.description == "some description"
       assert recipe.directions == "some directions"
       assert recipe.ingredients == "option1, option2"
@@ -54,11 +54,11 @@ defmodule Maria.RecipesTest do
 
     test "update_recipe/3 with valid data updates the recipe" do
       recipe = recipe_fixture()
-      cover = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
-      update_attrs = %{cover: cover, description: "some updated description", directions: "some updated directions", ingredients: "option1", yield: 1, mins: "4h", link: "updated link", tags: "option1", title: "some updated title"}
+      image = %Phoenix.LiveView.UploadEntry {client_name: "cover.png"}
+      update_attrs = %{image: image, description: "some updated description", directions: "some updated directions", ingredients: "option1", yield: 1, mins: "4h", link: "updated link", tags: "option1", title: "some updated title"}
 
       assert {:ok, %Recipe{} = recipe} = Recipes.update_recipe(recipe, "some-updated-title",  update_attrs)
-      assert recipe.cover =~ "some-updated-title"
+      assert recipe.image =~ "some-updated-title"
       assert recipe.description == "some updated description"
       assert recipe.directions == "some updated directions"
       assert recipe.ingredients == "option1"

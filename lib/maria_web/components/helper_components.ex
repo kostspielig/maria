@@ -9,7 +9,7 @@ defmodule MariaWeb.HelperComponents do
     ~H"""
     <div phx-click={@row_click && @row_click.(@info)} class="w-full overflow-hidden text-center">
       <div class="card pb-8 cursor-pointer">
-        <div class="card-img relative w-full h-56 bg-brand overflow-hidden "><img class="object-cover w-full h-full" src={"#{@info.cover}"}></div>
+        <div class="card-img relative w-full h-56 bg-brand overflow-hidden "><img class="object-cover w-full h-full" src={"#{@info.image}"}></div>
         <div class="card-title text-2xl font-semibold font-head mt-4 ml-4"><%= @info.title %></div>
         <div class="text-sm font-medium mt-1 ml-4 font-sans text-zinc-800">by <span class="font-bold"><%= @info.user.username %></span></div>
       </div>
@@ -31,7 +31,7 @@ defmodule MariaWeb.HelperComponents do
         <%= for info <- @items do %>
           <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
             <div  phx-click={@item_click && @item_click.(info)} class="cursor-pointer">
-              <img class="max-h-60 mx-auto" src={"#{info.cover}"}>
+              <img class="max-h-60 mx-auto" src={"#{info.image}"}>
               <div class="block w-72 mt-4">
                 <.link_hover color="green"><div class={"inline leading-6 font-serif font-semibold text-lg"}><%= info.title %></div></.link_hover>
                </div>

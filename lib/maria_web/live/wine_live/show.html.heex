@@ -58,10 +58,10 @@
     <div class="mt-6 text-brand tracking-tight font text-xl"><%= raw(@wine.description) %></div>
     <div class="mt-6">
       <%= if not is_nil( Map.get(@wine, :buy_link, nil)) do %>
-      <.link_item href={@wine.buy_link} icon="🛒" >Where to get it? </.link_item>
+      <.question_item href={@wine.buy_link} icon="🛒" >Where to get it? </.question_item>
       <% end %>
       <%= if not is_nil( Map.get(@wine, :food_pairig, nil)) do %>
-        <.link_item href={@wine.food_pairig} icon="🥢️" >What to drink this with? </.link_item>
+        <.question_item href={@wine.food_pairig} icon="🥢️" >What to drink this with? </.question_item>
       <% end %>
     </div>
   </div>

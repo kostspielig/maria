@@ -63,7 +63,7 @@
     <div class="mt-12 flex">
       <CC.back primary={false}  navigate={~p"/cooking"}>back</CC.back>
       <%= if @recipe.link do %>
-        <.link_item href={@recipe.link} icon="👀" class="ml-4">Similar recipes? </.link_item>
+        <.question_item href={@recipe.link} icon="👀" class="ml-4">Similar recipes? </.question_item>
       <% end %>
     </div>
   </div>

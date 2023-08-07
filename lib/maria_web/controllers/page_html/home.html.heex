@@ -13,3 +13,11 @@
     </div>
   </div>
 </div>
+
+<div class="mt-6 border-b border-brand-light">
+  <.carousel
+    title="Food you should be cooking"
+    items={@recipes}
+    row_click={&JS.navigate(~p"/recipes/#{&1}")}
+  />
+</div>

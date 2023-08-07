@@ -18,6 +18,31 @@ defmodule MariaWeb.HelperComponents do
   end
 
   attr :title, :string, required: true
+  attr :items, :map, required: true
+  attr :row_click, :any, default: nil
+  attr :color, :string, default: "blood"
+
+  def carousel(assigns) do
+    ~H"""
+    <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-7xl">
+      <h1 class={"font-head text-2xl font-bold text-#{@color}"}><%= @title %> </h1>
+      <div class="overflow-x-auto flex">
+        <%= for info <- @items do %>
+          <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
+            <div  phx-click={@row_click && @row_click.(info)} class="cursor-pointer">
+              <img class="max-h-60 mx-auto" src={"#{info.cover}"}>
+              <div class="block w-72 mt-4">
+                <.link_hover color="green"><div class={"inline leading-6 font-serif font-semibold text-lg"}><%= info.title %></div></.link_hover>
+               </div>
+            </div>
+            </div>
+         <% end %>
+      </div>
+    </div>
+    """
+  end
+
+  attr :title, :string, required: true
   attr :class, :string, default: nil
   attr :from, :string, default: "skin-lighter" # tailwind: from-skin-lighter from-green
   attr :to, :string, default: "skin-lighter"   # tailwind: to-skin-lighter to-green

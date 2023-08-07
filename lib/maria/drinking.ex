@@ -13,20 +13,18 @@ defmodule Maria.Drinking do
 
   ## Examples
 
-      iex> list_wines()
+      iex> list_wines(true, 3)
       [%Wine{}, ...]
 
   """
-  def list_wines(draft \\ false) do
+  def list_wines(draft \\ false, limit \\ nil) do
 
-    query = if draft do
+    query =
       from w in Wine,
-        where: is_nil(w.is_draft) or w.is_draft == false,
-        order_by: [desc: coalesce(w.updated_at, w.inserted_at)]
-    else
-        from w in Wine,
-          order_by: [desc: coalesce(w.updated_at, w.inserted_at)]
-    end
+      where: (^draft and (is_nil(w.is_draft) or w.is_draft == false)) or (not ^draft),
+      order_by: [desc: coalesce(w.inserted_at, w.updated_at)],
+      limit: ^limit
+
 
     query
     |> Repo.all()

@@ -12,20 +12,17 @@ defmodule Maria.Recipes do
 
   ## Examples
 
-      iex> list_recipes()
+      iex> list_recipes(true, 5)
       [%Recipe{}, ...]
 
   """
-  def list_recipes(draft \\ false) do
+  def list_recipes(draft \\ false, limit \\ nil) do
 
-    query = if draft do
-      from r in Recipe,
-        where: is_nil(r.is_draft) or r.is_draft == false,
-        order_by: [desc: coalesce(r.updated_at, r.inserted_at)]
-    else
-        from r in Recipe,
-        order_by: [desc: coalesce(r.updated_at, r.inserted_at)]
-    end
+  query =
+    from r in Recipe,
+      where: (^draft and (is_nil(r.is_draft) or r.is_draft == false)) or (not ^draft),
+      order_by: [desc: coalesce(r.inserted_at, r.updated_at)],
+      limit: ^limit
 
     query
     |> Repo.all()

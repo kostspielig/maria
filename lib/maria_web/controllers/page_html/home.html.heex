@@ -7,9 +7,17 @@
       </p>
       <div class="mt-40 xl:mt-60 flex justify-end ">
         <p class="font-head font-medium w-2/3 text-2xl sm:text-3xl">
-          Here is everything to <.link_hover href="/reading" class="italic">read</.link_hover>, <.link_hover href="/cooking" class="italic">cook</.link_hover>, <.link_hover href="/wines" class="italic">drink</.link_hover> or <.link_hover href="https://m.imdb.com/user/ur65531471/watchlist?sort=date_added%2Cdesc&view=detail" class="italic" target="_blank">watch</.link_hover> before 📅 <%=Calendar.strftime(Date.utc_today(), "%b")%> <%=Date.end_of_week(Date.utc_today()).day%>.
+          Here is everything to <.link_hover href="/cooking" class="italic">cook</.link_hover>, <.link_hover href="/wines" class="italic">drink</.link_hover>, <.link_hover href="/reading" class="italic">read</.link_hover> or <.link_hover href="https://m.imdb.com/user/ur65531471/watchlist?sort=date_added%2Cdesc&view=detail" class="italic" target="_blank">watch</.link_hover> before 📅 <%=Calendar.strftime(Date.utc_today(), "%b")%> <%=Date.end_of_week(Date.utc_today()).day%>.
         </p>
       </div>
     </div>
   </div>
+</div>
+
+<div class="mt-6 border-b border-brand-light">
+  <.carousel
+    title="Food you should be cooking"
+    items={@recipes}
+    row_click={&JS.navigate(~p"/recipes/#{&1}")}
+  />
 </div>

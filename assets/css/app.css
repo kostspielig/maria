@@ -22,12 +22,12 @@ body::-webkit-scrollbar-thumb {
 /* Horizontal Scrollbar */
 
 ::-webkit-scrollbar {
-  height: 0.18em;
-  background-color: #cdd5cd;
+  height: 0.25em;
+  background-color: #fdde7a; /*#cdd5cd;*/
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #181A18;
+  background-color: #fbb506;
 }
 
 

@@ -23,7 +23,7 @@ body::-webkit-scrollbar-thumb {
 
 ::-webkit-scrollbar {
   height: 0.25em;
-  background-color: #fdde7a; /*#cdd5cd;*/
+  background-color: #fdde7a;
 }
 
 ::-webkit-scrollbar-thumb {

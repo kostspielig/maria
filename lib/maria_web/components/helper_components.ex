@@ -25,6 +25,7 @@ defmodule MariaWeb.HelperComponents do
   attr :color, :string, default: "blood"
   attr :class, :string, default: nil
   attr :img_height, :integer, default: 60 # max-h-80
+  attr :next_link, :string, default: nil
 
   def carousel(assigns) do
     ~H"""
@@ -42,8 +43,13 @@ defmodule MariaWeb.HelperComponents do
                </div>
             <% end %>
             </a>
-            </div>
-         <% end %>
+          </div>
+        <% end %>
+        <%= if @next_link do %>
+          <div class="flex-none py-6 px-3 first:pl-0 last:pr-6 flex justify-center items-center">
+            <.link_hover color="green"  href={@next_link} class="cursor-pointer font-racing">more ❯</.link_hover>
+          </div>
+        <% end %>
       </div>
     </div>
     """

@@ -30,12 +30,12 @@ defmodule MariaWeb.HelperComponents do
       <div class="overflow-x-auto flex">
         <%= for info <- @items do %>
           <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
-            <div  phx-click={@item_click && @item_click.(info)} class="cursor-pointer">
+            <a  href={info.link} class="cursor-pointer">
               <img class="max-h-60 mx-auto" src={"#{info.image}"}>
               <div class="block w-72 mt-4">
                 <.link_hover color="green"><div class={"inline leading-6 font-serif font-semibold text-lg"}><%= info.title %></div></.link_hover>
                </div>
-            </div>
+            </a>
             </div>
          <% end %>
       </div>

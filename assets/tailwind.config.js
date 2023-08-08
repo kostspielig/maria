@@ -26,6 +26,7 @@ module.exports = {
         brand: {
           DEFAULT: "#3aadec",
           light: "#e4eef3",
+          lighter: "#c6e9fb",
         },
         blood: "#ef7801",
         skin: {

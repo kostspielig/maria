@@ -16,7 +16,7 @@ defmodule MariaWeb.RecipesLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action, recipe.title))
-     |> assign(:page_og,  %{url: url(~p"/recipes/#{id}"), image: recipe.cover, description: Floki.text(recipe.description)})
+     |> assign(:page_og,  %{url: url(~p"/recipes/#{id}"), image: recipe.image, description: Floki.text(recipe.description)})
      |> assign(:recipe, recipe)
      |> push_event("clearflash", %{id: "flash"})}
   end

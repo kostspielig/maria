@@ -21,7 +21,7 @@ defmodule MariaWeb.WineLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     wine = Drinking.get_wine!(id)
     socket
-    |> assign(:page_title, "Edit #{wine.name}")
+    |> assign(:page_title, "Edit #{wine.title}")
     |> assign(:wine, wine)
   end
 

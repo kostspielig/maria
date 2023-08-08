@@ -5,7 +5,7 @@ defmodule Maria.Recipes.Recipe do
   alias Maria.Accounts.User
 
   schema "recipes" do
-    field :cover, :string
+    field :image, :string
     field :description, :string
     field :directions, :string
     field :ingredients, :string
@@ -68,39 +68,39 @@ defmodule Maria.Recipes.Recipe do
       required
     end
 
-    case Map.get(changeset.params, "cover", nil) do
+    case Map.get(changeset.params, "image", nil) do
       %Phoenix.LiveView.UploadEntry {client_name: filename} ->
         if String.match?(filename, @rx) do
           changeset
-          |> put_change(:cover, MariaWeb.File.generate_name(filename, changeset.params["title"]))
+          |> put_change(:image, MariaWeb.File.generate_name(filename, changeset.params["title"]))
         else
-          add_error(changeset, :cover, "Invalid cover image format (jpg, jpeg, png, gif)")
+          add_error(changeset, :image, "Invalid cover image format (jpg, jpeg, png, gif)")
         end
       _ ->
         case required do
-          :required -> add_error(changeset, :cover,  "Cover image is required")
+          :required -> add_error(changeset, :image,  "Cover image is required")
           _ -> changeset
         end
     end
   end
 
   def delete_cover(recipe) do
-    if recipe.cover do
-      MariaWeb.File.delete(recipe.cover)
+    if recipe.image do
+      MariaWeb.File.delete(recipe.image)
     end
 
     recipe
   end
 
   def upload_cover(%{valid?: true} = changeset, socket) do
-    if cover = get_change(changeset, :cover) do
-      file = MariaWeb.File.upload(changeset.params["cover"], cover, socket)
+    if image = get_change(changeset, :image) do
+      file = MariaWeb.File.upload(changeset.params["image"], image, socket)
 
-      if old_cover = changeset.data.cover do
-        MariaWeb.File.delete(old_cover)
+      if old_image = changeset.data.image do
+        MariaWeb.File.delete(old_image)
       end
       changeset
-      |> put_change(:cover, file)
+      |> put_change(:image, file)
     else
       changeset
     end

@@ -18,8 +18,8 @@ defmodule Maria.Recipes do
   """
   def list_recipes(draft \\ false, limit \\ nil) do
 
-  query =
-    from r in Recipe,
+    query =
+      from r in Recipe,
       where: (^draft and (is_nil(r.is_draft) or r.is_draft == false)) or (not ^draft),
       order_by: [desc: coalesce(r.inserted_at, r.updated_at)],
       limit: ^limit

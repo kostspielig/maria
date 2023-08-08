@@ -8,7 +8,7 @@ defmodule Maria.DrinkingTest do
 
     import Maria.DrinkingFixtures
 
-    @invalid_attrs %{alcohol: nil, body: nil, buy_link: nil, color: nil, country: nil, description: nil, food_pairig: nil, grapes: nil, image: nil, is_draft: nil, is_featured: nil, name: nil, price: nil, producer: nil, rating: nil, region: nil, sweetness: nil, vintage: nil}
+    @invalid_attrs %{alcohol: nil, body: nil, buy_link: nil, color: nil, country: nil, description: nil, food_pairig: nil, grapes: nil, image: nil, is_draft: nil, is_featured: nil, title: nil, price: nil, producer: nil, rating: nil, region: nil, sweetness: nil, vintage: nil}
 
     test "list_wines/0 returns all wines" do
       wine = wine_fixture()
@@ -21,7 +21,7 @@ defmodule Maria.DrinkingTest do
     end
 
     test "create_wine/1 with valid data creates a wine" do
-      valid_attrs = %{alcohol: 120.5, body: "some body", buy_link: "some buy_link", color: "some color", country: "some country", description: "some description", food_pairig: "some food_pairig", grapes: "some grapes", image: "some image", is_draft: true, is_featured: true, name: "some name", price: 120.5, producer: "some producer", rating: 42, region: "some region", sweetness: "some sweetness", vintage: 42}
+      valid_attrs = %{alcohol: 120.5, body: "some body", buy_link: "some buy_link", color: "some color", country: "some country", description: "some description", food_pairig: "some food_pairig", grapes: "some grapes", image: "some image", is_draft: true, is_featured: true, title: "some name", price: 120.5, producer: "some producer", rating: 42, region: "some region", sweetness: "some sweetness", vintage: 42}
 
       assert {:ok, %Wine{} = wine} = Drinking.create_wine(valid_attrs)
       assert wine.alcohol == 120.5
@@ -35,7 +35,7 @@ defmodule Maria.DrinkingTest do
       assert wine.image == "some image"
       assert wine.is_draft == true
       assert wine.is_featured == true
-      assert wine.name == "some name"
+      assert wine.title == "some name"
       assert wine.price == 120.5
       assert wine.producer == "some producer"
       assert wine.rating == 42
@@ -50,7 +50,7 @@ defmodule Maria.DrinkingTest do
 
     test "update_wine/2 with valid data updates the wine" do
       wine = wine_fixture()
-      update_attrs = %{alcohol: 456.7, body: "some updated body", buy_link: "some updated buy_link", color: "some updated color", country: "some updated country", description: "some updated description", food_pairig: "some updated food_pairig", grapes: "some updated grapes", image: "some updated image", is_draft: false, is_featured: false, name: "some updated name", price: 456.7, producer: "some updated producer", rating: 43, region: "some updated region", sweetness: "some updated sweetness", vintage: 43}
+      update_attrs = %{alcohol: 456.7, body: "some updated body", buy_link: "some updated buy_link", color: "some updated color", country: "some updated country", description: "some updated description", food_pairig: "some updated food_pairig", grapes: "some updated grapes", image: "some updated image", is_draft: false, is_featured: false, title: "some updated name", price: 456.7, producer: "some updated producer", rating: 43, region: "some updated region", sweetness: "some updated sweetness", vintage: 43}
 
       assert {:ok, %Wine{} = wine} = Drinking.update_wine(wine, update_attrs)
       assert wine.alcohol == 456.7
@@ -64,7 +64,7 @@ defmodule Maria.DrinkingTest do
       assert wine.image == "some updated image"
       assert wine.is_draft == false
       assert wine.is_featured == false
-      assert wine.name == "some updated name"
+      assert wine.title == "some updated name"
       assert wine.price == 456.7
       assert wine.producer == "some updated producer"
       assert wine.rating == 43

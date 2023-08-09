@@ -43,7 +43,7 @@ defmodule MariaWeb.HelperComponents do
 
   attr :items, :map, required: true
   attr :item_click, :any, default: nil
-  attr :img_height, :integer, default: 60 # max-h-80
+  attr :img_height, :integer, default: 60 # max-h-80 max-h-60
   attr :next_link, :string, default: nil
 
   def carousel_items(assigns) do

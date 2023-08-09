@@ -32,6 +32,22 @@ defmodule MariaWeb.HelperComponents do
     <div class={["px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-7xl", @class]}>
       <a class={"font-head text-2xl font-bold text-#{@color}"} href={@title_link}><%= @title %> </a>
       <%= if @subtitle do %><h2 class="mt-8 text-base font-normal"><%= @subtitle %></h2> <% end %>
+      <.carousel_items
+          items={@items}
+          next_link={@next_link}
+          img_height={@img_height}
+      />
+    </div>
+    """
+  end
+
+  attr :items, :map, required: true
+  attr :item_click, :any, default: nil
+  attr :img_height, :integer, default: 60 # max-h-80
+  attr :next_link, :string, default: nil
+
+  def carousel_items(assigns) do
+    ~H"""
       <div class="overflow-x-auto flex">
         <%= for info <- @items do %>
           <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
@@ -51,7 +67,6 @@ defmodule MariaWeb.HelperComponents do
           </div>
         <% end %>
       </div>
-    </div>
     """
   end
 

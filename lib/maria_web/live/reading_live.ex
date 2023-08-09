@@ -19,6 +19,7 @@ defmodule MariaWeb.ReadingLive do
       <.carousel
         title="Books"
         title_link="https://www.goodreads.com/kostspielig"
+        next_link="https://www.goodreads.com/kostspielig"
         subtitle="Must-read list of Books"
         items={@goodreads}
         img_height={80}
@@ -32,21 +33,12 @@ defmodule MariaWeb.ReadingLive do
       <%= for podcast <- @podcasts do %>
       <div class="font-sans odd:bg-white odd:text-black">
       <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
-
         <h1 class="text-2xl font-bold"><%= podcast.title %> </h1>
         <h2 class="mt-2 text-base font-normal"><%= podcast.subtitle %> </h2>
-        <div class="overflow-x-auto flex">
-          <%= for e <- podcast.entries do %>
-            <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
-              <a href={"#{e.link}"} target="_blank">
-                <img class="max-h-60 mx-auto" src={"#{e.image}"}>
-                <div class="block w-60 mt-4">
-                  <div class="inline leading-6 font-serif font-semibold text-lg hover:bg-blood"><%= e.title %></div>
-                </div>
-              </a>
-            </div>
-          <% end %>
-        </div>
+        <.carousel_items
+          items={podcast.entries}
+          next_link={podcast.link}
+        />
       </div>
       </div>
       <% end %>
@@ -58,19 +50,11 @@ defmodule MariaWeb.ReadingLive do
       <div class="font-sans odd:bg-blood odd:bg-opacity-10">
       <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-2xl font-bold"><%= newsletter.title %> </h1>
-        <h2 class="mt-2 text-base font-normal"><%= newsletter.summary %> </h2>
-        <div class="overflow-x-auto flex">
-          <%= for e <- newsletter.entries do %>
-            <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
-              <a href={"#{e.link}"} target="_blank">
-              <img class="max-h-60 mx-auto" src={"#{e.enclosure.url}"}>
-              <div class="block w-60 mt-4">
-                <div class="inline leading-6 font-serif font-semibold text-lg hover:bg-blood hover:text-white"><%= e.title %></div>
-               </div>
-              </a>
-            </div>
-          <% end %>
-        </div>
+        <h2 class="mt-2 text-base font-normal"><%= newsletter.subtitle %> </h2>
+        <.carousel_items
+          items={newsletter.entries}
+          next_link={newsletter.link}
+        />
       </div>
       </div>
       <% end %>
@@ -82,19 +66,11 @@ defmodule MariaWeb.ReadingLive do
       <div class="font-sans odd:bg-black odd:bg-opacity-10">
       <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-2xl font-bold"><%= yc.title %> </h1>
-        <div class="overflow-x-auto flex">
-          <%= for e <- yc.entries do %>
-          <div class="flex-none py-6 px-3 first:pl-6 last:pr-6">
-            <!--  <iframe width="320" height="255" allow="fullscreen" frameBorder="0" src={"#{String.replace(e.link, "https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")}"}></iframe> -->
-            <a class="" href={"#{e.link}"} target="_blank">
-              <img class="max-h-52 mx-auto" src={"#{String.replace(e.link, "https://www.youtube.com/watch?v=", "https://img.youtube.com/vi/") <> "/0.jpg"}"}>
-                <div class="block w-48 mt-4">
-                  <div class="inline leading-6 font-serif font-semibold text-lg hover:bg-brand hover:text-white"><%= e.title %></div>
-                </div>
-            </a>
-          </div>
-          <% end %>
-        </div>
+    <!--  <iframe width="320" height="255" allow="fullscreen" frameBorder="0" src={"#{String.replace(e.link, "https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")}"}></iframe> -->
+        <.carousel_items
+          items={yc.entries}
+          next_link={yc.link}
+        />
       </div>
       </div>
       <% end %>
@@ -126,6 +102,7 @@ defmodule MariaWeb.ReadingLive do
     [%{
       title: feed.title,
       subtitle: feed.subtitle,
+      link: feed.link,
       entries: Enum.map(feed.entries, fn item ->
         %{title: item.title, image: item.image, link: item.enclosure.url}
       end)
@@ -154,12 +131,32 @@ defmodule MariaWeb.ReadingLive do
 
   def get_newsletters() do
     newsletters = ["https://blog.bytebytego.com/feed", "https://anewsletter.alisoneroman.com/feed"]
-    get_feeds(newsletters)
+    feeds = get_feeds(newsletters)
+
+    Enum.map(feeds, fn(feed) ->
+      %{
+        title: feed.title,
+        subtitle: feed.subtitle,
+        link: feed.link,
+        entries: Enum.map(feed.entries, fn item ->
+          %{title: item.title, image: item.enclosure.url, link: item.link}
+        end)
+  } end)
   end
 
 
   def get_youtube() do
     youtubes = ["https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA", "https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q"]
-    get_feeds(youtubes)
+    feeds = get_feeds(youtubes)
+
+    Enum.map(feeds, fn(feed) ->
+      %{
+        title: feed.title,
+        subtitle: feed.subtitle,
+        link: String.replace(feed.link, "http://www.youtube.com/feeds/videos.xml?channel_id=", "https://youtube.com/channel/"),
+        entries: Enum.map(feed.entries, fn item ->
+          %{title: item.title, image: String.replace(item.link, "https://www.youtube.com/watch?v=", "https://img.youtube.com/vi/") <> "/0.jpg", link: item.link}
+        end)
+  } end)
   end
 end

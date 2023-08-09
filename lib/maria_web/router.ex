@@ -73,7 +73,6 @@ defmodule MariaWeb.Router do
       live "/wines/new", WineLive.Index, :new
       live "/wines/:id/edit", WineLive.Index, :edit
 
-      live "/wines/:id", WineLive.Show, :show
       live "/wines/:id/show/edit", WineLive.Show, :edit
 
       live "/recipes", RecipesLive.Index, :index
@@ -94,6 +93,7 @@ defmodule MariaWeb.Router do
       live "/users/confirm", UserConfirmationInstructionsLive, :new
 
       live "/recipes/:id", RecipesLive.Show, :show
+      live "/wines/:id", WineLive.Show, :show
     end
   end
 end

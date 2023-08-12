@@ -348,7 +348,7 @@ defmodule MariaWeb.CoreComponents do
     """
   end
 
-  def input(%{type: "slot"} = assigns) do
+  def input(%{name: "slot"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
       <%= render_slot(@inner_block) %>

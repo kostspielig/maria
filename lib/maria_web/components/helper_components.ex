@@ -182,6 +182,7 @@ defmodule MariaWeb.HelperComponents do
     """
   end
 
+  attr :info, :map, required: true
   attr :href, :string, default: nil
   def tags(assigns) do
     ~H"""

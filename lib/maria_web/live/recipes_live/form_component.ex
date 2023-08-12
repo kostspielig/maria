@@ -32,7 +32,7 @@ defmodule MariaWeb.RecipesLive.FormComponent do
         <.input field={{f, :yield}} type="number" label="Yields" />
         <.input field={{f, :link}} type="text" label="Similar recipes" placeholder="https://bonappetit.com/recipe" />
         <.input field={{f, :tags}} type="text" label="Tags" placeholder="chinese, korean, spanish, russian" />
-        <.input field={{f, :image}} type="slot" label="Image" >
+        <.input field={{f, :image}} name="slot" label="Image" >
         <div class="lg:flex lg:items-start">
           <.live_file_input upload={@uploads.image} class={[
           "mt-2 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-zinc-300",

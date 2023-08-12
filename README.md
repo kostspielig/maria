@@ -72,3 +72,13 @@ or curl: `curl http://localhost:4000/dev/mailbox/json`
 # Error Pages
 
 In `maria/config/dev.exs` set `debug_errors: false` if you want to be able to debug error pages.
+
+# Migrations
+
+If you're changing the schema of the DB, you will need to create a migration to apply the changes.
+The following command generates a migration
+
+`mix ecto.gen.migration __description_of_migration__`
+
+This will create a new migration file in priv/repo/migrations directory. Follow instructions
+[here](https://hexdocs.pm/ecto_sql/Ecto.Migration.html) to create themigration code.

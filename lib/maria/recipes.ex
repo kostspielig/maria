@@ -60,25 +60,45 @@ defmodule Maria.Recipes do
   def get_recipe!(id), do: Repo.get!(Recipe, id) |> Repo.preload(:user) |> Repo.preload(:editor)
 
   @doc """
-  Searches for recipes, max # results is 10.
+  Searches for recipes, max # results is 10 by default.
 
   ## Examples
 
-      iex> search("kimchi")
+      iex> search("kimchi", 5)
       [%Recipe{}, ...]
   """
-  def search(search_query) do
+  def search(search_query, limit \\ 10) do
     search_query = "%#{search_query}%"
 
     Recipe
     |> order_by(desc: :updated_at)
     |> where([p], is_nil(p.is_draft) or p.is_draft == false)  # Exclude recipes with is_draft true
     |> where([p], ilike(p.directions, ^search_query) or ilike(p.tags, ^search_query) or ilike(p.title, ^search_query) or ilike(p.description, ^search_query))
-    |> limit(10)
+    |> limit(^limit)
     |> Repo.all()
     |> Repo.preload(:user)
   end
 
+  @doc """
+  Searches related recipes, max # results is 3 by default.
+
+  ## Examples
+
+      iex> related(recipe.id, 2)
+      [%Recipe{}, ...]
+  """
+  def related(recipe \\ nil, limit \\ 3) do
+    search_query = "%#{recipe.tags}%"
+
+    Recipe
+    |> order_by(desc: :updated_at)
+    |> where([p], is_nil(p.is_draft) or p.is_draft == false)  # Exclude recipes with is_draft true
+    |> where([p], ilike(p.directions, ^search_query) or ilike(p.tags, ^search_query) or ilike(p.title, ^search_query) or ilike(p.description, ^search_query))
+    |> where([p], is_nil(p.id) or p.id != ^recipe.id)
+    |> limit(^limit)
+    |> Repo.all()
+    |> Repo.preload(:user)
+  end
 
   @doc """
   Creates a recipe.

@@ -61,11 +61,29 @@
     </div>
 
     <div class="mt-12 flex">
-      <CC.back primary={false}  navigate={~p"/cooking"}>back</CC.back>
+      <CC.back primary={false} icon="❯"  navigate={~p"/cooking"}>back</CC.back>
       <%= if @recipe.link do %>
         <.question_item href={@recipe.link} icon="👀" class="ml-4">Similar recipes? </.question_item>
       <% end %>
     </div>
+  </div>
+</div>
+
+<div class="lg:px-8 border-t  border-b border-brand-light bg-brand text-white">
+  <div class="mx-auto max-w-4xl xl:max-w-6xl">
+    <h1 class="pt-6 px-6 font-head font-semibold text-white text-2xl leading-8"> More Recipes </h1>
+    <CC.back primary={false} icon="❯"  navigate={~p"/cooking"}>back</CC.back>
+    <div class="mt-6 mb-3 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 items-center justify-center">
+        <%= for recipe <- @related do %>
+      <.card info={recipe} row_click={&JS.navigate(~p"/recipes/#{&1}")}/>
+      <% end %>
+    </div>
+    <!--
+ <.carousel
+    title="Related"
+    items={@related}
+    next_link="/cooking"
+  /> -->
   </div>
 </div>
 <.modal :if={@live_action == :edit} id="recipes-modal" show on_cancel={JS.patch(~p"/recipes/#{@recipe}")}>

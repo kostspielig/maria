@@ -12,12 +12,16 @@ defmodule MariaWeb.RecipesLive.Show do
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
     recipe = Recipes.get_recipe!(id)
+    related = Enum.map(Recipes.related(recipe, 4), fn recipe ->
+      %{title: recipe.title, image: recipe.image, link: "/recipes/#{recipe.id}"}
+    end)
 
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action, recipe.title))
      |> assign(:page_og,  %{url: url(~p"/recipes/#{id}"), image: recipe.image, description: Floki.text(recipe.description)})
      |> assign(:recipe, recipe)
+     |> assign(:related, related)
      |> push_event("clearflash", %{id: "flash"})}
   end
 

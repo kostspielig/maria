@@ -68,15 +68,17 @@
   </div>
 </div>
 
-<div class="mt-2 lg:px-8 border-t border-b border-blood border-opacity-20 bg-blood bg-opacity-10">
-  <div class="mx-auto max-w-4xl xl:max-w-6xl">
-    <.carousel
-       title="Other recipes you should be cooking"
-       items={@related}
-       next_link="/cooking"
-     />
+<%= if length(@related) > 0 do %>
+  <div class="mt-2 lg:px-8 border-t border-b border-blood border-opacity-20 bg-blood bg-opacity-10">
+    <div class="mx-auto max-w-4xl xl:max-w-6xl">
+      <.carousel
+         title="Other recipes you should be cooking"
+         items={@related}
+         next_link="/cooking"
+       />
+    </div>
   </div>
-</div>
+<% end %>
 <.modal :if={@live_action == :edit} id="recipes-modal" show on_cancel={JS.patch(~p"/recipes/#{@recipe}")}>
   <.live_component
     module={MariaWeb.RecipesLive.FormComponent}

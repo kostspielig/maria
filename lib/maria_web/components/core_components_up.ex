@@ -540,8 +540,6 @@ defmodule MariaWeb.CoreComponentsUp do
   attr :primary, :boolean, default: true
   attr :icon, :string, default: "❮"
 
-  slot :inner_block, required: true
-
   def back(assigns) do
     ~H"""
     <.link

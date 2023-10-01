@@ -538,15 +538,14 @@ defmodule MariaWeb.CoreComponentsUp do
   """
   attr :navigate, :any, required: true
   attr :primary, :boolean, default: true
-
-  slot :inner_block, required: true
+  attr :icon, :string, default: "❮"
 
   def back(assigns) do
     ~H"""
     <.link
       navigate={@navigate}
       class="inline-block"
-    ><.button primary={@primary}>❮</.button>
+    ><.button primary={@primary}><%= @icon %></.button>
     </.link>
     """
   end

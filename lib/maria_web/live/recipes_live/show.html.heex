@@ -47,7 +47,7 @@
 
 <div class="px-6 pb-6 lg:px-8">
   <div class="mx-auto max-w-4xl xl:max-w-6xl">
-    <div class="mt-6 text-brand tracking-tight font text-xl"><%= raw(@recipe.description) %></div>
+    <div class="mt-6 text-blood tracking-tight font text-xl"><%= raw(@recipe.description) %></div>
 
     <div class="block xl:flex">
       <.recipe_list class="mr-12 w-full basis-1/2 grow-0 shrink-0 max-w-xs xl:max-w-sm" title="Ingredients">
@@ -61,11 +61,20 @@
     </div>
 
     <div class="mt-12 flex">
-      <CC.back primary={false}  navigate={~p"/cooking"}>back</CC.back>
       <%= if @recipe.link do %>
         <.question_item href={@recipe.link} icon="👀" class="ml-4">Similar recipes? </.question_item>
       <% end %>
     </div>
+  </div>
+</div>
+
+<div class="mt-2 lg:px-8 border-t border-b border-blood border-opacity-20 bg-blood bg-opacity-10">
+  <div class="mx-auto max-w-4xl xl:max-w-6xl">
+    <.carousel
+       title="Other recipes you should be cooking"
+       items={@related}
+       next_link="/cooking"
+     />
   </div>
 </div>
 <.modal :if={@live_action == :edit} id="recipes-modal" show on_cancel={JS.patch(~p"/recipes/#{@recipe}")}>

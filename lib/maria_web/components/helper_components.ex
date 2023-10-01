@@ -138,7 +138,7 @@ defmodule MariaWeb.HelperComponents do
 
   def recipe_item(assigns) do
     ~H"""
-    <div class="mb-6 text-sm">
+    <div class="mb-6 text-sm inline-block pr-2">
       <span class="uppercase font-semibold"> ┃ <%= @tag %></span> — <%= @info %>
     </div>
     """
@@ -175,23 +175,24 @@ defmodule MariaWeb.HelperComponents do
 
 
   attr :text, :string, required: true
-  attr :class, :string, default: nil
+  attr :class, :string, default: "bg-blood !text-white"
   def tag(assigns) do
     ~H"""
-       <span class={[@class, "inline-block rounded-full bg-blood text-white text-sm font-semibold px-3 py-1 m-1"]}><%= @text %></span>
+       <span class={[@class, "inline-block rounded-full text-black text-sm font-semibold px-3 py-1 m-1"]}><%= @text %></span>
     """
   end
 
   attr :info, :map, required: true
   attr :href, :string, default: nil
+  attr :class, :string, default: "bg-brand !text-white"
   def tags(assigns) do
     ~H"""
     <%= if @info do %>
     <%= for tag <- String.split(@info, ",") do %>
       <%= if @href do %>
-        <a href={if @href != nil, do: @href <> String.trim(tag), else: ""}><MariaWeb.HelperComponents.tag text={String.trim(tag)} class="!bg-brand"/></a>
+        <a href={if @href != nil, do: @href <> String.trim(tag), else: ""}><MariaWeb.HelperComponents.tag text={String.trim(tag)} class={@class}/></a>
       <% else %>
-        <MariaWeb.HelperComponents.tag text={String.trim(tag)} class="!bg-brand"/>
+        <MariaWeb.HelperComponents.tag text={String.trim(tag)} class={@class}/>
       <% end %>
     <% end %>
     <% end %>

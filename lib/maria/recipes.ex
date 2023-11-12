@@ -88,16 +88,26 @@ defmodule Maria.Recipes do
       [%Recipe{}, ...]
   """
   def related(recipe \\ nil, limit \\ 3) do
-    search_query = "%#{recipe.tags}%"
+    tags = String.split(recipe.tags, ",") |> Enum.map(&String.trim/1)
 
     Recipe
     |> order_by(desc: :updated_at)
-    |> where([p], is_nil(p.is_draft) or p.is_draft == false)  # Exclude recipes with is_draft true
-    |> where([p], ilike(p.directions, ^search_query) or ilike(p.tags, ^search_query) or ilike(p.title, ^search_query) or ilike(p.description, ^search_query))
+    |> ilike_any_tags(tags)
+    |> where([p], is_nil(p.is_draft) or p.is_draft == false)
     |> where([p], is_nil(p.id) or p.id != ^recipe.id)
     |> limit(^limit)
     |> Repo.all()
     |> Repo.preload(:user)
+  end
+
+  defp ilike_any_tags(query, tags) do
+    Enum.reduce(tags, query, fn tag, acc_query ->
+      acc_query
+      |> or_where([p], ilike(p.directions, ^"%#{tag}%"))
+      |> or_where([p], ilike(p.tags, ^"%#{tag}%"))
+      |> or_where([p], ilike(p.title, ^"%#{tag}%"))
+      |> or_where([p], ilike(p.description, ^"%#{tag}%"))
+    end)
   end
 
   @doc """

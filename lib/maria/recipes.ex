@@ -82,23 +82,27 @@ defmodule Maria.Recipes do
   @doc """
   Searches related recipes, max # results is 3 by default.
 
+  When the recipe contains no tags, we do not show any recommendations.
+
   ## Examples
 
       iex> related(recipe.id, 2)
       [%Recipe{}, ...]
   """
-  def related(recipe \\ nil, limit \\ 3) do
-    tags = String.split(recipe.tags, ",") |> Enum.map(&String.trim/1)
+  def related(%Recipe{id: id, tags: tags} = recipe, limit) when recipe.tags != nil do
+    tags = String.split(tags, ",") |> Enum.map(&String.trim/1)
 
     Recipe
     |> order_by(desc: :updated_at)
     |> ilike_any_tags(tags)
     |> where([p], is_nil(p.is_draft) or p.is_draft == false)
-    |> where([p], is_nil(p.id) or p.id != ^recipe.id)
+    |> where([p], is_nil(p.id) or p.id != ^id)
     |> limit(^limit)
     |> Repo.all()
     |> Repo.preload(:user)
   end
+
+  def related(_recipe, _limit), do: []
 
   defp ilike_any_tags(query, tags) do
     Enum.reduce(tags, query, fn tag, acc_query ->

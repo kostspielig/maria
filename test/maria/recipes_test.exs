@@ -85,5 +85,18 @@ defmodule Maria.RecipesTest do
       recipe = recipe_fixture()
       assert %Ecto.Changeset{} = Recipes.change_recipe(recipe)
     end
+
+    test "related/1 returns a list of related recipes" do
+      recipe = recipe_fixture()
+      relatedRecipe = recipe_fixture(%{ tags: "option1", title: "Related Recipe"})
+
+      assert hd(Recipes.related(recipe, 1)).title  == relatedRecipe.title
+    end
+
+    test "related/1 returns an empty list if tags is nil (in drafts it can be!)" do
+      recipe = recipe_fixture(%{ tags: nil, is_draft: true})
+
+      assert Recipes.related(recipe, 1)  == []
+    end
   end
 end

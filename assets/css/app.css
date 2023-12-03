@@ -32,10 +32,21 @@ body::-webkit-scrollbar-thumb {
 
 
 /* CKEditor and Recipe display custom styles */
-#recipe-content figure.media > div[data-oembed-url] > div {
-  padding-bottom: 20% !important;
+
+#recipe-content figure.media > div[data-oembed-url*="spotify"] > div {
+  padding-bottom: 40% !important;
 }
 
+@media (min-width: 452px)  {
+  #recipe-content figure.media > div[data-oembed-url*="spotify"] > div {
+    padding-bottom: 20% !important;
+  }
+}
+@media (min-width: 1280px)  {
+  #recipe-content figure.media > div[data-oembed-url*="spotify"] > div {
+    padding-bottom: 17% !important;
+  }
+}
 .ck-editor a, .recipe a{
   @apply text-brand font-bold;
 }

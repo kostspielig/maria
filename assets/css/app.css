@@ -32,6 +32,9 @@ body::-webkit-scrollbar-thumb {
 
 
 /* CKEditor and Recipe display custom styles */
+#recipe-content figure.media > div[data-oembed-url] > div {
+  padding-bottom: 20% !important;
+}
 
 .ck-editor a, .recipe a{
   @apply text-brand font-bold;
@@ -61,7 +64,7 @@ body::-webkit-scrollbar-thumb {
   @apply text-xl font-bold mt-6 mb-2;
 }
 
-
+/* Recipes */
 .recipe ol {
   margin: 1rem 0;
   list-style: none;

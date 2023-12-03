@@ -30,7 +30,7 @@ let EditorSettings = {
         toolbar: [ 'heading', '|',
                    'bold', 'italic', '|',
                    'numberedList', '|',
-                   'blockQuote', 'link', '|',
+                   'blockQuote', 'link', 'mediaEmbed', '|',
                    'undo', 'redo'],
         shouldNotGroupWhenFull: true,
         heading: {
@@ -38,12 +38,18 @@ let EditorSettings = {
                 { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
                 { model: 'heading1', view: 'h1', title: 'Heading', class: 'ck-heading_title' }
             ]
-        }
+        },
+        mediaEmbed: {
+            previewsInData:true
+        },
     },
     description: {
         toolbar: [ 'bold', 'italic', '|',
-                   'undo', 'redo'],
-        shouldNotGroupWhenFull: true
+                   'undo', 'redo', '|',  'mediaEmbed'],
+        shouldNotGroupWhenFull: true,
+        mediaEmbed: {
+            previewsInData:true
+        }
     }
 };
 

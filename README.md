@@ -5,7 +5,7 @@ App built using [Phoenix](https://www.phoenixframework.org/) and [Elixir](https:
 # Run locally 📌
 
 To start Maria's App server <sup id="db1">[1](#f1)</sup>:
-
+  * `s nix-shell`
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
@@ -20,9 +20,14 @@ export AWS_SECRET_ACCESS_KEY="<replace_secret_access_key>"
 export AWS_REGION="<replace_aws_region>"
 ```
 
-<b id="f1">1</b> If you are running the app for the first time you will need to configure the DB:
+<b id="f1">1</b> If you are running the app for the first time you will need to configure the DB and Nix:
+  * Install nix. If using Arch Linux: `yay -S nix`
+  * Get into your nix environment `nix-shell`, where the correct versions of the packages to run this project are.
   * Install postgresql and start the service.
-  * Configure the DB: `mix ecto.create`.  [↩](#db1)
+  * Configure the DB: `mix ecto.create`.
+  * `nix-shell`
+  [↩](#db1)
+
 
 [See local DB config here](https://github.com/kostspielig/maria/blob/main/config/dev.exs#L4-L11)
 
@@ -49,7 +54,7 @@ Also 👀 [phoenix deployment guides](https://hexdocs.pm/phoenix/deployment.html
 
 Run tests in the project with:
 
-`mix test`
+`MIX_ENV=test mix test `
 
 To only run specific tests add this tag `@tag runnable: true` before each test and run:
 

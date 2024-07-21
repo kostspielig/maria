@@ -31,7 +31,7 @@ defmodule MariaWeb.ReadingLive do
     <section id="podcast" class="bg-brand text-white">
       <h1 class="px-6 pt-10 font-head text-2xl font-bold mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Podcasts </h1>
       <%= for podcast <- @podcasts do %>
-      <div class="font-sans odd:bg-white odd:text-black">
+      <div class="font-sans odd:bg-black odd:bg-opacity-10">
       <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-2xl font-bold"><%= podcast.title %> </h1>
         <h2 class="mt-2 text-base font-normal"><%= podcast.subtitle %> </h2>
@@ -63,7 +63,7 @@ defmodule MariaWeb.ReadingLive do
     <section id="youtube" class="bg-neutral text-black">
       <h1 class="px-6 pt-10 font-head font-bold text-2xl  mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl"> Youtube </h1>
       <%= for yc <- @youtube do %>
-      <div class="font-sans odd:bg-black odd:bg-opacity-10">
+      <div class="font-sans odd:bg-white odd:text-black">
       <div class="px-6 py-8 mx-auto max-w-2xl sm:max-w-4xl xl:max-w-6xl">
         <h1 class="text-2xl font-bold"><%= yc.title %> </h1>
     <!--  <iframe width="320" height="255" allow="fullscreen" frameBorder="0" src={"#{String.replace(e.link, "https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")}"}></iframe> -->
@@ -96,7 +96,7 @@ defmodule MariaWeb.ReadingLive do
   end
 
   def get_podcasts() do
-    podcast = ["https://feeds.megaphone.fm/darknetdiaries"] # "https://changelog.com/master/feed"
+    podcast = ["https://feeds.megaphone.fm/GLT3714323852"] # "https://changelog.com/master/feed"
     feed = get_feed(List.first(podcast))
 
     [%{
@@ -146,7 +146,7 @@ defmodule MariaWeb.ReadingLive do
 
 
   def get_youtube() do
-    youtubes = ["https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA", "https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q"]
+    youtubes = ["https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA", "https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q", "https://www.youtube.com/feeds/videos.xml?channel_id=UCaLfMkkHhSA_LaCta0BzyhQ", "https://www.youtube.com/feeds/videos.xml?channel_id=UCh8gHdtzO2tXd593_bjErWg", "https://www.youtube.com/feeds/videos.xml?channel_id=UCcW03MCvL7-Apt_XmPa07EA"]
     feeds = get_feeds(youtubes)
 
     Enum.map(feeds, fn(feed) ->

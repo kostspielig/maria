@@ -52,7 +52,16 @@ defmodule MariaWeb.HelperComponents do
         <%= for info <- @items do %>
           <div class="flex-none py-6 px-3 first:pl-0 last:pr-6">
             <a href={info.link} class="cursor-pointer">
-            <img class={"max-h-#{@img_height} mx-auto"} src={"#{info.image}"}>
+            <%= if info.image do %>
+              <img class={"max-h-#{@img_height} mx-auto"} src={"#{info.image}"}>
+            <% else %>
+              <div class="p-2 w-60 h-60 mx-auto bg-blood flex items-center justify-center">
+                <div class="text-center text-gray-700 font-bold font-racing">
+                  <%= info.alt_img %>
+                </div>
+              </div>
+            <% end %>
+
             <%= if info.title do %>
               <div class="block w-72 mt-4">
                 <.link_hover href={info.link} color="green"><div class={"inline leading-6 font-serif font-semibold text-lg"}><%= info.title %></div></.link_hover>

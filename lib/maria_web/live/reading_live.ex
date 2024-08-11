@@ -161,7 +161,7 @@ defmodule MariaWeb.ReadingLive do
         subtitle: feed.subtitle,
         link: String.replace(feed.link, "http://www.youtube.com/feeds/videos.xml?channel_id=", "https://youtube.com/channel/"),
         entries: Enum.map(feed.entries, fn item ->
-          %{title: item.title, image: String.replace(item.link, "https://www.youtube.com/watch?v=", "https://img.youtube.com/vi/") <> "/0.jpg", link: item.link}
+          %{title: item.title, image: String.replace(item.link, "https://www.youtube.com/watch?v=", "https://img.youtube.com/vi/") <> "/0.jpg", link: item.link, alt_img: feed.title}
         end)
   } end)
   end

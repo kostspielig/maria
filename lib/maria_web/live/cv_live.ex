@@ -17,8 +17,8 @@ defmodule MariaWeb.CvLive do
       .name { font-family: 'Racing Sans One', cursive; font-size: 36px; font-weight: 400; line-height: 1.1; margin-bottom: 5px; }
       .subtitle { font-size: 18px; color: #444; margin-top: 0; }
       .contact-info { display: flex; flex-direction: column; gap: 8px; text-align: right; font-size: 15px; color: #333; line-height: 1.2; }
-      .contact-info a { color: inherit; text-decoration: none; }
-      .contact-info a:hover { text-decoration: underline; color: #3aadec; }
+      .contact-info a { color: #666; text-decoration: none; font-style: italic; }
+      .contact-info a:hover { color: #3aadec; }
       .section { margin: 18px 0 24px 0; }
       .section-title { font-size: 15px; text-transform: uppercase; letter-spacing: 0.12em; color: #111; margin: 12px 0 12px 0; border-bottom: 2px solid #333; padding-bottom: 4px; font-weight: 700; }
 
@@ -59,7 +59,7 @@ defmodule MariaWeb.CvLive do
         .container { max-width: 100%; width: 100%; }
         .header-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
         .contact-info { text-align: right; margin-top: 0; }
-        a { text-decoration: none; color: #000; }
+        a { text-decoration: none; color: #666; font-style: italic; }
         .experience-item, .education-item, .skill-group { break-inside: avoid; page-break-inside: avoid; }
         .page-break { break-before: page; page-break-before: always; }
       }

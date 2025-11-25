@@ -17,8 +17,10 @@ defmodule MariaWeb.CvLive do
       .name { font-family: 'Racing Sans One', cursive; font-size: 36px; font-weight: 400; line-height: 1.1; margin-bottom: 5px; }
       .subtitle { font-size: 18px; color: #444; margin-top: 0; }
       .contact-info { display: flex; flex-direction: column; gap: 8px; text-align: right; font-size: 15px; color: #333; line-height: 1.2; }
+      .contact-info div { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
       .contact-info a { color: #666; text-decoration: none; font-style: italic; }
       .contact-info a:hover { color: #3aadec; }
+      .contact-icon { width: 16px; height: 16px; color: #666; }
       .section { margin: 18px 0 24px 0; }
       .section-title { font-size: 15px; text-transform: uppercase; letter-spacing: 0.12em; color: #111; margin: 12px 0 12px 0; border-bottom: 2px solid #333; padding-bottom: 4px; font-weight: 700; }
 
@@ -52,13 +54,14 @@ defmodule MariaWeb.CvLive do
       .small { font-size: 14px; color: #444; }
       .small .achievements li { margin-bottom: 2px; }
 
-      @media (max-width: 768px) { body { padding: 20px; } .header-top { flex-direction: column; align-items: flex-start; gap: 12px; } .contact-info { text-align: left; margin-top: 10px; } }
+      @media (max-width: 768px) { body { padding: 20px; } .header-top { flex-direction: column; align-items: flex-start; gap: 12px; } .contact-info { text-align: left; margin-top: 10px; } .contact-info div { justify-content: flex-start; } }
 
       @media print {
         body { padding: 0; font-size: 12px; }
         .container { max-width: 100%; width: 100%; }
         .header-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
         .contact-info { text-align: right; margin-top: 0; }
+        .contact-info div { justify-content: flex-end; }
         a { text-decoration: none; color: #666; font-style: italic; }
         .experience-item, .education-item, .skill-group { break-inside: avoid; page-break-inside: avoid; }
         .page-break { break-before: page; page-break-before: always; }
@@ -73,9 +76,18 @@ defmodule MariaWeb.CvLive do
             <div class="subtitle">Software Engineering Leader</div>
           </div>
           <div class="contact-info">
-            <div><a href="https://www.linkedin.com/in/kostspielig/">/in/kostspielig</a></div>
-            <div><a href="mailto:kostspielig@gmail.com">kostspielig@gmail.com</a></div>
-            <div><a href="tel:+4917687090570">+49 176 87090570</a></div>
+            <div>
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              <a href="https://www.linkedin.com/in/kostspielig/">/in/kostspielig</a>
+            </div>
+            <div>
+              <.icon name="hero-envelope" class="contact-icon" />
+              <a href="mailto:kostspielig@gmail.com">kostspielig@gmail.com</a>
+            </div>
+            <div>
+              <.icon name="hero-phone" class="contact-icon" />
+              <a href="tel:+4917687090570">+49 176 87090570</a>
+            </div>
           </div>
         </div>
       </div>

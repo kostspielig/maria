@@ -53,6 +53,16 @@ defmodule MariaWeb.CvLive do
       .small .achievements li { margin-bottom: 2px; }
 
       @media (max-width: 768px) { body { padding: 20px; } .header-top { flex-direction: column; align-items: flex-start; gap: 12px; } .contact-info { text-align: left; margin-top: 10px; } }
+
+      @media print {
+        body { padding: 0; font-size: 12px; }
+        .container { max-width: 100%; width: 100%; }
+        .header-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+        .contact-info { text-align: right; margin-top: 0; }
+        a { text-decoration: none; color: #000; }
+        .experience-item, .education-item, .skill-group { break-inside: avoid; page-break-inside: avoid; }
+        .page-break { break-before: page; page-break-before: always; }
+      }
     </style>
 
     <div class="container">
@@ -93,7 +103,6 @@ defmodule MariaWeb.CvLive do
               <li>Drive AI strategy for engineering productivity, spearheading adoption of AI-powered development tools that increased developer velocity by 35% and reduced code review cycles by 50%</li>
               <li>Introduced FinOps practices across engineering organization, achieving 30% reduction in cloud infrastructure costs and €300k+ annual savings through optimization and governance</li>
               <li>Led technical due diligence and architecture strategy for GCP migration, influencing €1M+ infrastructure investment decision</li>
-              <li>Established technical vision and quarterly Goal framework across engineering org, improving cross-team alignment and delivery predictability</li>
             </ul>
           </div>
 

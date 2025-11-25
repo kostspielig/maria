@@ -54,7 +54,7 @@ defmodule Maria.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:feeder_ex, "~> 1.1.0"},
+      {:feeder_ex, "~> 1.1.0", override: true},
       {:ex_aws, "~> 2.0"},
       {:ex_aws_s3, "~> 2.0"},
       {:poison, "~> 3.0"},

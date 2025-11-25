@@ -30,7 +30,7 @@ defmodule MariaWeb.CvLive do
       .date { color: #333; font-size: 14px; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
 
       .role-title { font-size: 16px; font-weight: 600; color: #444; margin-bottom: 6px; display: flex; align-items: baseline; gap: 10px; }
-      .role-title .date { font-weight: 400; font-size: 14px; color: #666; font-variant-numeric: tabular-nums; }
+      .role-title .date { font-weight: 400; font-size: 13px; color: #666; font-variant-numeric: tabular-nums; }
       .description { color: #222; font-size: 16px; margin-bottom: 10px; }
       .achievements { margin-left: 22px; margin-bottom: 14px; }
       .achievements li { margin-bottom: 8px; list-style: disc; font-size: 15px; }
@@ -40,6 +40,7 @@ defmodule MariaWeb.CvLive do
       .level { color: #666; font-weight: 400; margin-left: 4px; }
       .tech-stack { font-size: 15px; color: #444; margin-top: 6px; }
       .tech-stack strong { font-weight: 600; color: #111; }
+      .skill-label { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
 
       .education-item { margin-bottom: 12px; }
       .education-item .description { margin-bottom: 2px; }
@@ -74,7 +75,7 @@ defmodule MariaWeb.CvLive do
 
         <div class="experience-item">
           <div class="company-header">
-            <div class="company-name">Elli - Volkswagen Group Charging</div>
+            <div class="company-name">Volkswagen Group Charging <span class="company-location">Remote, Germany</span></div>
             <div class="date">2023 – Present</div>
           </div>
 
@@ -83,7 +84,7 @@ defmodule MariaWeb.CvLive do
               <div class="role-title">Head of Software Engineering <span class="date">2024 – Present</span></div>
             </div>
             <div class="description">
-              Lead engineering teams on residential smart charging solutions and core platform, managing 20+ engineers across product and platform teams. Direct reports include staff engineers and engineering managers.
+              Lead engineering teams on residential smart charging solutions and core platform, managing 20+ engineers across product and platform teams. Direct reports include (staff) engineers and engineering managers.
             </div>
             <ul class="achievements">
               <li>Built platform engineering capability from ground up, establishing mobile and web foundation teams that doubled release frequency and improved system reliability</li>
@@ -108,14 +109,14 @@ defmodule MariaWeb.CvLive do
               <li>Drove organizational transformation during internalization, managing communication strategy and maintaining team productivity through transition</li>
             </ul>
             <div class="tech-stack">
-              <strong>Tech Stack:</strong> TypeScript Node.js, Typescript, Postgre, GCP, Terraform, Kubernetes
+              <strong>Tech Stack:</strong> Typescript, Node.js, Postgre, GCP, Terraform, Kubernetes
             </div>
           </div>
         </div>
 
         <div class="experience-item">
           <div class="company-header">
-            <div class="company-name">SoundCloud</div>
+            <div class="company-name">SoundCloud <span class="company-location">Berlin, Germany</span></div>
             <div class="date">2019 – 2022</div>
           </div>
 
@@ -139,19 +140,19 @@ defmodule MariaWeb.CvLive do
             </div>
             <ul class="achievements">
 
-              <li>Led PCI-DSS compliance inLed architecture migration to industry standard payment systemsitiative implementing 3DS2 authentication, reducing fraud by 45% while maintaining 99.9% payment success rate</li>
+              <li>Led PCI-DSS compliance initiative implementing 3DS2 authentication, reducing fraud by 45% while maintaining 99.9% payment success rate</li>
               <li>Migrated to Adyen’s new Web Checkout, integrating four additional payment methods and driving a double‑digit increase in conversions.</li>
               <li>Mentored junior engineers across teams, supporting their development and growth.</li>
             </ul>
             <div class="tech-stack">
-              <strong>Tech Stack:</strong> Scala, Ruby on Rails, Typescript, React, Node.js
+              <strong>Tech Stack:</strong> Scala, Ruby on Rails, Typescript, React, Node.js, AWS
             </div>
           </div>
         </div>
 
         <div class="experience-item">
           <div class="company-header">
-            <div class="company-name">Zalando</div>
+            <div class="company-name">Zalando <span class="company-location">Berlin, Germany</span></div>
             <div class="date">2014 – 2019</div>
           </div>
 

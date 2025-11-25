@@ -13,15 +13,32 @@ defmodule MariaWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :browser_blank do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, {MariaWeb.Layouts, :root_blank}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  scope "/", MariaWeb do
+    pipe_through :browser_blank
+
+    live_session :blank, layout: {MariaWeb.Layouts, :blank} do
+      live "/maria", CvLive
+    end
   end
 
   scope "/", MariaWeb do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/maria", CvLive
 
     live "/reading", ReadingLive
     live "/cooking", CookingLive

@@ -18,7 +18,8 @@ defmodule MariaWeb.CvLive do
       .subtitle { font-size: 18px; color: #444; margin-top: 0; }
       .contact-info { display: flex; flex-direction: column; gap: 8px; text-align: right; font-size: 15px; color: #333; line-height: 1.2; }
       .contact-info div { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
-      .contact-info a { color: #666; text-decoration: none; font-style: italic; }
+      .contact-info a, .contact-info span { color: #666; font-style: italic; }
+      .contact-info a { text-decoration: none; }
       .contact-info a:hover { color: #3aadec; }
       .contact-icon { width: 16px; height: 16px; color: #666; }
       .section { margin: 18px 0 24px 0; }
@@ -62,7 +63,7 @@ defmodule MariaWeb.CvLive do
         .header-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
         .contact-info { text-align: right; margin-top: 0; }
         .contact-info div { justify-content: flex-end; }
-        a { text-decoration: none; color: #666; font-style: italic; }
+        a, .contact-info span { text-decoration: none; color: #666; font-style: italic; }
         .experience-item, .education-item, .skill-group { break-inside: avoid; page-break-inside: avoid; }
         .page-break { break-before: page; page-break-before: always; }
       }
@@ -88,6 +89,10 @@ defmodule MariaWeb.CvLive do
               <.icon name="hero-phone" class="contact-icon" />
               <a href="tel:+4917687090570">+49 176 87090570</a>
             </div>
+            <div>
+              <.icon name="hero-map-pin" class="contact-icon" />
+              <span>Berlin, Germany</span>
+            </div>
           </div>
         </div>
       </div>
@@ -106,11 +111,11 @@ defmodule MariaWeb.CvLive do
               <div class="role-title">Head of Software Engineering <span class="date">2024 – Present</span></div>
             </div>
             <div class="description">
-              Lead engineering teams on residential smart charging solutions and core platform, managing 20+ engineers across product and platform teams. Direct reports include (staff) engineers and engineering managers.
+              Lead engineering teams on residential smart charging solutions and core platform, managing 25+ engineers across product and platform teams. Direct reports include (staff) engineers and engineering managers.
             </div>
             <ul class="achievements">
               <li>Built platform engineering capability from ground up, establishing mobile and web foundation teams that doubled release frequency and improved system reliability</li>
-              <li>Established and renegotiated strategic partnerships with technology vendors, securing favourable contracts and leveraging platforms such as GCP, Github, Amplitude, and Browserstack.</li>
+              <li>Established and renegotiated strategic technology partnerships across GCP, GitHub, Amplitude, Apigee, and Browserstack, securing enterprise agreements with 50-70% cost reductions through multi-year contracts and cross-organizational leverage within Volkswagen Group</li>
               <li>Own strategic technology partnerships with Google Cloud Platform and GitHub, managing relationships and co-creating initiatives including AI tooling pilot programs, quarterly hackathons, and joint innovation workshops</li>
               <li>Drive AI strategy for engineering productivity, spearheading adoption of AI-powered development tools that increased developer velocity by 35% and reduced code review cycles by 50%</li>
               <li>Introduced FinOps practices across engineering organization, achieving 30% reduction in cloud infrastructure costs and €300k+ annual savings through optimization and governance</li>
@@ -126,7 +131,7 @@ defmodule MariaWeb.CvLive do
               Led strategic initiatives during company's growth phase. Managed cross-functional teams and shaped engineering practices.
             </div>
             <ul class="achievements">
-              <li>Redesigned engineering hiring process increasing offer acceptance rate from 40% to 75% while maintaining quality bar, growing team 4x in 12 months</li>
+              <li>Redesigned engineering hiring process increasing offer acceptance rate from 40% to 75% while maintaining quality bar, growing team 4x (from 20 to 80+ people) in 12 months</li>
               <li>Drove organizational transformation during internalization, managing communication strategy and maintaining team productivity through transition</li>
             </ul>
             <div class="tech-stack">
@@ -196,7 +201,7 @@ defmodule MariaWeb.CvLive do
         <div class="experience-item">
           <div class="company-header">
             <div class="company-name">Various Tech Companies <span class="company-location">Madrid, Spain</span></div>
-            <div class="date">2012 – 2014</div>
+            <div class="date">2011 – 2014</div>
           </div>
 
           <div class="role">

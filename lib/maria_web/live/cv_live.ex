@@ -103,19 +103,19 @@ defmodule MariaWeb.CvLive do
         <div class="experience-item">
           <div class="company-header">
             <div class="company-name">Volkswagen Group Charging <span class="company-location">Remote, Germany</span></div>
-            <div class="date">2023 – Present</div>
+            <div class="date">Feb 2023 – Present</div>
           </div>
 
           <div class="role">
             <div class="role-header">
-              <div class="role-title">Head of Software Engineering <span class="date">2024 – Present</span></div>
+              <div class="role-title">Head of Software Engineering <span class="date">Jan 2024 – Present</span></div>
             </div>
             <div class="description">
               Lead engineering teams on residential smart charging solutions and core platform, managing 25+ engineers across product and platform teams. Direct reports include (staff) engineers and engineering managers.
             </div>
             <ul class="achievements">
               <li>Built platform engineering capability from ground up, establishing mobile and web foundation teams that doubled release frequency and improved system reliability</li>
-              <li>Established and renegotiated strategic technology partnerships across GCP, GitHub, Amplitude, Apigee, and Browserstack, securing enterprise agreements with 50-70% cost reductions through multi-year contracts and cross-organizational leverage within Volkswagen Group</li>
+              <li>Established and renegotiated strategic technology partnerships across GCP, GitHub, Amplitude and Apigee, securing enterprise agreements with 50-70% cost reductions through multi-year contracts and cross-organizational leverage within Volkswagen Group</li>
               <li>Own strategic technology partnerships with Google Cloud Platform and GitHub, managing relationships and co-creating initiatives including AI tooling pilot programs, quarterly hackathons, and joint innovation workshops</li>
               <li>Drive AI strategy for engineering productivity, spearheading adoption of AI-powered development tools that increased developer velocity by 35% and reduced code review cycles by 50%</li>
               <li>Introduced FinOps practices across engineering organization, achieving 30% reduction in cloud infrastructure costs and €300k+ annual savings through optimization and governance</li>
@@ -125,7 +125,7 @@ defmodule MariaWeb.CvLive do
 
           <div class="role">
             <div class="role-header">
-              <div class="role-title">Principal Engineering Manager <span class="date">2023</span></div>
+              <div class="role-title">Principal Engineering Manager <span class="date">Feb 2023 – Dec 2023</span></div>
             </div>
             <div class="description">
               Led strategic initiatives during company's growth phase. Managed cross-functional teams and shaped engineering practices.
@@ -143,12 +143,12 @@ defmodule MariaWeb.CvLive do
         <div class="experience-item">
           <div class="company-header">
             <div class="company-name">SoundCloud <span class="company-location">Berlin, Germany</span></div>
-            <div class="date">2019 – 2022</div>
+            <div class="date">Mar 2019 – Aug 2022</div>
           </div>
 
           <div class="role">
             <div class="role-header">
-              <div class="role-title">Engineering Manager, Payments & Subscriptions <span class="date">2020 – 2022</span></div>
+              <div class="role-title">Engineering Manager, Payments & Subscriptions <span class="date">Oct 2019 – Aug 2022</span></div>
             </div>
             <div class="description">
               Managed engineering teams responsible for monetization infrastructure supporting 175M+ users and 30M+ creators. Led 12+ engineers across 2 full stack teams.
@@ -162,7 +162,7 @@ defmodule MariaWeb.CvLive do
 
           <div class="role">
             <div class="role-header">
-              <div class="role-title">Senior Software Engineer, Payments <span class="date">2019 – 2020</span></div>
+              <div class="role-title">Senior Software Engineer, Payments <span class="date">Mar 2019 – Oct 2019</span></div>
             </div>
             <ul class="achievements">
 
@@ -179,7 +179,7 @@ defmodule MariaWeb.CvLive do
         <div class="experience-item">
           <div class="company-header">
             <div class="company-name">Zalando <span class="company-location">Berlin, Germany</span></div>
-            <div class="date">2014 – 2019</div>
+            <div class="date">Sep 2014 – Feb 2019</div>
           </div>
 
           <div class="role">
@@ -201,7 +201,7 @@ defmodule MariaWeb.CvLive do
         <div class="experience-item">
           <div class="company-header">
             <div class="company-name">Various Tech Companies <span class="company-location">Madrid, Spain</span></div>
-            <div class="date">2011 – 2014</div>
+            <div class="date">Jul 2011 – Aug 2014</div>
           </div>
 
           <div class="role">
@@ -277,9 +277,9 @@ defmodule MariaWeb.CvLive do
           <div class="skill-group">
             <h3 class="skill-label font-medium">Languages</h3>
             <ul class="achievements inline">
-              <li>German <span class="level">(Advanced)</span></li>
               <li>English <span class="level">(Fluent)</span></li>
               <li>Spanish <span class="level">(Native)</span></li>
+              <li>German <span class="level">(Advanced)</span></li>
               <li>Chinese <span class="level">(Beginner)</span></li>
             </ul>
           </div>

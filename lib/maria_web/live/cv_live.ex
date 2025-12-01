@@ -135,7 +135,7 @@ defmodule MariaWeb.CvLive do
               <li>Drove organizational transformation during internalization, managing communication strategy and maintaining team productivity through transition</li>
             </ul>
             <div class="tech-stack">
-              <strong>Tech Stack:</strong> Typescript, Node.js, Postgre, GCP, Terraform, Kubernetes
+              <strong>Tech Stack:</strong> Typescript, Node.js, Postgres, GCP, Terraform, Kubernetes
             </div>
           </div>
         </div>

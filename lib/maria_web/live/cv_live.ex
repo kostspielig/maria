@@ -43,7 +43,7 @@ defmodule MariaWeb.CvLive do
       .level { color: #666; font-weight: 400; margin-left: 4px; }
       .tech-stack { font-size: 15px; color: #444; margin-top: 6px; }
       .tech-stack strong { font-weight: 600; color: #111; }
-      .skill-label { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+      .skill-label { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
 
       .education-item { margin-bottom: 12px; }
       .education-item .description { margin-bottom: 2px; }

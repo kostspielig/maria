@@ -28,11 +28,11 @@ defmodule MariaWeb.CvLive do
       .experience-item { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #ddd; }
       .experience-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
       .company-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-      .company-name { font-size: 16px; font-weight: 700; }
+      .company-name { font-size: 17px; font-weight: 700; }
       .company-location { font-weight: 400; color: #666; margin-left: 4px; font-size: 14px; }
       .date { color: #333; font-size: 14px; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
 
-      .role-title { font-size: 16px; font-weight: 600; color: #444; margin-bottom: 6px; display: flex; align-items: baseline; gap: 10px; }
+      .role-title { font-size: 16px; font-weight: 700; color: #444; margin-bottom: 6px; display: flex; align-items: baseline; gap: 10px; }
       .role-title .date { font-weight: 400; font-size: 13px; color: #666; font-variant-numeric: tabular-nums; }
       .description { color: #222; font-size: 16px; margin-bottom: 10px; }
       .achievements { margin-left: 22px; margin-bottom: 14px; }
@@ -49,13 +49,13 @@ defmodule MariaWeb.CvLive do
       .education-item .description { margin-bottom: 2px; }
       .education-header { display: flex; justify-content: flex-start; align-items: baseline; gap: 24px; }
       .education-header .degree { white-space: nowrap; flex-shrink: 0; }
-      .degree { font-weight: 600; font-size: 16px; }
-      .institution { color: #333; font-size: 15px; margin-bottom: 4px; }
+      .degree { font-weight: 700; font-size: 17px; }
+      .institution { color: #444; font-weight: 700; font-size: 16px; margin-bottom: 4px; }
 
       .small { font-size: 14px; color: #444; }
       .small .achievements li { margin-bottom: 2px; }
 
-      @media (max-width: 768px) { body { padding: 20px; } .header-top { flex-direction: column; align-items: flex-start; gap: 12px; } .contact-info { text-align: left; margin-top: 10px; } .contact-info div { justify-content: flex-start; } }
+      @media (max-width: 768px) { body { padding: 20px; } .header-top { flex-direction: column; align-items: flex-start; gap: 12px; } .contact-info { text-align: left; margin-top: 10px; } .contact-info div { justify-content: flex-start; } .company-location { display: block; margin-left: 0; margin-top: 2px; } }
 
       @media print {
         body { padding: 0; font-size: 12px; }

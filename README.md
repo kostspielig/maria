@@ -54,7 +54,7 @@ Also 👀 [phoenix deployment guides](https://hexdocs.pm/phoenix/deployment.html
 
 Run tests in the project with:
 
-`MIX_ENV=test mix test `
+`MIX_ENV=test mix test`
 
 To only run specific tests add this tag `@tag runnable: true` before each test and run:
 

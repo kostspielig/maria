@@ -11,7 +11,7 @@ defmodule MariaWeb.CvLive do
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #111; background: #fff; padding: 44px 40px; font-size: 17px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
       .container { max-width: 800px; margin: 0 auto; }
-      .header { margin-bottom: 30px; padding-bottom: 15px; }
+      .header { margin-bottom: 20px; padding-bottom: 15px; }
       .header-top { display: flex; justify-content: space-between; align-items: flex-start; }
       .header-left { display: flex; flex-direction: column; }
       .name { font-family: 'Racing Sans One', cursive; font-size: 36px; font-weight: 400; line-height: 1.1; margin-bottom: 5px; }
@@ -22,6 +22,7 @@ defmodule MariaWeb.CvLive do
       .contact-info a { text-decoration: none; }
       .contact-info a:hover { color: #3aadec; }
       .contact-icon { width: 16px; height: 16px; color: #666; }
+      .bio { font-size: 15px; color: #333; line-height: 1.6; margin: 30px 0 0px; }
       .section { margin: 18px 0 24px 0; }
       .section-title { font-size: 15px; text-transform: uppercase; letter-spacing: 0.12em; color: #111; margin: 12px 0 12px 0; border-bottom: 2px solid #333; padding-bottom: 4px; font-weight: 700; }
 
@@ -64,8 +65,10 @@ defmodule MariaWeb.CvLive do
         .contact-info { text-align: right; margin-top: 0; }
         .contact-info div { justify-content: flex-end; }
         a, .contact-info span { text-decoration: none; color: #666; font-style: italic; }
-        .experience-item, .education-item, .skill-group { break-inside: avoid; page-break-inside: avoid; }
+        .education-item, .skill-group { break-inside: avoid; page-break-inside: avoid; }
+        .section-title, .company-header, .role-header, .role-title, .skill-label { break-after: avoid; page-break-after: avoid; }
         .page-break { break-before: page; page-break-before: always; }
+        .company-location { display: inline; margin-left: 4px; }
       }
     </style>
 
@@ -94,6 +97,9 @@ defmodule MariaWeb.CvLive do
               <span>Berlin, Germany</span>
             </div>
           </div>
+        </div>
+        <div class="bio">
+          Strategic leader with 15+ years scaling engineering organizations at Zalando, SoundCloud, and Volkswagen. Expert in building high-performing cultures, modernizing complex systems, and driving innovation through AI and experimentation.
         </div>
       </div>
 
@@ -125,7 +131,7 @@ defmodule MariaWeb.CvLive do
 
           <div class="role">
             <div class="role-header">
-              <div class="role-title">Principal Engineering Manager <span class="date">Feb 2023 – Dec 2023</span></div>
+              <div class="role-title">Senior Engineering Manager <span class="date">Feb 2023 – Dec 2023</span></div>
             </div>
             <div class="description">
               Led strategic initiatives during company's growth phase. Managed cross-functional teams and shaped engineering practices.
@@ -155,7 +161,7 @@ defmodule MariaWeb.CvLive do
             </div>
             <ul class="achievements">
               <li>Led the hiring and onboarding of new developers, establishing a dedicated payments team to drive the modernization and expansion of the payment platform.</li>
-              <li>Launched 2 new subscription tiers, handling payment processing across 15+ countries and payment methods</li>
+              <li>Launched 2 new subscription tiers, optimizing user acquisition flows and handling payment processing across 15+ countries and payment methods</li>
               <li>Led the migration from a legacy Rails payment system to a modern Scala architecture, integrating an external payment provider and restructuring the payment workflow for scalability and flexibility.</li>
             </ul>
           </div>
@@ -187,7 +193,7 @@ defmodule MariaWeb.CvLive do
               <div class="role-title">Senior Software Engineer</div>
             </div>
             <ul class="achievements">
-              <li>Architected and launched Zalandoʼs next-generation micro-frontend platform, scaling adoption from 7 teams to over 30, significantly improving modularity and maintainability</li>
+              <li>Architected and launched Zalandoʼs next-generation React-based micro-frontend platform, scaling adoption from 7 teams to over 30, significantly improving modularity and maintainability</li>
               <li>Designed custom tracking infrastructure replacing GTM, processing 1B+ events daily with 99.99% reliability (Go, DynamoDB, Kinesis)</li>
               <li>Architected migration from PHP monolith to microservices-based frontend (Node.js, TypeScript, GraphQL), reducing page load time by 50% and enabling 10x team scaling</li>
               <li>Developed real-time recommendation system for Zalando Lounge, increasing conversion rate by 18%</li>
@@ -259,6 +265,7 @@ defmodule MariaWeb.CvLive do
             <ul class="achievements">
               <li>Engineering strategy, org design, tech roadmap ownership</li>
               <li>Agile delivery models, DevOps culture development, platform governance</li>
+              <li>Growth Engineering, experimentation & data-driven development</li>
               <li>Budgeting for platforms and cloud operations</li>
             </ul>
           </div>
